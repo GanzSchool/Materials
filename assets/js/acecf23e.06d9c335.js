@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkganz_school_materials=self.webpackChunkganz_school_materials||[]).push([[1903],{1912:a=>{a.exports=JSON.parse('{"blogBasePath":"/Materials/blog","blogTitle":"Blog","authorsListPath":"/Materials/blog/authors"}')}}]);
