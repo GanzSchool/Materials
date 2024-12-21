@@ -5,7 +5,7 @@ const sidebars = {
     'bevezeto',
     {
       type: 'category',
-      label: 'Java',
+      label: 'JavaScript',
       items: [
         'javascript/index',
         'javascript/halado',

@@ -1,54 +1,33 @@
 import React from 'react';
 import Layout from '@theme/Layout';
+import clsx from 'clsx';
 import styles from './index.module.css';
 
 export default function Home() {
   return (
     <Layout
-      title="Ganz School Tananyag"
-      description="Egyedi Docusaurus oldal a tanulóknak"
+      title="GanzSchool Tananyagok"
+      description="Minden tananyag egy helyen, dizájnos és letisztult megjelenéssel"
     >
-      {/* Felső harmad - bemutatkozás */}
       <header className={styles.hero}>
         <div className={styles.heroContainer}>
-          <h1 className={styles.title}>Üdv a Ganz School tananyagaihoz!</h1>
+          <h1 className={styles.title}>Üdvözöllek a GanzSchool tananyagai között!</h1>
           <p className={styles.subtitle}>
-            Röviden bemutatkozás, cél, kinek szól ez az oldal...
+            Válaszd ki az alábbi tananyagok egyikét a kezdéshez.
           </p>
         </div>
       </header>
 
-      {/* Alsó 2/3 - ikonok/dobozok */}
       <main className={styles.mainContent}>
-        <div className={styles.iconGrid}>
-          {/* Java */}
-          <a href="/docs/javascript" className={styles.iconCard}>
-            <img
-              src="img/java-icon.png"
-              alt="Java ikon"
-              className={styles.iconImage}
-            />
-            <h3>Java tananyag</h3>
+        <div className={styles.cardGrid}>
+          <a href="/Materials/docs/javascript" className={styles.card}>
+            <h3>JavaScript Tananyag</h3>
           </a>
-
-          {/* Python */}
-          <a href="/docs/python" className={styles.iconCard}>
-            <img
-              src="img/python-icon.png"
-              alt="Python ikon"
-              className={styles.iconImage}
-            />
-            <h3>Python tananyag</h3>
+          <a href="/Materials/docs/python" className={styles.card}>
+            <h3>Python Tananyag</h3>
           </a>
-
-          {/* C++ */}
-          <a href="/docs/csharp" className={styles.iconCard}>
-            <img
-              src="img/cpp-icon.png"
-              alt="C++ ikon"
-              className={styles.iconImage}
-            />
-            <h3>C++ tananyag</h3>
+          <a href="/Materials/docs/csharp" className={styles.card}>
+            <h3>C++ Tananyag</h3>
           </a>
         </div>
       </main>
