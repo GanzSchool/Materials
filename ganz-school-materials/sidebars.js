@@ -1,23 +1,33 @@
+/** @type {import('@docusaurus/plugin-content-docs').SidebarsConfig} */
 const sidebars = {
-  // Kézi oldalsáv definiálása
-  tutorialSidebar: [
-    'intro', // Hivatkozás a docs/intro.md fájlra
+  // Nevezzük pl. "mySidebar"-nak
+  mySidebar: [
+    'bevezeto',
     {
       type: 'category',
-      label: 'Útmutatók', // A kategória neve az oldalsávban
+      label: 'Java',
       items: [
-        'tutorial-basics/create-a-document', // Hivatkozás a megfelelő dokumentációra
-        'tutorial-basics/deploy-your-site', // Másik dokumentációs fájl
+        'javascript/index',
+        'javascript/halado',
       ],
     },
     {
       type: 'category',
-      label: 'Haladó témák',
+      label: 'Python',
       items: [
-        'advanced/cli-commands', // Egy másik kategória eleme
+        'python/index',
+        'python/halado',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'C++',
+      items: [
+        'csharp/index',
+        'csharp/halado',
       ],
     },
   ],
 };
 
-export default sidebars;
+module.exports = sidebars;

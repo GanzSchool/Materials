@@ -1,42 +1,56 @@
-import clsx from 'clsx';
-import Link from '@docusaurus/Link';
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import React from 'react';
 import Layout from '@theme/Layout';
-import HomepageFeatures from '@site/src/components/HomepageFeatures';
-
-import Heading from '@theme/Heading';
 import styles from './index.module.css';
 
-function HomepageHeader() {
-  const {siteConfig} = useDocusaurusContext();
-  return (
-    <header className={clsx('hero hero--primary', styles.heroBanner)}>
-      <div className="container">
-        <Heading as="h1" className="hero__title">
-          {siteConfig.title}
-        </Heading>
-        <p className="hero__subtitle">{siteConfig.tagline}</p>
-        <div className={styles.buttons}>
-          <Link
-            className="button button--secondary button--lg"
-            to="/docs/intro">
-            Docusaurus Tutorial - 5min ⏱️
-          </Link>
-        </div>
-      </div>
-    </header>
-  );
-}
-
 export default function Home() {
-  const {siteConfig} = useDocusaurusContext();
   return (
     <Layout
-      title={`Hello from ${siteConfig.title}`}
-      description="Description will go into a meta tag in <head />">
-      <HomepageHeader />
-      <main>
-        <HomepageFeatures />
+      title="Ganz School Tananyag"
+      description="Egyedi Docusaurus oldal a tanulóknak"
+    >
+      {/* Felső harmad - bemutatkozás */}
+      <header className={styles.hero}>
+        <div className={styles.heroContainer}>
+          <h1 className={styles.title}>Üdv a Ganz School tananyagaihoz!</h1>
+          <p className={styles.subtitle}>
+            Röviden bemutatkozás, cél, kinek szól ez az oldal...
+          </p>
+        </div>
+      </header>
+
+      {/* Alsó 2/3 - ikonok/dobozok */}
+      <main className={styles.mainContent}>
+        <div className={styles.iconGrid}>
+          {/* Java */}
+          <a href="/docs/javascript" className={styles.iconCard}>
+            <img
+              src="img/java-icon.png"
+              alt="Java ikon"
+              className={styles.iconImage}
+            />
+            <h3>Java tananyag</h3>
+          </a>
+
+          {/* Python */}
+          <a href="/docs/python" className={styles.iconCard}>
+            <img
+              src="img/python-icon.png"
+              alt="Python ikon"
+              className={styles.iconImage}
+            />
+            <h3>Python tananyag</h3>
+          </a>
+
+          {/* C++ */}
+          <a href="/docs/csharp" className={styles.iconCard}>
+            <img
+              src="img/cpp-icon.png"
+              alt="C++ ikon"
+              className={styles.iconImage}
+            />
+            <h3>C++ tananyag</h3>
+          </a>
+        </div>
       </main>
     </Layout>
   );

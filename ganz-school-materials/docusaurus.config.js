@@ -1,9 +1,4 @@
 // @ts-check
-// `@type` JSDoc annotations allow editor autocompletion and type checking
-// (when paired with `@ts-check`).
-// There are various equivalent ways to declare your Docusaurus config.
-// See: https://docusaurus.io/docs/api/docusaurus-config
-
 import { themes as prismThemes } from 'prism-react-renderer';
 
 /** @type {import('@docusaurus/types').Config} */
@@ -35,7 +30,7 @@ const config = {
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
-          sidebarPath: './sidebars.js',
+          sidebarPath: require.resolve('./sidebars.js'),
           editUrl: 'https://github.com/GanzSchool/Materials/edit/main/',
         },
         blog: {
@@ -47,7 +42,7 @@ const config = {
           editUrl: 'https://github.com/GanzSchool/Materials/edit/main/',
         },
         theme: {
-          customCss: './src/css/custom.css',
+          customCss: require.resolve('./src/css/custom.css'),
         },
       }),
     ],
@@ -64,9 +59,10 @@ const config = {
           src: 'img/logo.svg',
         },
         items: [
+          // Itt cseréltük a 'tutorialSidebar'-t 'mySidebar'-ra
           {
             type: 'docSidebar',
-            sidebarId: 'tutorialSidebar',
+            sidebarId: 'mySidebar',
             position: 'left',
             label: 'Docs',
           },
@@ -85,8 +81,9 @@ const config = {
             title: 'Docs',
             items: [
               {
-                label: 'Introduction',
-                to: '/docs/intro',
+                // Ha a bevezető anyagod /docs/bevezeto.md (--- id: bevezeto ---), akkor:
+                label: 'Bevezető',
+                to: '/docs/bevezeto',
               },
             ],
           },
