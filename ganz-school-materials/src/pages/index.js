@@ -6,12 +6,12 @@ import styles from './index.module.css';
 export default function Home() {
   return (
     <Layout
-      title="GanzSchool Tananyagok"
+      title="GanzSchool Materials"
       description="Minden tananyag egy helyen, dizájnos és letisztult megjelenéssel"
     >
       <header className={styles.hero}>
         <div className={styles.heroContainer}>
-          <h1 className={styles.title}>Üdvözöllek a GanzSchool tananyagai között!</h1>
+          <h1 className={styles.title}>GanzSchool Materials</h1>
           <p className={styles.subtitle}>
             Válaszd ki az alábbi tananyagok egyikét a kezdéshez.
           </p>

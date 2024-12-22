@@ -22,14 +22,14 @@
 
 /* Fő tartalom (téglalap alakú linkek) */
 .mainContent {
-  padding: 2rem;
+  padding: 5rem;
   background-color: var(--ifm-background-color);
 }
 
 .cardGrid {
   display: flex;
   flex-wrap: wrap;
-  gap: 1.5rem;
+  gap: 4rem;
   justify-content: center;
 }
 
@@ -37,14 +37,14 @@
   text-decoration: none;
   background-color: var(--ifm-card-background-color);
   color: var(--ifm-color-primary);
-  border: 2px solid var(--ifm-color-primary);
-  border-radius: 8px;
-  padding: 1.5rem 2rem;
+  border: 1px solid var(--ifm-color-primary);
+  border-radius: 16px;
+  padding: 1.5rem 6rem;
   text-align: center;
   font-weight: bold;
   font-size: 1.2rem;
   transition: background-color 0.2s ease, color 0.2s ease;
-  width: 200px;
+  width: 300px;
 }
 
 .card:hover {
