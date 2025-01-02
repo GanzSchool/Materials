@@ -1,0 +1,107 @@
+---
+title: Késleltető függvények setTimeout
+sidebar_label: Késleltető függvények (setTimeout)
+---
+
+# Késleltető függvények: setTimeout
+
+A JavaScript `setTimeout` metódusával időzített feladatokat hajthatunk végre, vagyis meg tudjuk határozni, hogy egy kódrészlet bizonyos idő elteltével fusson le. Ez a módszer nagyon hasznos olyan helyzetekben, amikor például:
+
+- **Visszajelzést** szeretnénk adni a felhasználónak késleltetve (pl. “Sikeres mentés” üzenet rövid idő után eltüntetése).  
+- Olyan **animációt** készítünk, amelynek bizonyos lépései meghatározott időközönként követik egymást.  
+- Vagy bármilyen más alkalommal, amikor időzített műveletre van szükség.
+
+A `setTimeout` abban különbözik a szinkron (egymás után végrehajtódó) folyamattól, hogy nem blokkolja a fő programszálat. Ha egy szinkron kód végrehajtása hosszú ideig tart, akkor a következő kódsorok csak annak befejeződése után indulnak el. A `setTimeout` ezzel szemben “háttérbe helyezi” a futtatandó kódrészletet, és a JavaScript mehet tovább a következő utasítások végrehajtásával, így egyfajta aszinkron működést érhetünk el.
+
+## Alapfogalmak
+
+1. **Aszinkron végrehajtás:**  
+   A kód futása nem egymást blokkolva, hanem egymással párhuzamosan (vagy inkább eltoltan) történik. Egy időzített függvény nem várja meg, hogy a főprogram befejeződjön, hanem beállítja a futást (pl. 2 másodperc múlva), és addig a program többi része folytatódik.
+
+2. **Callback függvény:**  
+   Ez az a függvény, amit a `setTimeout` hív meg a megadott idő után. Tehát ha a `setTimeout(function(){...}, 1000)` alakot használjuk, akkor az első paraméter (a függvény) fog lefutni 1 másodperc után.
+
+3. **Időköz (delay):**  
+   A `setTimeout` második paramétere – ez az az érték (ezredmásodpercben megadva), amely után a callback függvény lefut.
+
+4. **Single Threaded (egyszálú) környezet:**  
+   A JavaScript alapértelmezetten egyetlen szálon fut. Emiatt fontos, hogy a hosszabb műveletek ne blokkolják a teljes futást. A `setTimeout` lehetővé teszi, hogy bizonyos kód futtatását eltoljuk időben, ezzel segítve, hogy a felhasználói felület gyorsan reagáljon más interakciókra is.
+
+Ezek az alapok segítenek abban, hogy megértsük, miért fontos és hasznos a `setTimeout` használata, főleg akkor, ha szeretnénk egy kódot késleltetve végrehajtani, de nem akarjuk, hogy a program többi része megálljon a háttérben.
+
+<details style={{ backgroundColor: "green", padding: "1rem", borderRadius: "5px" }}>
+  <summary><strong>Szintaktika belső működése</strong></summary>
+
+  **Hogyan néz ki a `setTimeout` használata JavaScript-ben?**  
+  Íme egy példakód, ami 2 másodperc késleltetéssel futtat egy üzenetet a konzolban:
+
+  ```js
+  setTimeout(function() {
+    console.log("Ez a kód 2 másodperc késleltetéssel fut le.");
+  }, 2000);
+  ```
+
+  A `setTimeout` metódusnak alapvetően két fő paramétere van:  
+  1. **A meghívandó függvény** (callback), amely a megadott idő elteltével fut le.  
+  2. **Az időtartam** (ezredmásodpercben megadva), ami után a függvény végrehajtódik.
+
+  **Hogyan működik mindez a kulisszák mögött?**  
+  1. Amikor a JavaScript kódot futtatjuk, minden utasításunk a **Call Stack** tetejére kerül, és ott hajtódik végre.  
+  2. Ha a kódban `setTimeout`-ot talál a JavaScript, elindítja a függvény késleltetését a **Web API** vagy a JavaScript környezet megfelelő modulja segítségével.  
+  3. Maga a fő program továbbhalad, nincs megállás; a `setTimeout` által érintett függvény közben “háttérbe” kerül.  
+  4. Ha letelt a beállított idő (pl. 2000 ms), a függvény bekerül a **Callback Queue**-ba (egy sorba, ahol a végrehajtásra várakoznak a callbackek).  
+  5. Az **Event Loop** (eseményhurok) figyeli, hogy a Call Stack éppen üres-e. Ha igen, akkor kiveszi a függvényt a Callback Queue-ból, és felteszi a Call Stack tetejére.  
+  6. Ekkor fut le ténylegesen a `setTimeout` callback függvénye.
+
+  Röviden ez annyit jelent, hogy a `setTimeout` nem állítja meg a programunkat, hanem “időzített” feladatot hoz létre, ami csak a megadott idő elteltével kerül végrehajtásra – és akkor is csak akkor, ha a JavaScript már éppen ráér (üres a Call Stack). Ez biztosítja, hogy ne akadjon meg a kódunk futása, miközben várunk valamire vagy késleltetni szeretnénk egy műveletet.
+
+</details>
+
+## Gyakorlati felhasználási lehetőségek
+
+A `setTimeout` nagyon sokrétűen alkalmazható a mindennapi JavaScript fejlesztés során. Íme néhány példa, amelyek könnyen átültethetők a gyakorlatba:
+
+<details style={{ backgroundColor: "#41038c", padding: "1rem", borderRadius: "5px" }}>
+  <summary><strong>1. Értesítő üzenet megjelenítése és eltüntetése</strong></summary>
+
+  Az egyik leggyakoribb felhasználási mód, amikor egy üzenetet vagy értesítést jelenítünk meg a felhasználónak, majd egy pár másodperc múlva automatikusan eltüntetjük:
+  
+  - Például, ha a felhasználó befejezett egy űrlapot és rákattintott a “Küldés” gombra, akkor a sikerességről informáló sáv felugrik, majd 3 másodperc után eltűnik.
+  - Ez kellemes felhasználói élményt biztosít, mert a felhasználó látja, hogy a művelet sikeres volt, ugyanakkor nem kell neki magának bezárni az üzenetet, mert “magától” eltűnik.
+</details>
+
+<details style={{ backgroundColor: "#41038c", padding: "1rem", borderRadius: "5px" }}>
+  <summary><strong>2. Számláló vagy visszaszámlálás (countdown)</strong></summary>
+
+  Ha egy adott eseményig vagy időpontig szeretnénk visszaszámolni, akkor a `setTimeout` (vagy gyakrabban a `setInterval`) segítségével szabályos időközönként frissíthetjük a kijelzett értéket.
+  - Írhatunk például egy felugró ablakot, ami 10 másodpercig él, és 1 másodpercenként frissíti a visszaszámlálást.  
+  - Amikor a számláló eléri a nullát, automatikusan eltűntethetjük az elemet, vagy lefuttathatunk valamilyen műveletet.
+</details>
+
+<details style={{ backgroundColor: "#41038c", padding: "1rem", borderRadius: "5px" }}>
+  <summary><strong>3. Animált diavetítés (slideshow)</strong></summary>
+
+  Egy egyszerű képgaléria vagy diavetítés esetén könnyen elérhetjük, hogy a képek néhány másodpercenként automatikusan cserélődjenek.
+  - A `setTimeout` hívásban egyszerűen beállítjuk a következő kép megjelenítését.  
+  - Amikor a következő kép betöltődik, újra meghívjuk a `setTimeout`-ot (rekurzív vagy láncolt hívással), így folyamatos diavetítést valósítunk meg.
+  - Az előny, hogy rugalmasan, a megadott időköz alapján váltogathatjuk a képeket, és közben a felhasználói felület sem fagy le.
+</details>
+
+<details style={{ backgroundColor: "#41038c", padding: "1rem", borderRadius: "5px" }}>
+  <summary><strong>4. Adatbetöltésnél betöltés jelzése (loader)</strong></summary>
+
+  Sokszor előfordul, hogy adatokat kell behívnunk egy szerverről vagy valamilyen külső forrásból. Ilyenkor hasznos lehet egy “Betöltés…” vagy “Kérlek, várj…” feliratot elhelyezni, majd az adat megérkezése után pár pillanat múlva eltüntetni:
+  - Amikor elindítjuk a lekérést (fetch, axios, stb.), kirakunk egy kis “loader” animációt vagy szöveget.  
+  - Miután az adat megjön, elindítunk egy kis `setTimeout`-ot, hogy a felhasználó észrevegye a változást, majd pár másodperc múlva eltávolítjuk a betöltésre utaló elemet.
+  - Ez segít abban, hogy a felhasználónak legyen vizuális visszajelzése a várakozásról.
+</details>
+
+<details style={{ backgroundColor: "#41038c", padding: "1rem", borderRadius: "5px" }}>
+  <summary><strong>5. Időzített gomb inaktiválása</strong></summary>
+
+  Ha például szeretnénk megelőzni a túl sok, gyors egymásutánban történő kattintást, akkor egy gombot átmenetileg inaktívvá tehetünk a kattintás után:
+  - A gomb kattintása után a gombot letiltjuk (`disabled` állapotra állítjuk).  
+  - Ezzel egyidőben indítunk egy `setTimeout` hívást, hogy 1-2 másodperc múlva újra engedélyezzük a gombot.  
+  - Így a felhasználó nem tud túl gyorsan, feleslegesen sok műveletet végezni.
+</details>
+```

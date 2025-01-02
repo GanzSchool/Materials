@@ -53,18 +53,15 @@ const config = {
     ({
       image: 'img/docusaurus-social-card.jpg',
       navbar: {
-        title: 'GanzSchool Materials',
-        logo: {
-          alt: 'GanzSchool Logo',
-          src: 'img/logo.svg',
-        },
+        title: 'GanzSchool',
+
         items: [
           // Itt cseréltük a 'tutorialSidebar'-t 'mySidebar'-ra
           {
             type: 'docSidebar',
             sidebarId: 'mySidebar',
             position: 'left',
-            label: 'Docs',
+            label: 'Materials',
           },
           { to: '/blog', label: 'Blog', position: 'left' },
           {
