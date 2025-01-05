@@ -7,4 +7,4 @@ title: Python Tananyag
 
 Itt a Python alapjaival ismerkedünk meg.
 
-- [Haladó Python témák](./halado.md)
+

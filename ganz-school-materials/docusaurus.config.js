@@ -4,7 +4,7 @@ import { themes as prismThemes } from 'prism-react-renderer';
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'GanzSchool Materials',
-  tagline: 'Evriting you need',
+  tagline: 'Everything you need',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
@@ -78,9 +78,9 @@ const config = {
             title: 'Docs',
             items: [
               {
-                // Ha a bevezető anyagod /docs/bevezeto.md (--- id: bevezeto ---), akkor:
+                // Frissített hivatkozás a helyes útvonalra
                 label: 'Bevezető',
-                to: '/docs/bevezeto',
+                to: '/docs/Webprogramozás/Bevezető',
               },
             ],
           },

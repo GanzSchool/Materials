@@ -1,0 +1,132 @@
+# Multiple Choice Quiz Component
+
+A következő React komponens lehetővé teszi, hogy többválaszos kérdőívet hozz létre a Docusaurus oldaladon. A komponens támogatja a kérdések és válaszok könnyű beillesztését, visszajelzést ad a választásról, valamint opcionálisan időkorlátot is beállíthatsz.
+
+## Komponens Struktúra
+
+A quiz komponens három fő részből áll:
+
+1. **Quiz**: A fő komponens, amely kezeli a kérdések átadását és a teszt logikáját.
+2. **Question**: Megjeleníti az aktuális kérdést és a válaszlehetőségeket.
+3. **Result**: Összegzi az eredményeket a teszt végén.
+
+## 1. Quiz Komponens
+
+```jsx
+import React, { useState, useEffect } from 'react';
+import './Quiz.css';
+
+const Quiz = ({ questions, timeLimit }) => {
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [selectedOption, setSelectedOption] = useState(null);
+  const [showFeedback, setShowFeedback] = useState(false);
+  const [score, setScore] = useState(0);
+  const [timeLeft, setTimeLeft] = useState(timeLimit);
+  const [isTimeUp, setIsTimeUp] = useState(false);
+
+  useEffect(() => {
+    if (timeLimit) {
+      if (timeLeft === 0) {
+        setIsTimeUp(true);
+        setShowFeedback(true);
+        return;
+      }
+      const timer = setInterval(() => {
+        setTimeLeft(timeLeft - 1);
+      }, 1000);
+      return () => clearInterval(timer);
+    }
+  }, [timeLeft, timeLimit]);
+
+  const handleOptionClick = (option) => {
+    setSelectedOption(option);
+    setShowFeedback(true);
+    if (option.isCorrect) {
+      setScore(score + 1);
+    }
+  };
+
+  const handleNextQuestion = () => {
+    setShowFeedback(false);
+    setSelectedOption(null);
+    setIsTimeUp(false);
+    setTimeLeft(timeLimit);
+    if (currentQuestionIndex < questions.length - 1) {
+      setCurrentQuestionIndex(currentQuestionIndex + 1);
+    }
+  };
+
+  const handleRestart = () => {
+    setCurrentQuestionIndex(0);
+    setSelectedOption(null);
+    setShowFeedback(false);
+    setScore(0);
+    setTimeLeft(timeLimit);
+    setIsTimeUp(false);
+  };
+
+  if (currentQuestionIndex >= questions.length) {
+    return (
+      <div className="quiz-container">
+        <h2>Quiz vége!</h2>
+        <p>Elért pontszám: {score} / {questions.length}</p>
+        <button onClick={handleRestart}>Újraindítás</button>
+      </div>
+    );
+  }
+
+  const currentQuestion = questions[currentQuestionIndex];
+
+  return (
+    <div className="quiz-container">
+      {timeLimit && (
+        <div className={`timer ${timeLeft <= 5 ? 'time-up' : ''}`}>
+          {timeLeft} másodperc hátra
+        </div>
+      )}
+      <Question
+        question={currentQuestion}
+        selectedOption={selectedOption}
+        onOptionClick={handleOptionClick}
+      />
+      {showFeedback && (
+        <div className="feedback">
+          {selectedOption?.isCorrect ? (
+            <p className="correct">Helyes válasz!</p>
+          ) : isTimeUp ? (
+            <p className="time-up">Időkorlát lejárt!</p>
+          ) : (
+            <p className="incorrect">Helytelen válasz.</p>
+          )}
+          <button onClick={handleNextQuestion}>
+            {currentQuestionIndex < questions.length - 1 ? 'Következő' : 'Eredmények'}
+          </button>
+        </div>
+      )}
+    </div>
+  );
+};
+
+const Question = ({ question, selectedOption, onOptionClick }) => {
+  return (
+    <div className="question-section">
+      <h3>{question.question}</h3>
+      <div className="options">
+        {question.options.map((option, index) => (
+          <button
+            key={index}
+            className={`option-button ${
+              selectedOption === option ? (option.isCorrect ? 'correct' : 'incorrect') : ''
+            }`}
+            onClick={() => onOptionClick(option)}
+            disabled={!!selectedOption}
+          >
+            {option.text}
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default Quiz;

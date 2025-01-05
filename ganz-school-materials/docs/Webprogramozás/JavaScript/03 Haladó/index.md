@@ -8,4 +8,3 @@ title: Haladó
 Hamarosan.
 
 
-- [Ez egy link 0-ra](./0.mdx)

@@ -7,4 +7,4 @@ title: Java Tananyag
 
 Ebben a részben a Java alapjait vesszük át.
 
-- [Haladó Java témák](./halado.md)
+
