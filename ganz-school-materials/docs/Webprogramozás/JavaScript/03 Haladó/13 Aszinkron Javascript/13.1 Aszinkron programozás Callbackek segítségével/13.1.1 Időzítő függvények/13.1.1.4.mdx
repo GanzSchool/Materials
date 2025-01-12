@@ -1,0 +1,272 @@
+---  
+title: clearInterval  
+sidebar_label: clearInterval  
+---
+
+# Időzített folyamat leállítása: clearInterval
+
+A JavaScript `clearInterval` metódusával **meglévő, folyamatos (ismétlődő) időzítéseket** tudunk megszakítani. Ha korábban elindítottuk a `setInterval` hívást, és szeretnénk **leállítani az ismétlődő feladatot**, akkor a `clearInterval` használatára van szükség. Ez rendkívül hasznos például olyan helyzetekben, amikor:
+
+- Egy folytonosan futó **visszaszámlálást** akarunk megállítani, ha a célidő elérkezett.  
+- Egy **animáció** folyamatos frissítését akarjuk leállítani bizonyos feltétel teljesülésekor.  
+- Felhasználói **interakció** alapján be szeretnénk fejezni egy ismétlődő műveletet (pl. gombnyomásra leállítjuk a számlálót).
+
+A `clearInterval` tehát az **ismétlődő** (setInterval) időzítések leállítására szolgál, szemben a `clearTimeout`-tal, mely az egyszeri (setTimeout) időzítéseket állítja meg. Fontos, hogy a `clearInterval` a `setInterval` által visszaadott azonosítóra (ID) támaszkodik, így meg kell jegyeznünk és el kell tárolnunk ezt az ID-t, hogy utólag le tudjuk állítani.
+
+## Alapfogalmak
+
+**Ismétlődő művelet (`setInterval`):**  
+   A `setInterval` segítségével a JavaScript-ben megadhatjuk, hogy egy kódrészlet bizonyos időközönként automatikusan újra és újra végrehajtódjon.
+
+**Azonosító (Interval ID):**  
+   Amikor meghívjuk a `setInterval`-ot, az visszaad egy numerikus azonosítót. Ezt az azonosítót kell tárolnunk, hogy később ezzel tudjuk leállítani az ismétlődő folyamatot a `clearInterval` függvénnyel.
+
+**`clearInterval(intervalID)`:**  
+   A `clearInterval` egy paramétert vár (az interval ID-t). Miután meghívjuk ezt, a JavaScript leállítja az adott ID-hoz tartozó ismétlődő időzítést.
+
+**Single Threaded környezet és az aszinkron műveletek:**  
+   A JavaScript egy szálon fut, azonban az időzítő műveletek (például setInterval, setTimeout) külön kerülnek kezelésre a Web API vagy a környezet hasonló moduljaiban. A leállítás (`clearInterval`) aszinkron módon abbahagyja az ismétlődő feladatot, így a fő szálon már nem fog többet lefutni az adott callback.
+
+
+<details className="dropdown-task">
+  <summary><strong>Szintaktika belső működése</strong></summary>
+
+  **Hogyan néz ki a `clearInterval` használata JavaScript-ben?**  
+  Vegyünk egy egyszerű példát, amely elindít egy számlálót, majd néhány másodperc múlva leállítja:
+
+  ```js
+  // Elindítunk egy számlálót, amely másodpercenként növeli a counter értékét
+  let counter = 0;
+  const intervalID = setInterval(function() {
+    counter++;
+    console.log("Számláló értéke:", counter);
+  }, 1000);
+
+  // 5 másodperc után leállítjuk a számlálót
+  setTimeout(function() {
+    clearInterval(intervalID);
+    console.log("A számláló leállt.");
+  }, 5000);
+  ```
+
+  1. Meghívjuk a `setInterval`-t, ami minden 1000 ms (1 másodperc) után futtatja a callback függvényt. A `setInterval` visszaad egy azonosítót (intervalID).
+  2. Ezt az azonosítót elmentjük `intervalID` néven.
+  3. A `setTimeout` 5 másodperc után meghívja a `clearInterval(intervalID)` függvényt, ezzel leállítva az ismétlődő számlálást.
+  4. Miután lefutott a `clearInterval`, a callback függvény (amely a számlálót növelné) többé nem fog meghívódni.
+
+  **Mi történik a háttérben?**  
+  - A `setInterval` által létrehozott ismétlődő művelet egy sorban (Queue) várakozik és az Event Loop gondoskodik arról, hogy minden 1 másodpercben végrehajtódjon.  
+  - A `clearInterval` utasítja a JavaScript motort, hogy törölje ezt a sorban álló, folyamatosan érkező feladatot, így a callback függvény többé nem kerül végrehajtásra.
+
+</details>
+
+## Gyakorlati felhasználási lehetőségek
+
+A `clearInterval` számos helyzetben rendkívül hasznos, főként akkor, amikor nem akarjuk, hogy valamilyen ismétlődő folyamat örökké fusson.
+
+<details className="dropdown-task">
+  <summary><strong>Visszaszámlálás leállítása</strong></summary>
+
+  Klasszikus példa, amikor egy bizonyos időpontig visszaszámolunk (pl. 10… 9… 8…), majd elérve a 0-t, már nincs szükség további számlálásra:
+  
+  - Elindítunk egy 1 másodpercenként frissülő számlálót a `setInterval` segítségével.  
+  - Amikor elérjük a 0-t, meghívjuk a `clearInterval`-t.  
+  - Így a számláló (és a kapcsolódó kódrész) többé nem fut.
+
+</details>
+
+<details className="dropdown-task">
+  <summary><strong>Animációk megállítása</strong></summary>
+
+  Ha van egy folyamatos animáció (pl. egy mozgó elem a képernyőn), amit a `setInterval`-lal frissítünk bizonyos időközönként, akkor a `clearInterval`-nek köszönhetően le tudjuk állítani, amikor:
+  
+  - Az elem elér egy adott pozíciót a képernyőn.  
+  - A felhasználó rákattint egy “Stop” gombra.  
+  - Valamilyen más esemény bekövetkezik (pl. a felhasználó lapozott egy másik menüpontra).
+
+</details>
+
+<details className="dropdown-task">
+  <summary><strong>Automatikus folyamatok szüneteltetése</strong></summary>
+
+  Ha készítettünk egy automatikusan futó folyamatot (pl. rendszeres adatlekérés a szervertől), előfordulhat, hogy bizonyos feltételek teljesülésekor (pl. sikeres befejezés, hibaüzenet, felhasználó leállította) **már nem akarjuk** a további lekéréseket futtatni.
+  
+  - A `clearInterval` segítségével könnyedén lekapcsolhatjuk a folyamatos adatlekérés ciklust.  
+  - Ezzel erőforrást takaríthatunk meg, és elkerülhetjük, hogy felesleges kérésekkel terheljük a szervert.
+
+</details>
+
+<details className="dropdown-task">
+  <summary><strong>Játékokban időzített események leállítása</strong></summary>
+
+  Ha JavaScript-ben készítünk egyszerűbb játékokat, sokszor használunk `setInterval`-t a játék logikájának frissítéséhez (mozgatás, ütközésvizsgálat, pontszámítás). Azonban amikor a játék véget ér (Game Over), le kell állítani ezt a frissítési ciklust.
+  
+  - A `clearInterval` segít abban, hogy a játék fő ciklusa ne fusson tovább, amint a játékot befejeztük vagy újraindítjuk.  
+  - Így lehet biztosítani, hogy a játék ne frissüljön fölöslegesen és ne használjon erőforrásokat.
+
+</details>
+
+<details className="dropdown-task">
+  <summary><strong>Időzített reklámok/értesítések kikapcsolása</strong></summary>
+
+  Biztos láttál már olyan oldalt, ahol kis értesítések (pl. chat-szerű ablakok) vagy reklámok tűnnek fel bizonyos időközönként. Ha a felhasználó már bezárta az ablakot, nem szeretnénk, hogy továbbra is előugorjanak újabb értesítések:
+  
+  - Kezdetben `setInterval`-lal hívjuk a “reklám megjelenítése” függvényt.  
+  - Ha a felhasználó rábök a “Ne jelenjen meg többször” gombra, `clearInterval`-lal leállítjuk a folyamatot.  
+  - Így a kellemetlen pop-up nem fogja tovább zavarni a felhasználót.
+
+</details>
+
+## Gyakorlati feladatok
+
+Az alábbi feladatokon keresztül kipróbálhatod, hogyan lehet a `clearTimeout`-ot a gyakorlatban használni.
+
+<details className="dropdown-task">
+  <summary>
+    <strong>Visszaszámláló</strong><br/>
+ Hozz létre egy olyan weboldalt, amely visszaszámol 10-től 0-ig, és biztosítsd, hogy a felhasználó elindíthassa vagy megállíthassa a visszaszámlálást gombok segítségével. A visszaszámlálás csak egyszer fusson le, és a visszaszámlálás során lehessen megszakítani.
+
+ **JavaScript funkciók:**
+   - A visszaszámlálás 10-től 0-ig tartson.
+   - A visszaszámlálás másodpercenként frissüljön, a `setInterval` segítségével.
+   - Amikor a visszaszámlálás eléri a 0-t, az automatikusan álljon le.
+
+   - **Indítás gomb**:
+     - Csak akkor induljon el a visszaszámlálás, ha az nem fut éppen.
+
+   - **Megállítás gomb**:
+     - Állítsa meg az aktuálisan futó visszaszámlálást.
+  </summary>
+  
+  #### Kód megoldása:
+
+```html
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <title>Visszaszámlálás Példa setInterval segítségével</title>
+    <style>
+        /* A body központozása Flexbox segítségével */
+        body {
+            display: flex; /* Flexbox elrendezés */
+            flex-direction: column; /* A tartalom függőlegesen helyezkedjen el */
+            align-items: center; /* Középre igazítás vízszintesen */
+            justify-content: center; /* Középre igazítás függőlegesen */
+            height: 100vh; /* Az oldal teljes magasságát lefedi */
+            background-color: #e0f7fa; /* Világoskék háttérszín */
+            font-family: Arial, sans-serif; /* Egyszerű, modern betűtípus */
+        }
+
+        /* A fejléc stílusozása */
+        h1 {
+            color: #2e7d32; /* Zöld szín a szöveghez */
+            font-size: 4em; /* Nagy betűméret */
+            margin-bottom: 20px; /* Alsó margó a távolsághoz */
+        }
+
+        /* Gombok alapstílusa */
+        button {
+            padding: 10px 20px; /* Belső térköz */
+            margin: 5px; /* Külső térköz */
+            font-size: 1em; /* Közepes betűméret */
+            border: none; /* Nincs keret */
+            border-radius: 5px; /* Lekerekített sarkok */
+            cursor: pointer; /* Mutatóvá változó kurzor hover állapotban */
+        }
+
+        /* Indítás gomb stílusa */
+        #startBtn {
+            background-color: #66bb6a; /* Világoszöld háttérszín */
+            color: white; /* Fehér szöveg */
+        }
+
+        /* Megállítás gomb stílusa */
+        #stopBtn {
+            background-color: #ef5350; /* Piros háttérszín */
+            color: white; /* Fehér szöveg */
+        }
+
+        /* Hover-effektus a gombokhoz */
+        button:hover {
+            opacity: 0.8; /* Enyhén átlátszóvá válik hover állapotban */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- A visszaszámláló értéke megjelenik itt -->
+    <h1 id="countdown">10</h1>
+    <div>
+        <!-- Indítás gomb -->
+        <button id="startBtn">Indítás</button>
+        <!-- Megállítás gomb -->
+        <button id="stopBtn">Megállítás</button>
+    </div>
+
+    <script>
+        // Az aktuális visszaszámláló érték elemének lekérése
+        const countdownElement = document.getElementById('countdown');
+
+        // Az Indítás és Megállítás gombok elemeinek lekérése
+        const startBtn = document.getElementById('startBtn');
+        const stopBtn = document.getElementById('stopBtn');
+
+        // A visszaszámláló induló értéke
+        let count = 10;
+
+        // Az interval azonosítója; ezzel lehet törölni a visszaszámlálást
+        let intervalId = null;
+
+        // A visszaszámláló frissítése
+        function updateCountdown() {
+            // Az aktuális érték megjelenítése a számláló elemben
+            countdownElement.textContent = count;
+
+            // Ha még nem értük el a nullát, csökkentsük az értéket
+            if (count > 0) {
+                count--; // A számláló értékének csökkentése
+            } else {
+                // Ha elérte a nullát, állítsuk le a visszaszámlálást
+                clearInterval(intervalId); // Az interval törlése
+                intervalId = null; // Az interval azonosító nullázása
+            }
+        }
+
+        // Az "Indítás" gombra kattintva indul a visszaszámlálás
+        startBtn.addEventListener('click', () => {
+            // Ellenőrzés: ha nincs aktív visszaszámlálás, és az érték még nagyobb mint 0
+            if (!intervalId && count > 0) {
+                updateCountdown(); // Azonnali frissítés
+                intervalId = setInterval(updateCountdown, 1000); // Másodpercenkénti frissítés
+            }
+        });
+
+        // A "Megállítás" gombra kattintva leáll a visszaszámlálás
+        stopBtn.addEventListener('click', () => {
+            if (intervalId) {
+                clearInterval(intervalId); // Az interval törlése
+                intervalId = null; // Az interval azonosító nullázása
+            }
+        });
+    </script>
+
+</body>
+</html>
+```
+
+#### Működés rövid magyarázata:
+**HTML:** A `<h1>` elem megjeleníti a visszaszámláló aktuális értékét. Az "Indítás" és "Megállítás" gombok az események vezérlésére szolgálnak.
+
+**JavaScript:**
+   - **`setInterval`:** Másodpercenként frissíti a visszaszámláló értékét.
+   - **`clearInterval`:** Megállítja az aktív visszaszámlálást.
+   - **Gombok eseménykezelése:** Az "Indítás" elindítja, a "Megállítás" pedig leállítja a visszaszámlálást.
+   - Az "Indítás" gomb nem indít új visszaszámlálást, ha már fut egy.
+   - Az "Indítás" gomb csak akkor működik, ha a számláló értéke nagyobb, mint 0.
+</details>
+
+
+## Projektfeladatok
+
+Hamarosan.

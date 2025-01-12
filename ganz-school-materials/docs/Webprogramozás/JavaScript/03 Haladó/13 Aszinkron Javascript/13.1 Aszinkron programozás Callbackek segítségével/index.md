@@ -43,7 +43,7 @@ Fontos megjegyezni, hogy a callbackek használatakor mindig oda kell figyelni a 
 
 A JavaScript callbackjei tehát remek megoldást jelentenek az eseményalapú és aszinkron feladatok kivitelezéséhez. Megfelelő szervezéssel biztonságos, moduláris és könnyen bővíthető struktúrát lehet kialakítani. Ez az alapot is megteremti a modernebb funkcióknak, mint például a Promisek vagy az async–await szintaxis, amelyek ugyan kifinomultabb formában, de ugyanerre a funkcionális elképzelésre épülnek. Ha a fő koncepció megértésre kerül, már csak a különböző alkalmazási területeken és könyvtárakban felbukkanó variációkhoz kell alkalmazkodni, illetve élni a nyelv további lehetőségeivel a minél hatékonyabb és átláthatóbb fejlesztés érdekében.
 
-<details style={{ border: "2px solid darkblue", backgroundColor: "#185fe0" }}>
+<details className="dropdown-task">
   <summary>Gyakorlati példa: Egy aszinkron üdvözlő üzenet setTimeout használatával</summary>
 
 ```javascript
@@ -73,7 +73,7 @@ A **sayHelloLater** függvény meghívásakor még nem történik azonnali kimen
 
 <br />
 
-<details style={{ border: "2px solid #2c52ca", backgroundColor: "#185fe0" }}>
+<details className="dropdown-task">
   <summary>Gyakorlati példa: Tömb elemeinek feldolgozása callbackkel</summary>
 
 ```javascript
@@ -105,7 +105,7 @@ A **processArrayItems** függvény tetszőleges tömböt és egy feldolgozó fü
 
 <br />
 
-<details style={{ border: "2px solid darkblue", backgroundColor: "#185fe0" }}>
+<details className="dropdown-task">
   <summary>Gyakorlati példa: Egyszerű adatlekérés-szimuláció callbackkel</summary>
 
 ```javascript

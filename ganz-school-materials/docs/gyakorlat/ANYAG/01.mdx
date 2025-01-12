@@ -1,0 +1,54 @@
+---  
+title: Alapműveletek 01
+sidebar_label: Alapműveletek 01
+---
+
+
+## Kód Írása Szövegszerkesztőben
+
+A kódíráshoz használhatsz bármilyen szövegszerkesztőt. Írd meg a JavaScript kódodat, majd másold be a JavaScript konzolba Alternatív megoldásként mentheted a kódot egy `.js` kiterjesztésű fájlba, majd futtathatod azt Node.js-sel:
+
+```bash
+$ node snippet.js
+```
+
+## Kimenetek Megjelenítése
+
+Ha Node.js-t nem interaktív módban használod, az nem fogja automatikusan kiírni a futtatott kódok értékeit. Ehhez használd a `console.log()` függvényt, amely lehetővé teszi a szöveg és egyéb JavaScript értékek megjelenítését a terminálablakban vagy a böngésző fejlesztői eszközeinek konzoljában.
+
+Például, ha létrehozol egy `hello.js` fájlt a következő sorral:
+
+```javascript
+console.log("Hello World!");
+```
+
+és futtatod a fájlt a következő paranccsal:
+
+```bash
+node hello.js
+```
+
+A "Hello World!" üzenet meg fog jelenni a terminálban.
+
+## Üzenet Megjelenítése a Böngésző Konzoljában
+
+Ha ugyanazt az üzenetet a web böngésző JavaScript konzoljában szeretnéd látni, kövesd az alábbi lépéseket:
+
+1. Hozz létre egy `hello.html` fájlt a következő tartalommal:
+
+    ```html
+    <script src="hello.js"></script>
+    ```
+
+2. Töltsd be a `hello.html` fájlt a böngésződben egy `file://` URL használatával, például:
+
+    ```
+    file:///Users/username/javascript/hello.html
+    ```
+
+3. Nyisd meg a fejlesztői eszközök ablakát (általában az F12 billentyűvel vagy jobb klikk -> "Inspect" opcióval), hogy lásd az üdvözlő üzenetet a konzolban.
+
+## Összefoglalás
+
+Ez a módszer lehetővé teszi, hogy hatékonyan írj és futtass JavaScript kódot Node.js segítségével, valamint megjelenítsd a kimeneteket mind a terminálban, mind a böngésző konzoljában. Ahogy a kódod egyre bonyolultabbá válik, ezek az eszközök segítenek a fejlesztési folyamatban.
+```

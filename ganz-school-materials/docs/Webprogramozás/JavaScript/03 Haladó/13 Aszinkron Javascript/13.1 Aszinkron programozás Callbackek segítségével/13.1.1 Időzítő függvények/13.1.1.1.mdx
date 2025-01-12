@@ -3,7 +3,7 @@ title: setTimeout
 sidebar_label: setTimeout
 ---
 
-# Késleltető függvények: setTimeout
+# Késleltető függvény: setTimeout
 
 A JavaScript `setTimeout` metódusával időzített feladatokat hajthatunk végre, vagyis meg tudjuk határozni, hogy egy kódrészlet bizonyos idő elteltével fusson le. Ez a módszer nagyon hasznos olyan helyzetekben, amikor például:
 
@@ -15,21 +15,16 @@ A `setTimeout` abban különbözik a szinkron (egymás után végrehajtódó) fo
 
 ## Alapfogalmak
 
-1. **Aszinkron végrehajtás:**  
-   A kód futása nem egymást blokkolva, hanem egymással párhuzamosan (vagy inkább eltoltan) történik. Egy időzített függvény nem várja meg, hogy a főprogram befejeződjön, hanem beállítja a futást (pl. 2 másodperc múlva), és addig a program többi része folytatódik.
+ **Aszinkron végrehajtás:**  
+   A kód futása nem egymást blokkolva, hanem egymással párhuzamosan (vagy inkább eltoltan) történik. 
 
-2. **Callback függvény:**  
-   Ez az a függvény, amit a `setTimeout` hív meg a megadott idő után. Tehát ha a `setTimeout(function(){...}, 1000)` alakot használjuk, akkor az első paraméter (a függvény) fog lefutni 1 másodperc után.
+ **Callback függvény:**  
+   Ez az a függvény, amit a `setTimeout` hív meg a megadott idő után.
 
-3. **Időköz (delay):**  
+**Időköz (delay):**  
    A `setTimeout` második paramétere – ez az az érték (ezredmásodpercben megadva), amely után a callback függvény lefut.
 
-4. **Single Threaded (egyszálú) környezet:**  
-   A JavaScript alapértelmezetten egyetlen szálon fut. Emiatt fontos, hogy a hosszabb műveletek ne blokkolják a teljes futást. A `setTimeout` lehetővé teszi, hogy bizonyos kód futtatását eltoljuk időben, ezzel segítve, hogy a felhasználói felület gyorsan reagáljon más interakciókra is.
-
-Ezek az alapok segítenek abban, hogy megértsük, miért fontos és hasznos a `setTimeout` használata, főleg akkor, ha szeretnénk egy kódot késleltetve végrehajtani, de nem akarjuk, hogy a program többi része megálljon a háttérben.
-
-<details style={{ backgroundColor: "green", padding: "1rem", borderRadius: "5px" }}>
+<details className="dropdown-task">
   <summary><strong>Szintaktika belső működése</strong></summary>
 
   **Hogyan néz ki a `setTimeout` használata JavaScript-ben?**  
@@ -61,47 +56,143 @@ Ezek az alapok segítenek abban, hogy megértsük, miért fontos és hasznos a `
 
 A `setTimeout` nagyon sokrétűen alkalmazható a mindennapi JavaScript fejlesztés során. Íme néhány példa, amelyek könnyen átültethetők a gyakorlatba:
 
-<details style={{ backgroundColor: "#41038c", padding: "1rem", borderRadius: "5px" }}>
-  <summary><strong>1. Értesítő üzenet megjelenítése és eltüntetése</strong></summary>
+<details className="dropdown-task">
+  <summary><strong>Értesítő üzenet megjelenítése és eltüntetése</strong></summary>
 
   Az egyik leggyakoribb felhasználási mód, amikor egy üzenetet vagy értesítést jelenítünk meg a felhasználónak, majd egy pár másodperc múlva automatikusan eltüntetjük:
-  
+
   - Például, ha a felhasználó befejezett egy űrlapot és rákattintott a “Küldés” gombra, akkor a sikerességről informáló sáv felugrik, majd 3 másodperc után eltűnik.
   - Ez kellemes felhasználói élményt biztosít, mert a felhasználó látja, hogy a művelet sikeres volt, ugyanakkor nem kell neki magának bezárni az üzenetet, mert “magától” eltűnik.
 </details>
 
-<details style={{ backgroundColor: "#41038c", padding: "1rem", borderRadius: "5px" }}>
-  <summary><strong>2. Számláló vagy visszaszámlálás (countdown)</strong></summary>
-
-  Ha egy adott eseményig vagy időpontig szeretnénk visszaszámolni, akkor a `setTimeout` (vagy gyakrabban a `setInterval`) segítségével szabályos időközönként frissíthetjük a kijelzett értéket.
-  - Írhatunk például egy felugró ablakot, ami 10 másodpercig él, és 1 másodpercenként frissíti a visszaszámlálást.  
-  - Amikor a számláló eléri a nullát, automatikusan eltűntethetjük az elemet, vagy lefuttathatunk valamilyen műveletet.
-</details>
-
-<details style={{ backgroundColor: "#41038c", padding: "1rem", borderRadius: "5px" }}>
-  <summary><strong>3. Animált diavetítés (slideshow)</strong></summary>
-
-  Egy egyszerű képgaléria vagy diavetítés esetén könnyen elérhetjük, hogy a képek néhány másodpercenként automatikusan cserélődjenek.
-  - A `setTimeout` hívásban egyszerűen beállítjuk a következő kép megjelenítését.  
-  - Amikor a következő kép betöltődik, újra meghívjuk a `setTimeout`-ot (rekurzív vagy láncolt hívással), így folyamatos diavetítést valósítunk meg.
-  - Az előny, hogy rugalmasan, a megadott időköz alapján váltogathatjuk a képeket, és közben a felhasználói felület sem fagy le.
-</details>
-
-<details style={{ backgroundColor: "#41038c", padding: "1rem", borderRadius: "5px" }}>
-  <summary><strong>4. Adatbetöltésnél betöltés jelzése (loader)</strong></summary>
+<details className="dropdown-task">
+  <summary><strong>Adatbetöltésnél betöltés jelzése (loader)</strong></summary>
 
   Sokszor előfordul, hogy adatokat kell behívnunk egy szerverről vagy valamilyen külső forrásból. Ilyenkor hasznos lehet egy “Betöltés…” vagy “Kérlek, várj…” feliratot elhelyezni, majd az adat megérkezése után pár pillanat múlva eltüntetni:
   - Amikor elindítjuk a lekérést (fetch, axios, stb.), kirakunk egy kis “loader” animációt vagy szöveget.  
   - Miután az adat megjön, elindítunk egy kis `setTimeout`-ot, hogy a felhasználó észrevegye a változást, majd pár másodperc múlva eltávolítjuk a betöltésre utaló elemet.
-  - Ez segít abban, hogy a felhasználónak legyen vizuális visszajelzése a várakozásról.
 </details>
 
-<details style={{ backgroundColor: "#41038c", padding: "1rem", borderRadius: "5px" }}>
-  <summary><strong>5. Időzített gomb inaktiválása</strong></summary>
+## Gyakorlati feladatok
 
-  Ha például szeretnénk megelőzni a túl sok, gyors egymásutánban történő kattintást, akkor egy gombot átmenetileg inaktívvá tehetünk a kattintás után:
-  - A gomb kattintása után a gombot letiltjuk (`disabled` állapotra állítjuk).  
-  - Ezzel egyidőben indítunk egy `setTimeout` hívást, hogy 1-2 másodperc múlva újra engedélyezzük a gombot.  
-  - Így a felhasználó nem tud túl gyorsan, feleslegesen sok műveletet végezni.
+Kattints a kívánt feladatra a részletes leírás és megoldások megtekintéséhez.
+
+<details className="dropdown-task">
+  <summary>
+    <strong>Alert üzenet</strong><br/> Üdvözlő üzenet
+    Készíts egy egyszerű alkalmazást, amely egy gomb megnyomása után 3 másodperc múlva megjelenít egy üzenetet a felhasználónak.
+  </summary>
+  
+  #### Kód megoldása:
+
+  ```js
+  // Ez a függvény megjelenít egy üzenetet 3 másodperc késleltetéssel
+  function showMessage() {
+    setTimeout(function() {
+      alert("Ez az üzenet 3 másodperc késleltetéssel jelenik meg.");
+    }, 3000); // 3000 ezredmásodperc = 3 másodperc
+  }
+
+  // Eseménykezelő a gombra
+  document.getElementById("showMessageButton").addEventListener("click", showMessage);
+  ```
+
 </details>
-```
+
+<details className="dropdown-task">
+  <summary>
+    <strong>Számláló</strong><br/>
+    Hozz létre egy számlálót, amely 5 másodpercig számol vissza, majd megjelenít egy értesítést, hogy az idő lejárt.
+  </summary>
+  
+  #### Kód megoldása:
+
+  ```js
+  // Visszaszámláló funkció
+  function countdown(seconds) {
+    let remaining = seconds;
+
+    const intervalId = setInterval(function() {
+      console.log(`Hátralévő idő: ${remaining} másodperc`);
+      remaining--;
+
+      if (remaining < 0) {
+        clearInterval(intervalId); // Leállítja a számlálást
+        alert("Az idő lejárt!");
+      }
+    }, 1000); // 1000 ezredmásodperc = 1 másodperc
+  }
+
+  // Indítsd el a számlálót 5 másodpercre
+  countdown(5);
+  ```
+
+</details>
+
+<details className="dropdown-task">
+  <summary>
+    <strong>Slider</strong><br/>
+    Készíts egy animált diavetítést, ahol a képek 4 másodpercenként váltakoznak automatikusan.
+  </summary>
+  
+#### Kód megoldása:
+
+  ```html
+  <!-- HTML struktúra -->
+  <div id="slideshow">
+    <img src="image1.jpg" alt="Kép 1" class="active">
+    <img src="image2.jpg" alt="Kép 2">
+    <img src="image3.jpg" alt="Kép 3">
+  </div>
+  ```
+
+  ```css
+  /* CSS stílusok */
+  #slideshow {
+    position: relative;
+    width: 600px;
+    height: 400px;
+    overflow: hidden;
+  }
+
+  #slideshow img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+  }
+
+  #slideshow img.active {
+    opacity: 1;
+  }
+  ```
+
+  ```js
+  // JavaScript kód a diavetítéshez
+  function startSlideshow() {
+    const slides = document.querySelectorAll("#slideshow img");
+    let currentIndex = 0;
+    const totalSlides = slides.length;
+
+    setInterval(function() {
+      // Eltávolítja az 'active' osztályt az aktuális képről
+      slides[currentIndex].classList.remove("active");
+      
+      // Növeli az indexet, és visszaáll 0-ra, ha a végére ér
+      currentIndex = (currentIndex + 1) % totalSlides;
+      
+      // Hozzáadja az 'active' osztályt az új aktuális képhez
+      slides[currentIndex].classList.add("active");
+    }, 4000); // 4000 ezredmásodperc = 4 másodperc
+  }
+
+  // Indítsd el a diavetítést, amikor az oldal betöltődik
+  window.onload = startSlideshow;
+  ```
+
+</details>
+
+## Projektfeladatok
+
+Hamarosan.

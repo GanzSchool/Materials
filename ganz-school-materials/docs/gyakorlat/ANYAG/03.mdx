@@ -1,0 +1,221 @@
+---
+title: 3
+---
+
+## A JavaScript Nyelv Lexikális Szerkezete
+
+A programozási nyelv lexikális szerkezete az alapvető szabályok halmaza, amelyek meghatározzák, hogyan írsz programokat az adott nyelven. Ez a nyelv alacsony szintű szintaxisa: meghatározza, hogy a változónevek hogyan néznek ki, a kommentek határoló karaktereit, és hogy egy programutasítás hogyan van elválasztva a következőtől, például. Ez a rövid fejezet a JavaScript lexikális szerkezetét dokumentálja. A következő témákat fedi le:
+
+- Nagy- és kisbetű érzékenység, szóközök és sortörések
+- Kommentek
+- Literálok
+- Azonosítók és fenntartott szavak
+- Unicode
+- Opccionális pontosvesszők
+
+### 2.1 A JavaScript Program Szövege
+
+A JavaScript nagybetű-érzékeny nyelv. Ez azt jelenti, hogy a nyelvi kulcsszavak, változók, függvénynevek és egyéb azonosítók mindig következetes nagy- és kisbetűsítéssel kell, hogy legyenek beírva. Például a `while` kulcsszót mindig "while"-ként kell írni, nem "While" vagy "WHILE" formában. Hasonlóképpen, az `online`, `Online`, `OnLine` és `ONLINE` négy különböző változónévnek számítanak.
+
+A JavaScript figyelmen kívül hagyja a programokban a tokenek közötti szóközöket. A legtöbb esetben a JavaScript figyelmen kívül hagyja a sortöréseket is (de lásd a §2.6-ot egy kivételért). Mivel a programokban szabadon használhatók a szóközök és sortörések, a kódokat tisztán és következetesen formázhatod, ami könnyen olvasható és érthetővé teszi a kódot.
+
+A szabályos szóköz karakter (`\u0020`) mellett a JavaScript tabulátorokat, különböző ASCII vezérlő karaktereket és különféle Unicode szóköz karaktereket is felismert fehér karakterként. A JavaScript sortöréseket, visszatérési karaktereket és visszatérési karakter/sorfeed (CRLF) sorozatot is sortörőként ismer fel.
+
+### 2.2 Kommentek
+
+A JavaScript kétféle komment stílust támogat. Bármely szöveg, amely `//` karakterek között van egy sor végéig, kommentként kezelődik és a JavaScript figyelmen kívül hagyja. Bármely szöveg, amely a `/*` és `*/` karakterek között van, szintén kommentként kezelődik; ezek a kommentek több sort is átfedhetnek, de nem lehet őket egymásba ágyazni. Az alábbi sorok mind érvényes JavaScript kommentek:
+
+```javascript
+// Ez egy egysoros komment.
+
+/* Ez is egy komment */  // és itt van még egy komment.
+
+/*
+ * Ez egy többsoros komment. A sorok elején lévő további * karakterek nem kötelező részei a szintaxisnak; csak jól néznek ki!
+ */
+```
+
+### 2.3 Literálok
+
+A literál egy adatérték, amely közvetlenül megjelenik egy programban. Az alábbiak mind literálok:
+
+```javascript
+12               // A tizenkettő szám
+1.2              // Az egy egész pont kettő
+"hello world"    // Szöveg string idézőjelek között
+'Hi'             // Egy másik szöveg
+true             // Egy logikai érték
+false            // A másik logikai érték
+null             // Objektum hiánya
+```
+
+### 2.4 Azonosítók és Fenntartott Szavak
+
+Egy azonosító egyszerűen egy név. A JavaScript-ben az azonosítókat konstansok, változók, tulajdonságok, függvények és osztályok nevének adására, valamint bizonyos ciklusok címkéinek biztosítására használják a JavaScript kódban. Egy JavaScript azonosító betűvel, alulvonással (`_`) vagy dollárjellel (`$`) kell, hogy kezdődjön. A következő karakterek lehetnek betűk, számok, alulvonások vagy dollárjelek. (A számjegyek nem engedélyezettek az első karakterként, hogy a JavaScript könnyen megkülönböztesse az azonosítókat a számoktól.) Ezek mind érvényes azonosítók:
+
+```javascript
+i
+my_variable_name
+v13
+_dummy
+$str
+```
+
+Mint minden nyelv, a JavaScript is fenntartott bizonyos azonosítókat a nyelv saját használatára. Ezeket a "fenntartott szavakat" nem lehet szokásos azonosítóként használni. Az alábbiak a JavaScript nyelv részei. Sokuk (például `if`, `while`, és `for`) fenntartott kulcsszavak, amelyeket nem lehet konstansok, változók, függvények vagy osztályok neveként használni (bár mind használhatók objektum tulajdonságainak neveként). Mások (például `from`, `of`, `get`, és `set`) korlátozott kontextusokban használhatók szintaktikai kétértelműség nélkül és teljesen érvényesek az azonosítóként való használatra. Még más kulcsszavak (például `let`) nem lehetnek teljesen fenntartottak a régebbi programok visszamenőleges kompatibilitása érdekében, ezért összetett szabályok szabályozzák, hogy mikor használhatók az azonosítóként és mikor nem. (A `let` használható változónévként, ha `var`-ral deklarálták osztályon kívül, például, de nem használható osztályon belül vagy `const`-tal.) A legegyszerűbb, ha elkerülöd ezeknek a szavaknak a használatát az azonosítóként, kivéve a `from`, `set`, és `target` szavakat, amelyek biztonságosak és már széles körben használatosak.
+
+#### Fenntartott Szavak
+
+A következő szavak a JavaScript nyelv részei. Sokuk (mint az `if`, `while`, és `for`) fenntartott kulcsszavak, amelyeket nem lehet szokásos azonosítóként használni (bár használhatók objektum tulajdonságainak neveként). Mások (mint a `from`, `of`, `get`, és `set`) korlátozott kontextusokban használhatók szintaktikai kétértelműség nélkül és teljesen érvényesek az azonosítóként való használatra. Még más kulcsszavak (mint a `let`) nem lehetnek teljesen fenntartottak a régebbi programok visszamenőleges kompatibilitása érdekében, ezért összetett szabályok szabályozzák, hogy mikor használhatók az azonosítóként és mikor nem. (A `let` használható változónévként, ha `var`-ral deklarálták osztályon kívül, például, de nem használható osztályon belül vagy `const`-tal.) A legegyszerűbb, ha elkerülöd ezeknek a szavaknak a használatát az azonosítóként, kivéve a `from`, `set`, és `target` szavakat, amelyek biztonságosak és már széles körben használatosak.
+
+```javascript
+as      const      export     get         null     target   void
+async   continue   extends    if          of       this     while
+await   debugger   false      import      return   throw    with
+break   default    finally    in          set      true     yield
+case    delete     for        instanceof  static   try
+catch   do         from       let         super    typeof
+class   else       function   new         switch   var
+enum  implements  interface  package  private  protected  public
+```
+
+A JavaScript bizonyos kulcsszavakat fenntart vagy korlátoz a nyelv által még nem használt, de a jövőbeni verziókban használhatóak lehetnek:
+
+```javascript
+enum  implements  interface  package  private  protected  public
+```
+
+Történelmi okokból az `arguments` és `eval` nem használhatók azonosítóként bizonyos körülmények között, és legjobb elkerülni őket teljesen.
+
+### 2.5 Unicode
+
+A JavaScript programokat a Unicode karakterkészlettel írják, és bármilyen Unicode karaktert használhatsz sztringekben és kommentekben. A hordozhatóság és a könnyű szerkesztés érdekében általában csak ASCII betűket és számokat használnak az azonosítókban. De ez csak programozási konvenció, a nyelv megengedi a Unicode betűket, számokat és ideografikus karaktereket (de nem az emoji-kat) az azonosítókban. Ez azt jelenti, hogy a programozók matematikai szimbólumokat és nem-angol szavakat is használhatnak konstansok és változók névként:
+
+```javascript
+const π = 3.14;
+const sí = true;
+```
+
+#### 2.5.1 Unicode Escape Szekvenciák
+
+Egyes számítógépes hardverek és szoftverek nem képesek megjeleníteni, bevitelre, vagy helyesen feldolgozni a teljes Unicode karakterkészletet. Az idősebb technológiát használó programozók és rendszerek támogatása érdekében a JavaScript escape szekvenciákat definiál, amelyek lehetővé teszik, hogy Unicode karaktereket csak ASCII karakterekkel írjunk. Ezek az Unicode escape-ek a `\u` karakterekkel kezdődnek, és pontosan négy hexadecimális számjegyet (A–F nagy- vagy kisbetűkkel) követnek, vagy egy-egy hat hexadecimális számjegyet kapcsos zárójelek között. Ezek az Unicode escape-ek megjelenhetnek JavaScript sztring literálokban, reguláris kifejezés literálokban, és azonosítókban (de nem nyelvi kulcsszavakban). Például az `é` karakter Unicode escape-je `\u00E9`:
+
+```javascript
+let café = 1; // Változó definiálása Unicode karakterrel
+caf\u00e9     // => 1; hozzáférés escape szekvenciával
+caf\u{E9}     // => 1; egy másik forma ugyanazon escape szekvenciára
+```
+
+Korábbi JavaScript verziók csak a négyjegyű escape szekvenciákat támogatták. A kapcsos zárójelek használatával definiált verzió az ES6-ban került bevezetésre, hogy jobban támogassa a 16 bitnél nagyobb Unicode kódpontokat, mint például az emoji-k:
+
+```javascript
+console.log("\u{1F600}");  // Egy mosolygó arc emoji megjelenítése
+```
+
+Az Unicode escape-ek kommentekben is megjelenhetnek, de mivel a kommentek figyelmen kívül hagyottak, ezek egyszerűen ASCII karakterekként kezelődnek ebben a kontextusban és nem értelmeződnek Unicode-ként.
+
+#### 2.5.2 Unicode Normalizáció
+
+Ha nem-ASCII karaktereket használsz JavaScript programjaidban, tudnod kell, hogy az Unicode többféleképpen is kódolhatja ugyanazt a karaktert. Például az `é` stringet egyetlen Unicode karakterként (`\u00E9`) vagy egy sima ASCII `e` karakterként, amit követ egy ékezetes kombináló jel (`\u0301`), kódolhatjuk. Ezek a két kódolás tipikusan pontosan ugyanúgy néznek ki egy szövegszerkesztőben, de különböző bináris kódolásokkal rendelkeznek, ami azt jelenti, hogy a JavaScript különbözőként kezeli őket, ami nagyon zavaró programokhoz vezethet:
+
+```javascript
+const café = 1;  // Ez a konstans "caf\u{e9}" néven szerepel
+const café = 2;  // Ez a konstans más: "cafe\u{301}"
+café  // => 1: ez a konstans egy értékkel rendelkezik
+café  // => 2: ez a látványosan ugyanaz a konstans más értékkel
+```
+
+Az Unicode szabvány meghatározza az összes karakter preferált kódolását, és normalizációs eljárást ír elő, hogy a szöveget kanonikus formába konvertálják összehasonlításra alkalmasan. A JavaScript feltételezi, hogy az értelmezett forráskód már normalizált, és nem végez normalizációt saját maga. Ha Unicode karaktereket használsz JavaScript programjaidban, győződj meg róla, hogy a szerkesztőd vagy más eszköz biztosítja a forráskód Unicode normalizációját, hogy elkerüld a különböző, de látványosan megkülönböztethetetlen azonosítók létrehozását.
+
+### 2.6 Opccionális Punctuális Vesszők
+
+Mint sok programozási nyelv, a JavaScript is használja a pontosvesszőt (`;`) az utasítások (lásd a 5. fejezetet) elválasztására egymástól. Ez fontos a kód jelentésének tisztázása érdekében: elválasztó nélkül egy utasítás vége úgy tűnhet, mintha a következő utasítás kezdődne, vagy fordítva. A JavaScript általában kihagyhatja a pontosvesszőt két utasítás között, ha azok külön sorokban vannak írva. (A pontosvessző elhagyható a program végén vagy ha a következő token záró kapcsos zárójel: `}`). Sok JavaScript programozó (és a könyv kódja is) explicit módon használ pontosvesszőket az utasítások végét jelölve, még akkor is, ha nem szükségesek. Egy másik stílus az, hogy elhagyjuk a pontosvesszőket, amennyire csak lehet, csak azokon a kevés helyzeteken használjuk, ahol szükségesek. Bárhogyan is döntesz, néhány részletet meg kell értened az opciós pontosvesszők használatával kapcsolatban a JavaScript-ben.
+
+Vegyük a következő kódot. Mivel a két utasítás külön sorokban jelenik meg, az első pontosvessző elhagyható:
+
+```javascript
+a = 3
+b = 4
+```
+
+Viszont a következőképpen írt kód esetén az első pontosvessző kötelező:
+
+```javascript
+a = 3; b = 4;
+```
+
+Megjegyzendő, hogy a JavaScript nem kezeli minden sortörést pontosvesszőként: általában csak akkor kezeli sortörésként, ha nem tudja a kódot pontosvessző hozzáadása nélkül értelmezni. Formálisan (és három kivétel leírása később) a JavaScript sortörést pontosvesszőként értelmez, ha a program következő nem-helyet foglaló karaktere nem értelmezhető a jelenlegi utasítás folytatásaként. Vegyük a következő kódot:
+
+```javascript
+let a
+a
+=
+3
+console.log(a)
+```
+
+A JavaScript ezt a kódot így értelmezi:
+
+```javascript
+let a; a = 3; console.log(a);
+```
+
+A JavaScript az első sortörést pontosvesszőként kezeli, mert nem tudja értelmezni a `let a a` kódot pontosvessző nélkül. A második `a` szintén önállóan kezelhető, mint az `a;`, de a JavaScript nem kezeli a második sortörést pontosvesszőként, mert folytathatja az értelmezést a hosszabb utasítás `a = 3;` felé.
+
+Ezek az utasítás befejezési szabályok néhány meglepő esethez vezetnek. Ez a kód két különálló utasításnak tűnik sortöréssel elválasztva:
+
+```javascript
+let y = x + f
+(a+b).toString()
+```
+
+De a második sorban lévő zárójelek a `f` függvény meghívásaként értelmezhetők az első sorból, és a JavaScript ezt a kódot így értelmezi:
+
+```javascript
+let y = x + f(a+b).toString();
+```
+
+Valószínűbb, hogy a kód szerzője nem ezt szerette volna, és hogy két külön utasítást akart írni. Ebben az esetben explicitt pontosvessző szükséges.
+
+Általánosságban, ha egy utasítás `(`, `[`, `/`, `+`, vagy `-` karakterrel kezdődik, fennáll a lehetőség, hogy folytatódik az előző utasítás folytatásaként. Az `(` és `[` karakterekkel kezdődő utasítások gyakoriak a JavaScript programozási stílusokban. Egyes programozók úgy szeretik elhelyezni egy védelmi pontosvesszőt az ilyen utasítások előtt, hogy az utasítás helyesen működjön, még akkor is, ha az előző utasítás módosítva van és egy korábban lezáró pontosvesszőt eltávolítanak:
+
+```javascript
+let x = 0                         // Punctuáció elhagyva itt
+;[x,x+1,x+2].forEach(console.log) // Védelmi ; különállóvá teszi ezt az utasítást
+```
+
+A JavaScript három kivételt tesz az általános szabályhoz, hogy a sortörést pontosvesszőként értelmezi, ha nem tudja folytatni a második sort az első sor utasításának folytatásaként. Az első kivétel a `return`, `throw`, `yield`, `break`, és `continue` utasításokra vonatkozik. Ezek az utasítások gyakran önállóan állnak, de néha követik őket egy azonosító vagy kifejezés. Ha sortörés van ezek után (mielőtt más tokenek jönnének), a JavaScript mindig sortörésként értelmezi azt, mint pontosvesszőt. Például, ha így írod:
+
+```javascript
+return
+true;
+```
+
+A JavaScript feltételezi, hogy így szeretted volna írni:
+
+```javascript
+return; true;
+```
+
+Azonban valószínűleg ezt szeretted volna:
+
+```javascript
+return true;
+```
+
+Ez azt jelenti, hogy nem szabad sortörést beiktatni a `return`, `break`, vagy `continue` és a következő kifejezés között. Ha sortörést beiktatsz, a kódod nem várt módon fog működni, ami nehezen hibakereshető.
+
+A második kivétel a `++` és `--` operátorokra vonatkozik (§4.8). Ezek az operátorok prefix operátorok, amelyek egy kifejezés előtt állnak, vagy postfix operátorok, amelyek egy kifejezés után állnak. Ha ezeket az operátorokat postfix operátorokként akarod használni, ugyanazon a soron kell lenniük, mint a kifejezés, amelyre alkalmazódnak.
+
+A harmadik kivétel a rövidített "arrow" szintaxissal definiált függvényekre vonatkozik: az `=>` nyílnak ugyanazon a soron kell lennie, mint a paraméterlista.
+
+### 2.7 Összegzés
+
+Ez a fejezet bemutatta, hogyan íródnak JavaScript programok az alacsony szinten. A következő fejezet egy lépéssel magasabbra visz minket, és bevezeti a primitív típusokat és értékeket (számok, sztringek stb.), amelyek a JavaScript programok számítási alapegységei.
+
+---
+
+Ez az anyag a JavaScript alapvető lexikális szerkezetét és szintaxisát mutatja be kódpéldákon keresztül, segítve a nyelv megértését és alkalmazását.
+
+---
+
+https://chatgpt.com/share/677d816f-1d78-800b-96dc-d2ae3975d311

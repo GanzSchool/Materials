@@ -3,8 +3,10 @@ id: bevezeto
 title: Alapok
 ---
 
-# Üdv a Ganz School Tananyagaihoz!
 
-Hamarosan.
+## Fejlesztés alatt
+
+![alt text](../../../img/cc.webp)
+
 
 

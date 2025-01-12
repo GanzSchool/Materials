@@ -63,7 +63,7 @@ const config = {
             position: 'left',
             label: 'Materials',
           },
-          { to: '/blog', label: 'Blog', position: 'left' },
+          { to: '/blog', label: 'Blogg', position: 'left' },
           {
             href: 'https://github.com/GanzSchool/Materials',
             label: 'GitHub',

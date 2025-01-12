@@ -1,0 +1,229 @@
+---  
+title: Alapműveletek 02
+sidebar_label: Alapműveletek 02
+---
+
+## A Tour of JavaScript
+
+Ez a szakasz egy gyors bevezetést nyújt a JavaScript nyelvhez kódpéldákon keresztül.
+
+### JavaScript Alapok
+
+#### Változók és Értékek
+
+```javascript
+// A dupla perjelek után minden angol nyelvű komment.
+// Olvasd el a kommenteket alaposan: magyarázzák a JavaScript kódot.
+
+// Egy változó szimbolikus neve egy értéknek.
+// A változókat a `let` kulcsszóval deklaráljuk:
+let x; // Egy x nevű változó deklarálása.
+
+// Értékek hozzárendelhetők változókhoz egy = jellel
+x = 0; // Most az x változó értéke 0
+x // => 0: Egy változó az értékére értékelődik.
+
+// JavaScript többféle értéktípust támogat
+x = 1; // Számok.
+x = 0.01; // Számok lehetnek egész számok vagy valósak.
+x = "hello world"; // Szövegek idézőjelek között.
+x = 'JavaScript'; // Az egyszeres idézőjelek is határolnak szövegeket.
+x = true; // Egy logikai érték.
+x = false; // A másik logikai érték.
+x = null; // A null egy speciális érték, ami azt jelenti, hogy nincs érték.
+x = undefined; // Az undefined egy másik speciális érték, hasonló a null-hoz.
+
+// Az objektumok és tömbök két nagyon fontos típus, amiket JavaScript programok kezelhetnek:
+let book = { // Az objektumokat kapcsos zárójelek zárják.
+    topic: "JavaScript", // A "topic" tulajdonság értéke "JavaScript."
+    edition: 7 // Az "edition" tulajdonság értéke 7
+}; // A kapcsos zárójel jelzi az objektum végét.
+
+// Az objektum tulajdonságainak elérése . vagy [] segítségével:
+book.topic // => "JavaScript"
+book["edition"] // => 7: egy másik mód a tulajdonság értékek elérésére.
+book.author = "Flanagan"; // Új tulajdonságok létrehozása hozzárendeléssel.
+book.contents = {}; // {} egy üres objektum, tulajdonságok nélkül.
+
+// Feltételes tulajdonság elérés ?. (ES2020):
+book.contents?.ch01?.sect1 // => undefined: a book.contents nem tartalmaz ch01 tulajdonságot.
+
+// JavaScript támogatja a tömböket (szám szerint indexelt listák) értékekből:
+let primes = [2, 3, 5, 7]; // 4 értékből álló tömb, [ és ] zárójelekkel határolva.
+primes[0] // => 2: a tömb első eleme (index 0).
+primes.length // => 4: hány elem van a tömbben.
+primes[primes.length-1] // => 7: a tömb utolsó eleme.
+primes[4] = 9; // Új elem hozzáadása hozzárendeléssel.
+primes[4] = 11; // Vagy meglévő elem módosítása hozzárendeléssel.
+let empty = []; // [] egy üres tömb, elemek nélkül.
+empty.length // => 0
+
+// A tömbök és objektumok más tömböket és objektumokat is tartalmazhatnak:
+let points = [ // 2 elemű tömb.
+    {x: 0, y: 0}, // Minden elem egy objektum.
+    {x: 1, y: 1}
+];
+let data = { // 2 tulajdonságú objektum
+    trial1: [[1,2], [3,4]], // Minden tulajdonság értéke egy tömb.
+    trial2: [[2,3], [4,5]] // A tömbök elemei tömbök.
+};
+```
+
+#### Operátorok
+
+```javascript
+// Operátorok értékeken (operandus) működnek, hogy új értéket hozzanak létre.
+// A műveleti operátorok néhány egyszerű:
+3 + 2 // => 5: összeadás
+3 - 2 // => 1: kivonás
+3 * 2 // => 6: szorzás
+3 / 2 // => 1.5: osztás
+points[1].x - points[0].x // => 1: bonyolultabb operandusok is működnek
+"3" + "2" // => "32": a + számokat ad össze, stringeket konkatenál
+
+// JavaScript néhány rövidített aritmetikai operátort is definiál
+let count = 0; // Egy változó definiálása
+count++; // A változó növelése
+count--; // A változó csökkentése
+count += 2; // 2 hozzáadása: ugyanaz, mint count = count + 2;
+count *= 3; // 3-mal való szorzás: ugyanaz, mint count = count * 3;
+count // => 6: a változó neve is egy kifejezés.
+
+// Egyenlőség- és relációs operátorok tesztelik, hogy két érték egyenlő, egyenlőtlen, kisebb, nagyobb stb. Értékeket adnak vissza.
+let x = 2, y = 3; // Ezek a = jelek hozzárendelés, nem egyenlőség tesztek
+x === y // => false: egyenlőség
+x !== y // => true: egyenlőtlen
+x < y // => true: kisebb
+x <= y // => true: kisebb vagy egyenlő
+x > y // => false: nagyobb
+x >= y // => false: nagyobb vagy egyenlő
+"two" === "three" // => false: a két string különböző
+"two" > "three" // => true: "tw" alfabetikusan nagyobb, mint "th"
+false === (x > y) // => true: false egyenlő false-val
+
+// Logikai operátorok kombinálják vagy inverzálják a boolean értékeket
+(x === 2) && (y === 3) // => true: mindkét összehasonlítás igaz. && az AND
+(x > 3) || (y < 3) // => false: egyik összehasonlítás sem igaz. || az OR
+!(x === y) // => true: ! inverzálja a boolean értéket
+```
+
+#### Kifejezések és Utasítások
+
+A JavaScript kifejezések olyan kifejezések, amelyek értéket számítanak ki, de nem végeznek semmilyen állapotváltoztatást. Az utasítások teljes mondatokhoz hasonlóak, és állapotot változtatnak.
+
+#### Függvények
+
+Egy függvény egy névvel ellátott és paraméterekkel rendelkező JavaScript kódblokk, amit egyszer definiálsz, és aztán többször meghívhatsz.
+
+```javascript
+// Függvények paraméterezett JavaScript kódblokkok, amiket meghívhatunk.
+function plus1(x) { // "plus1" nevű függvény definiálása paraméterrel "x"
+    return x + 1; // Visszatér egy értékkel, ami egyel nagyobb, mint a bemeneti érték
+}
+
+plus1(y) // => 4: y értéke 3, tehát ez a meghívás 3+1-et ad vissza
+
+let square = function(x) { // Függvények értékek, és hozzárendelhetők változókhoz
+    return x * x; // A függvény értékét számolja ki
+}; // A pontosvessző a hozzárendelés végét jelzi.
+
+square(plus1(y)) // => 16: két függvény meghívása egy kifejezésben
+```
+
+Az ES6 és későbbi verziókban van egy rövidített szintaxis függvények definiálására, az úgynevezett arrow függvények.
+
+```javascript
+const plus1 = x => x + 1; // A bemenet x térképezi a kimenetre x + 1
+const square = x => x * x; // A bemenet x térképezi a kimenetre x * x
+plus1(y) // => 4: a függvény meghívása ugyanaz
+square(plus1(y)) // => 16
+```
+
+Amikor függvényeket rendelünk objektumok tulajdonságaihoz, módszereket kapunk:
+
+```javascript
+// Amikor függvényeket rendelünk egy objektum tulajdonságaihoz, "módszereknek" nevezzük őket.
+let a = []; // Üres tömb létrehozása
+a.push(1,2,3); // A push() módszer elemeket ad a tömbhöz
+a.reverse(); // Egy másik módszer: a tömb elemeinek sorrendjének megfordítása
+
+// Saját módszereket is definiálhatunk. A "this" kulcsszó arra az objektumra hivatkozik, amin a módszer van definiálva.
+points.dist = function() { // Módszer definiálása a pontok távolságának számítására
+    let p1 = this[0]; // Az objektum első eleme, amin a módszer hívódik
+    let p2 = this[1]; // A második elem
+    let a = p2.x - p1.x; // x koordináták különbsége
+    let b = p2.y - p1.y; // y koordináták különbsége
+    return Math.sqrt(a*a + b*b); // Pitagorasz-tétel
+};
+points.dist() // => Math.SQRT2: a két pont közötti távolság
+```
+
+#### Kontrollstruktúrák
+
+A JavaScript kontrollstruktúrái közé tartoznak a feltételes és ciklus szerkezetek.
+
+```javascript
+// Feltételes utasítások és ciklusok
+function abs(x) { // Egy függvény az abszolút érték számítására
+    if (x >= 0) { // Ha x nagyobb vagy egyenlő 0-val
+        return x; // Visszatér x-szel
+    }
+    else { // Egyébként
+        return -x; // Visszatér -x-szel
+    }
+}
+abs(-10) === abs(10) // => true
+
+function sum(array) { // Egy függvény az elemek összegzésére egy tömbben
+    let sum = 0; // Kezdő összeg 0
+    for(let x of array) { // Loop a tömb elemein
+        sum += x; // Hozzáadja az elemet az összeghez
+    }
+    return sum; // Visszatér az összeggel
+}
+sum(primes) // => 28: az első 5 prímszám összege
+
+function factorial(n) { // Faktoriális számítás függvénye
+    let product = 1; // Kezdő szorzat 1
+    while(n > 1) { // Amíg n nagyobb 1-nél
+        product *= n; // Szorozza meg a szorzatot n-nel
+        n--; // Csökkenti n-t 1-gyel
+    }
+    return product; // Visszatér a szorzattal
+}
+factorial(4) // => 24: 1*4*3*2
+
+function factorial2(n) { // Másik faktoriális függvény ciklussal
+    let i, product = 1; // Kezdő értékek
+    for(i=2; i <= n; i++) // i-t 2-től n-ig növeli
+        product *= i; // Szorozza meg a szorzatot i-vel
+    return product; // Visszatér a szorzattal
+}
+factorial2(5) // => 120: 1*2*3*4*5
+```
+
+### Objektumorientált Programozás
+
+JavaScript támogatja az objektumorientált programozást, de jelentősen különbözik a "klasszikus" objektumorientált nyelvektől.
+
+```javascript
+class Point { // Osztály definiálása
+    constructor(x, y) { // Konstruktor függvény az új példányok inicializálására
+        this.x = x; // x tulajdonság beállítása
+        this.y = y; // y tulajdonság beállítása
+    }
+
+    distance() { // Módszer a pont távolságának számítására az origótól
+        return Math.sqrt( // Visszatér a négyzetgyökével x² + y²-nek
+            this.x * this.x +
+            this.y * this.y
+        );
+    }
+}
+
+// A Point osztály konstruktőrjének használata "new" kulcsszóval pont objektumok létrehozásához
+let p = new Point(1, 1); // A (1,1) geometriai pont
+
+// Most használjunk egy módszert a Point objektum p-n
+p.distance() // => Math.SQRT2
+```
