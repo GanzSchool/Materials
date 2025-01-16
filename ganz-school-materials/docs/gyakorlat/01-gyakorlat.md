@@ -51,7 +51,4 @@ Készíts egy egyszerű alkalmazást, amely egy gomb megnyomása után 3 másodp
 
 
 
-
-
-[← Vissza a `copy` dokumentációhoz](../Webprogramozás/JavaScript/copi.mdx)
-```
+`
