@@ -1,0 +1,540 @@
+---
+title: JavaScript nyelvi szabályai
+---
+
+## Nyelvtani szabályok és írásmód a JavaScriptben
+
+A JavaScript egy **case-sensitive** nyelv, ami azt jelenti, hogy érzékeny a kis és nagybetűkre. Ezen kívül kulcsszavakat, változó- és függvényneveket, valamint egyéb azonosítókat mindig pontosan a meghatározott módon kell írni.
+
+Például a **while** kulcsszót mindig kisbetűvel kell írni. A **While** vagy a **WHILE** nem értelmezhető a JavaScript számára. A változóneveknél azonban már lehetünk rugalmasabbak. Ha például azt szeretnénk, hogy a változónk neve **online** legyen, akkor ezt a következő módokon is írhatjuk: **Online**, **OnLine** és **ONLINE**, de erről majd később részletesebben is szó lesz.
+
+A JavaScript sok esetben figyelmen kívül hagyja a kód elemei (tokenek) között lévő szóközöket. Általában a JavaScript a sortöréseket is figyelmen kívül hagyja, így a kódot szabadon formázhatjuk a könnyebb olvashatóság érdekében.
+
+---
+
+## Comments
+
+A **kommentek** a kódban olyan megjegyzések, amelyek segítenek a kód megértésében, de nem befolyásolják annak működését. A JavaScript-ben kétféle kommentet használhatunk: **egysoros** és **többsoros** kommenteket.
+
+#### Egysoros komment
+Az egysoros komment egyetlen sorra terjed ki. Az alábbi módon használható:
+
+```javascript
+// Ez egy egysoros komment
+let x = 5; // Ez is egy komment
+```
+
+A `//` után minden, amit írunk, a sor végéig kommentnek számít.
+
+#### Többsoros komment
+A többsoros komment több sorra is kiterjedhet. A kommentet a `/*` és `*/` jelek közé kell írni:
+
+```javascript
+/*
+Ez egy többsoros komment,
+ami több sorban is folytatódhat.
+*/
+let y = 10;
+```
+
+Itt a `/*` jelzi a komment kezdetét, míg a `*/` a végét. Minden, ami közöttük van, kommentként lesz kezelve.
+
+Ezek a kommentek segítenek a kód olvashatóságának javításában, és nem befolyásolják annak működését.
+
+---
+
+## Literals
+
+<details className="dropdown-task">
+  <summary><strong>A szó jelentése</strong></summary>
+
+
+
+A **literál** szó eredetileg a latin *littera* szóból származik, ami "betűt" vagy "írásjegyet" jelent. A programozásban a **literál** kifejezés olyan konkrét, változóktól független értékeket jelöl, amelyeket közvetlenül a kódban írunk le.
+
+Az angolban a literal szóból származó kifejezés magyar jelentése: szó szerinti, betű szerinti.
+
+A szó tágabb értelemben azt jelenti, hogy valamit szó szerint, pontosan úgy, ahogy van, kifejezünk. A programozásban tehát egy literál azt az értéket jelenti, amit a programban közvetlenül leírunk, például egy számot, szöveget vagy logikai értéket. Például:
+
+- A `42` szám literál, mert szó szerint az értéke 42.
+- A `"hello"` szöveg literál, mert szó szerint a karakterláncot tartalmazza.
+
+Ezért a literál egy olyan konkrét érték, amelyet nem kell kiszámítani, hanem egyszerűen megadunk.
+
+</details>
+
+A **literálok** a JavaScriptben olyan értékek, amelyeket közvetlenül a kódban adunk meg, és nem egy változóból származnak. A literálok az alapvető adat típusok értékeinek közvetlen megjelenítésére szolgálnak. A következő típusú literálokat használhatjuk:
+
+ **Számliterálok**: Egyszerű számok, például:
+   ```javascript
+   let a = 42;  // egész szám literál
+   let b = 3.14; // lebegőpontos szám literál
+   ```
+
+**Sztringliterálok**: Karakterláncok, amelyek egy karakterláncot képviselnek, és egyszeres (') vagy dupla (") idézőjelek között vannak.
+   ```javascript
+   let str1 = "Hello, World!";
+   let str2 = 'JavaScript';
+   ```
+
+**Boolean literálok**: Igaz (true) vagy hamis (false) értékek.
+   ```javascript
+   let isActive = true;
+   let isFinished = false;
+   ```
+
+**Objektumliterálok**: Az objektumokat egyszerűen hozhatjuk létre kulcs-érték párokkal.
+   ```javascript
+   let person = { name: "John", age: 30 };
+   ```
+
+**Tömbliterálok**: Az elemeket zárójelek közé téve hozhatunk létre tömböket.
+   ```javascript
+   let numbers = [1, 2, 3, 4];
+   ```
+
+**Null literál**: A `null` érték, amely azt jelzi, hogy egy változó értéke nincs beállítva.
+   ```javascript
+   let emptyValue = null;
+   ```
+
+**Template literálok**: A backtick (`) karakterek között megadott karakterláncok, amelyek lehetővé teszik változók beágyazását a sztringekbe.
+   ```javascript
+   let name = "Alice";
+   let greeting = `Hello, ${name}!`; // Template literal
+   ```
+
+A literálok tehát az alapvető adatokat kifejező szintaktikai elemek, amelyeket a JavaScript programokban közvetlenül használunk.
+
+--- 
+#### Azonosítók and Reserved szavak (kulcsszavak)
+
+#### **Identifiers** (Azonosítók) a JavaScriptben
+
+Az **azonosítók** olyan nevek, amelyeket változók, függvények, objektumok, vagy más elemek azonosítására használsz a kódban. Az azonosítók lehetnek saját, általad választott nevek vagy a nyelv által előre definiált nevek.
+
+#### **Szabályok az azonosítókhoz**:
+1. **Kezdőkarakter**:
+   - Az azonosító **betűvel** (a-z, A-Z), aláhúzással (`_`), vagy dollárjellel (`$`) kell kezdődjön.
+   - **Szám** nem lehet az első karakter.
+     ```javascript
+     let validName = "OK"; // Érvényes
+     let _private = "Hidden"; // Érvényes
+     let $currency = "USD"; // Érvényes
+     // let 1variable = "Error"; // Hiba
+     ```
+
+2. **Következő karakterek**:
+   - Lehetnek betűk, számok, aláhúzás (`_`) vagy dollárjelek (`$`).
+     ```javascript
+     let name1 = "John"; // Érvényes
+     let my_var = "Variable"; // Érvényes
+     ```
+
+3. **Érzékenyek a kis- és nagybetűkre**:
+   - A JavaScript megkülönbözteti a kis- és nagybetűket.
+     ```javascript
+     let apple = "fruit";
+     let Apple = "company";
+     console.log(apple); // "fruit"
+     console.log(Apple); // "company"
+     ```
+
+4. **Kulcsszavak nem használhatók azonosítóként** (lásd lentebb).
+
+
+#### **Reserved Words** (Kulcsszavak) a JavaScriptben
+
+A **foglalt szavak** olyan szavak, amelyeket a JavaScript maga használ bizonyos funkciókhoz vagy szintaxis részeként. Ezeket **nem lehet azonosítóként használni**.
+
+#### **Kulcsszavak (Keywords)**:
+Olyan szavak, amelyek a JavaScript szintaxisának részét képezik, például:
+```javascript
+let, const, var, if, else, switch, case, break, for, while, do, return, function, class, extends, try, catch, finally, throw, import, export, new, delete, typeof, instanceof, in, this, super, static
+```
+
+#### **Függvények által foglalt szavak**:
+Példák: `eval`, `arguments`.
+
+#### **Jövőbeni foglalt szavak**:
+Ezek olyan szavak, amelyeket a JavaScript későbbi verzióiban tervezhetnek kulcsszóként használni:
+```javascript
+enum, implements, interface, package, private, protected, public
+```
+
+#### **Példák és hibák**:
+
+1. **Foglalatlan szó**:
+   ```javascript
+   let myVariable = 10; // Érvényes
+   ```
+
+2. **Foglalt szó**:
+   ```javascript
+   // let return = 5; // Hiba: "return" foglalt szó
+   ```
+
+3. **Érvényes azonosítók**:
+   ```javascript
+   let _value = 100;
+   let $dollar = "currency";
+   let camelCase = true;
+   ```
+
+4. **Érvénytelen azonosítók**:
+   ```javascript
+   // let 123abc = "error"; // Hiba: Szám nem lehet kezdőkarakter
+   // let my-var = "error"; // Hiba: Kötőjel nem megengedett
+   ```
+
+#### **Összefoglalva**:
+- **Azonosítók**: Nevek, amelyeket te adhatsz változóknak, függvényeknek, stb., bizonyos szabályokat követve.
+- **Foglalt szavak**: A JavaScript beépített vagy fenntartott szavai, amelyeket nem használhatsz azonosítóként.
+
+---
+
+## Unicode a JavaScriptben
+
+A **Unicode** a JavaScriptben (és más programozási nyelvekben) a karakterek globális szabványosított ábrázolása. Lehetővé teszi, hogy a kód különböző nyelvek és írásrendszerek karaktereit támogassa, így globálisan használhatóvá válik.
+
+1. **Sztringekben**:
+   A JavaScript sztringek Unicode karaktereket támogatnak, így gyakorlatilag bármilyen karakter megadható bennük. Például:
+   ```javascript
+   let text = "Hello, 世界!"; // Angol és kínai karakterek
+   console.log(text); // "Hello, 世界!"
+   ```
+
+2. **Unicode kódpontok használata**:
+   Egy karakter Unicode kódpontját megadhatod `\u` szekvenciával (hexadecimális formátumban), például:
+   ```javascript
+   let heart = "\u2764"; // Szív szimbólum (❤)
+   console.log(heart); // ❤
+   ```
+
+   A modernebb Unicode kódpontok, amelyek meghaladják a `\uFFFF` tartományt, a következő szintaxissal érhetők el:
+   ```javascript
+   let smiley = "\u{1F600}"; // 😀 (Unicode kódpont U+1F600)
+   console.log(smiley); // 😀
+   ```
+
+3. **Unicode azonosítókban**:
+   Az azonosítók (pl. változónevek) Unicode karaktereket is tartalmazhatnak, beleértve nem angol karaktereket is.
+   ```javascript
+   let élőlény = "macska"; // Ékezetes karakterek az azonosítóban
+   let 世界 = "világ"; // Kínai karakterek az azonosítóban
+   console.log(élőlény, 世界); // "macska világ"
+   ```
+
+4. **Unicode Escape szekvenciák**:
+   Sztringekben és reguláris kifejezésekben Unicode escape szekvenciákkal is megadhatod a karaktereket:
+   ```javascript
+   let unicodeEscape = "\u0041"; // 'A' betű Unicode kódja (U+0041)
+   console.log(unicodeEscape); // A
+   ```
+
+5. **Unicode és reguláris kifejezések**:
+   A JavaScript reguláris kifejezései támogatják a Unicode karaktereket. A `u` jelzőt használhatod a Unicode mód bekapcsolásához:
+   ```javascript
+   let regex = /\u{1F600}/u; // 😀 karakter keresése
+   console.log(regex.test("😀")); // true
+   ```
+
+6. **Unicode hosszú karakterek**:
+   Egyes Unicode karakterek, mint például az emoji, több "kód egységből" állhatnak, mert a JavaScript belsőleg 16 bites UTF-16 kódolást használ.
+   ```javascript
+   let emoji = "😀";
+   console.log(emoji.length); // 2 (mert két kód egységből áll)
+   ```
+
+   Az ilyen karakterek helyes kezelése érdekében használhatod a **spread operátort** vagy más modern metódusokat:
+   ```javascript
+   console.log([...emoji].length); // 1 (helyes karakterhossz)
+   ```
+
+**Gyakorlati példák**:
+
+1. **Unicode szimbólumok**:
+   ```javascript
+   let chess = "\u265A"; // Király sakk figura (♚)
+   console.log(chess); // ♚
+   ```
+
+2. **Emoji Unicode kódokkal**:
+   ```javascript
+   let thumbsUp = "\u{1F44D}"; // 👍
+   console.log(thumbsUp); // 👍
+   ```
+
+3. **Nem latin karakterek az azonosítókban**:
+   ```javascript
+   let ár = 500;
+   console.log(ár); // 500
+   ```0
+
+**Összefoglalva**:
+A Unicode a karakterek globális szabványos ábrázolása, amely biztosítja, hogy a JavaScript támogassa az összes írásrendszert, szimbólumot, emoji-t, és speciális karaktereket. Ennek köszönhetően a kódod univerzálisan alkalmazható különböző nyelveken és platformokon.
+
+## Optional Semicolons
+
+A **"Optional Semicolons"** (opcionális pontosvesszők) a JavaScriptben arra utal, hogy a nyelv **általában lehetővé teszi a pontosvesszők kihagyását** a kódban, mivel a JavaScript **automatikusan beszúrja** a szükséges pontosvesszőket a megfelelő helyekre, amikor a kódot futtatjuk. Ez az úgynevezett **Automatic Semicolon Insertion (ASI)** mechanizmus, amely megkísérli a pontosvesszők automatikus hozzáadását ott, ahol a programozó elfelejtette őket.
+
+**Miért opcionális a pontosvessző?**
+A JavaScript a kód elemzéséhez és végrehajtásához képes kitalálni, hogy mikor van szükség egy pontosvesszőre. Ha egy kifejezés vagy utasítás vége nem tartalmazza a pontosvesszőt, a JavaScript próbálja automatikusan behelyettesíteni a megfelelő helyeken.
+
+**Példák, ahol a pontosvessző elhagyható**:
+
+1. **Egyszerű kifejezés**:
+   A következő kód pontosvesszők nélkül is működik:
+   ```javascript
+   let a = 5
+   let b = 10
+   let sum = a + b
+   console.log(sum)
+   ```
+   Az ASI automatikusan hozzáadja a szükséges pontosvesszőket a kifejezések végén.
+
+2. **Függvényhívások**:
+   A függvények hívása után sem szükséges pontosvessző, ha a kód jól van struktúrálva:
+   ```javascript
+   function greet() {
+       console.log("Hello!");
+   }
+   greet()  // Nem szükséges pontosvessző
+   ```
+
+**Amikor a pontosvessző kihagyása problémát okozhat**:
+Bár a pontosvesszők opcionálisak, bizonyos esetekben az ASI nem működik megfelelően, és hibákhoz vezethet. A leggyakoribb probléma akkor fordul elő, amikor a kódnak két sor között **értelmezési problémája** van, például a következő esetekben:
+
+1. **Visszatérési utasítások**:
+   Ha egy `return` kulcsszóval rendelkező sor után nem teszel pontosvesszőt, a JavaScript nem biztos, hogy helyesen értelmezi a kódot.
+   ```javascript
+   function test() {
+       return
+       {
+           name: "John"
+       }
+   }
+
+   console.log(test())  // undefined
+   ```
+   Itt a `return` sor után nem helyezhető el új sor, mivel a JavaScript úgy értelmezi, hogy a `return` utasítást egyből befejezi. Ha a pontosvesszőt nem teszed a `return` után, akkor a következő sor egy új blokkot kezd, és nem lesz visszaadva a kívánt objektum.
+
+2. **Előtag nélküli operátorok**:
+   Az ilyen típusú kódban is problémák lehetnek:
+   ```javascript
+   let x = 5
+   let y = 10
+   x
+   + y
+   ```
+   Ebben az esetben a JavaScript **összeadja** az `x` és `y` értékeit, de az ASI nem biztos, hogy úgy működik, ahogy vártuk.
+
+**Összefoglalva**:
+
+- **Pontosvesszők opcionálisak** a JavaScriptben, mivel az ASI mechanizmus automatikusan hozzáadja őket, ahol szükséges.
+- **Bár opcionálisak**, érdemes használni őket a kód tisztaságának és olvashatóságának megőrzéséhez, valamint hogy elkerüljük az olyan helyzeteket, ahol az ASI nem működik megfelelően.
+- **Kihagyásuk** néha problémákat okozhat, különösen az olyan helyzetekben, ahol a JavaScript nem biztos abban, hogy mikor kell befejezni egy utasítást.
+
+<details className="dropdown-task">
+  <summary><strong>ASI-ról bővebben</strong></summary>
+
+
+Az **ASI (Automatic Semicolon Insertion)** a JavaScript egy sajátossága, amely lehetővé teszi, hogy bizonyos helyzetekben a szintaktikai szabályok szerint elvárt pontosvesszők (`;`) automatikusan hozzáadásra kerüljenek a JavaScript motor által, még akkor is, ha a kód írója nem írta be őket manuálisan.
+
+#### Hogyan működik az ASI?
+A JavaScript szabályai szerint a pontosvessző opcionális bizonyos helyeken, és az ASI mechanizmus automatikusan beilleszti azokat, ha:
+- Új sor van a kódban, amely lezárhat egy állítást.
+- A JavaScript egy érvénytelen szintaktikai helyzetbe kerülne, ha nem lenne pontosvessző.
+- Bizonyos kulcsszavak után (pl. `return`, `break`, `continue`), ha új sor következik.
+
+#### Példák az ASI működésére
+
+#### Automatikusan beillesztett pontosvessző:
+```javascript
+let a = 5
+let b = 10
+console.log(a + b)
+```
+
+A fenti kódot a JavaScript motor így értelmezi:
+```javascript
+let a = 5;
+let b = 10;
+console.log(a + b);
+```
+
+#### Kulcsszavak és új sor problémái:
+Ha `return` után új sor kezdődik, az ASI beilleszti a pontosvesszőt az első sor végére:
+```javascript
+function getValue() {
+  return 
+  42
+}
+
+console.log(getValue()) // undefined
+```
+Itt a JavaScript így értelmezi:
+```javascript
+function getValue() {
+  return; // automatikusan beillesztve
+  42;
+}
+```
+Ezért a függvény `undefined` értéket ad vissza, nem pedig `42`.
+
+#### Probléma, ha nem egyértelmű:
+Az ASI nem mindig működik úgy, ahogyan várnánk. Példa:
+```javascript
+let a = 10
+let b = 20
+let c = a + b
+(a).toString()
+```
+Itt hibát kapunk, mert a JavaScript így próbálja értelmezni:
+```javascript
+let a = 10;
+let b = 20;
+let c = a + b(a).toString(); // Hiba: b nem függvény
+```
+Ezért érdemes manuálisan hozzáadni a pontosvesszőket.
+
+#### Mikor **ne bízz** az ASI-ban?
+- **Kód egyértelműsége**: Más programozók könnyebben olvassák a kódot, ha a pontosvesszők ott vannak, ahol kell.
+- **Potenciális hibák elkerülése**: Az olyan kulcsszavak után, mint a `return`, mindig egy sorba írd a visszaadott értéket.
+
+#### Összegzés
+Bár az ASI sok helyzetben megkönnyíti a kódolást, nem helyettesíti a pontos szintaktikai fegyelmet. Javasolt, hogy következetesen használj pontosvesszőket, mert így elkerülheted a nehezen követhető hibákat. Az ASI inkább egy kényelmi funkció, nem pedig helyes programozási gyakorlat.
+
+---
+
+JavaScriptben a pontosvessző (`;`) használata nem mindig kötelező az **ASI** (Automatic Semicolon Insertion) miatt, de vannak olyan helyzetek, amikor **kötelező kitenni**, mert a hiánya szintaktikai hibát vagy váratlan viselkedést eredményezhet. Nézzük meg, mikor kötelező a pontosvessző használata!
+
+---
+
+#### **Kódsorok összekapcsolásakor ugyanabban a sorban**
+Ha két különálló állítást (`statement`) egy sorban helyezel el, akkor kötelező a pontosvessző:
+```javascript
+let a = 5; let b = 10; console.log(a + b);
+```
+
+Ha nincs pontosvessző, a JavaScript nem tudja megkülönböztetni a különálló utasításokat, és szintaktikai hibát dob.
+
+---
+
+#### **Kifejezések között, ahol nem egyértelmű az elválasztás**
+Egyes helyzetekben a JavaScript motor nem tudja helyesen értelmezni a kódot, ha nincs pontosvessző. Például:
+```javascript
+let a = 5
+let b = function() {}
+[a].forEach(console.log)
+```
+
+Ez hibát okoz, mert a motor így próbálja értelmezni:
+```javascript
+let b = function() {}[a].forEach(console.log);
+```
+
+A megoldás:
+```javascript
+let a = 5;
+let b = function() {};
+[a].forEach(console.log);
+```
+
+---
+
+#### **Return, Break, Continue kulcsszavak után**
+Ha a `return`, `break`, vagy `continue` kulcsszót követően új sor kezdődik, akkor kötelező a pontosvessző, hogy elkerüld a helytelen értelmezést.
+
+#### Hibás példa:
+```javascript
+function test() {
+  return
+  42
+}
+console.log(test()) // undefined
+```
+
+A JavaScript így értelmezi:
+```javascript
+function test() {
+  return; // Az ASI beilleszti
+  42;    // Ez már nem része a return értéknek
+}
+```
+
+#### Helyes:
+```javascript
+function test() {
+  return 42;
+}
+```
+
+---
+
+#### **For, While, Do-While ciklusok üres testében**
+Ha a ciklus törzse üres, kötelező a pontosvessző a kód helyes értelmezése érdekében:
+```javascript
+for (let i = 0; i < 10; i++);
+```
+
+---
+
+#### **Egyéni kódblokkok esetén**
+Ha a kódblokkok között pontosvessző nélkül folytatod a kódot, és az egy kifejezéssel kezdődik, a motor félreértelmezheti:
+```javascript
+let x = 10
+(function() {
+  console.log("Hi")
+})()
+```
+
+A JavaScript ezt így értelmezi:
+```javascript
+let x = 10(function() {
+  console.log("Hi")
+})();
+```
+
+A megoldás:
+```javascript
+let x = 10;
+(function() {
+  console.log("Hi");
+})();
+```
+
+---
+
+#### **Ternary operátorok használatakor**
+Többsoros ternary operátor esetén zárójelek vagy pontosvessző használata segít elkerülni a hibákat:
+```javascript
+let result = condition
+  ? value1
+  : value2
+// Itt nem kötelező, de ajánlott zárni az előző kifejezést.
+```
+
+---
+
+#### Mikor nem szükséges?
+Az ASI a következő helyzetekben automatikusan beszúrja a pontosvesszőt:
+1. Egy sor vége után, ha az érvényes állítást zár.
+2. Blokk (`{}`) végén, ha nincs további szintaktikai elem.
+
+Például:
+```javascript
+let a = 10
+let b = 20
+console.log(a + b)
+```
+
+---
+
+#### Általános ajánlás
+Míg az ASI sokszor megkönnyíti a kódírást, **következetesen használj pontosvesszőket**:
+- Könnyebben olvashatóvá teszed a kódot.
+- Elkerülöd a félreérthető szituációkat és hibákat.
+
+
+</details>

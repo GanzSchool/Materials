@@ -320,7 +320,147 @@ Ebben a példában a gyermek elem kattintása először a capturing fázisban ke
 
 Az események kezelése a callback alapú aszinkron programozásban elengedhetetlen része a JavaScript fejlesztésnek. Az eseménykezelők révén a programok képesek dinamikusan reagálni a felhasználói interakciókra és más aszinkron történésekre. Ez hozzájárul ahhozi is, hogy hatékonyan használjuk az erőforrásokat.
 
-## Gyakorlati feladatok.
+## Gyakorlati feladatok
+
+<details className="dropdown-task">
+
+  <summary><strong>Modal</strong></summary>
+   
+Ez a kód egy **információs modal ablakot** valósít meg, amely egy felugró ablakként jelenik meg a képernyő közepén, amikor egy gombra kattintasz. A modal ablak célja további információk megjelenítése. A lenti példában lehetőség van egy külön gomb vagy a háttérre kattintás segítségével bezárni.
+
+```html
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <title>Információs Modal</title>
+  <style>
+/* Alapértelmezett stílusok a body elemhez */
+body {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; /* Betűtípus beállítása */
+  background: #282c34; /* Háttérszín beállítása */
+  color: #fff; /* Szöveg színe fehér */
+  display: flex; /* Flexbox használata a középre igazításhoz */
+  justify-content: center; /* Horizontálisan középre igazít */
+  align-items: center; /* Vertikálisan középre igazít */
+  height: 100vh; /* 100%-os magasság a viewport (képernyő) magasságához képest */
+  margin: 0; /* Margin eltávolítása az alapértelmezett értékek miatt */
+}
+
+/* Gomb stílusa a modal megnyitásához */
+.open-modal-btn {
+  padding: 15px 25px; /* Párnázás a gomb körül */
+  font-size: 18px; /* Betűméret beállítása */
+  border: none; /* Nincs keret */
+  border-radius: 10px; /* Lekerekített sarkok */
+  background: #61dafb; /* Gomb háttérszín */
+  color: #282c34; /* Gomb szövegének színe */
+  cursor: pointer; /* Kéz kurzor, jelezve, hogy kattintható */
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3); /* Árnyék hozzáadása a gombhoz */
+  transition: background 0.3s, transform 0.3s; /* Áttűnés a háttérszín és a transform változásához */
+}
+
+/* Hover effektus a gombon, amikor fölé viszed az egeret */
+.open-modal-btn:hover {
+  background: #21a1f1; /* Háttérszín világosabbá válik */
+  transform: translateY(-3px); /* A gomb elmozdul egy kicsit felfelé */
+}
+
+/* Modal stílusok */
+.modal {
+  position: fixed; /* A modal fix pozícióban jelenik meg */
+  top: 0; /* A képernyő tetejére igazítva */
+  left: 0; /* A képernyő bal oldalára igazítva */
+  width: 100%; /* A modal szélessége 100% */
+  height: 100%; /* A modal magassága 100% */
+  background: rgba(0,0,0,0.6); /* Fekete háttér áttetsző árnyékkal */
+  display: flex; /* Flexbox használata a tartalom középre igazításához */
+  justify-content: center; /* Horizontálisan középre igazít */
+  align-items: center; /* Vertikálisan középre igazít */
+  opacity: 0; /* Alapértelmezés szerint láthatatlan */
+  visibility: hidden; /* Alapértelmezés szerint rejtett */
+  transition: opacity 0.3s, visibility 0.3s; /* Láthatóság és átlátszóság animálása */
+}
+
+/* Amikor a modal aktív, láthatóvá válik */
+.modal.active {
+  opacity: 1; /* Láthatóvá válik */
+  visibility: visible; /* Láthatóvá válik */
+}
+
+/* Modal tartalom stílusai */
+.modal-content {
+  background: #fff; /* Fehér háttér */
+  color: #333; /* Sötét szövegszín */
+  padding: 30px; /* Párnázás a modal tartalom körül */
+  border-radius: 10px; /* Lekerekített sarkok */
+  width: 80%; /* A modal szélessége 80% */
+  max-width: 500px; /* A modal maximális szélessége 500px */
+  position: relative; /* A modal tartalom pozíciója relatív, hogy a bezáró gombot pozicionálhassuk */
+  text-align: center; /* A szöveg középre igazítása */
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3); /* Árnyék hozzáadása a modal tartalomhoz */
+  animation: fadeIn 0.3s ease-out; /* Fade-in animáció a modal tartalomhoz */
+}
+
+/* Animáció a modal tartalom belépéséhez */
+@keyframes fadeIn {
+  from { transform: translateY(-50px); opacity: 0; } /* Kezdeti állapot: kicsit feljebb és láthatatlan */
+  to { transform: translateY(0); opacity: 1; } /* Végső állapot: a modal a helyére ér és láthatóvá válik */
+}
+
+/* A modal bezárásához használt gomb stílusa */
+.close-modal-btn {
+  position: absolute; /* A gomb pozícióját abszolút helyezésben adjuk meg */
+  top: 15px; /* A gomb a modal tetejére kerül */
+  right: 15px; /* A gomb a modal jobb oldalára kerül */
+  background: #e74c3c; /* Piros háttérszín */
+  border: none; /* Nincs keret */
+  color: #fff; /* Fehér szöveg */
+  padding: 5px 10px; /* Párnázás a gomb körül */
+  border-radius: 5px; /* Lekerekített sarkok */
+  cursor: pointer; /* Kéz kurzor */
+  transition: background 0.3s; /* Háttérszín áttűnése */
+}
+
+/* Hover effektus a bezáró gombon */
+.close-modal-btn:hover {
+  background: #c0392b; /* Sötétebb piros háttér a gombon hover esetén */
+}
+
+/* A modal tartalmában található h2 elem stílusa */
+.modal-content h2 {
+  margin-top: 0; /* Eltávolítja a felső margót */
+}
+
+  </style>
+</head>
+<body>
+
+    <!-- tartalom --> 
+
+    </body>
+
+<script>
+
+
+    // Hivatkozások
+
+
+    // Modal megnyitása
+
+
+    // Modal bezárása a gombra kattintva
+
+
+    // Modal bezárása a háttérre kattintva
+
+</script>
+
+</body>
+</html>
+```
+
+</details>
 
 
 ## Projekt feladatok
