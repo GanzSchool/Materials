@@ -468,6 +468,11 @@ body {
 
 A kód egy weboldal, amely egy gomb segítségével lehetővé teszi a felhasználók számára, hogy váltsanak a világos és a sötét mód között.
 
+Minták:
+https://shorturl.at/N4Vi7 
+| 
+https://shorturl.at/aZ7hJ
+
 #### Működés
 
 **JavaScript**: 
@@ -564,6 +569,119 @@ A kód egy weboldal, amely egy gomb segítségével lehetővé teszi a felhaszn�
 
   <summary><strong>Galery</strong></summary>
    
+Ez a projekt egy egyszerű **kép galériát** valósít meg, amelyben a képekre kattintva azok kinagyítva jelennek meg. A funkciók és az implementáció röviden:
+
+#### **Funkciók**
+**Galéria megjelenítése**: A képek kis méretben vannak elhelyezve egy rácsszerű elrendezésben.
+**Nagyított kép megtekintése**: A galériában egy képre kattintva nagyobb méretben jelenik meg a kép az oldal közepén.**Bezárás kattintással**: A nagyított képre kattintva az eltűnik, visszatérve az eredeti galéria nézethez.
+
+#### **JavaScript megvalósítása**
+A kód egyszerű eseménykezelőket használ:
+**Kattintásfigyelés a galériában**:
+   - A galéria konténerére (`.gallery`) eseményfigyelőt teszünk, amely ellenőrzi, hogy a kattintott elem egy kép-e.
+   - A kiválasztott kép URL-jét frissítjük, és a kép kinagyított változatát jelenítjük meg.
+
+**Kép bezárása**:
+   - Egy külön eseményfigyelőt használunk a nagyított kép bezárására, amikor arra kattintunk.
+
+```html
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <title>Kép Galéria</title>
+  <style>
+    body {
+      font-family: 'Verdana', sans-serif;
+      background-color: #f4f4f4;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      margin: 0;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .gallery img {
+      width: 150px;
+      height: 100px;
+      object-fit: cover;
+      border: 3px solid #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      cursor: pointer;
+      transition: transform 0.3s, border-color 0.3s;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.05);
+      border-color: #f06;
+    }
+
+    .selected-image {
+      margin-top: 30px;
+      width: 80%;
+      max-width: 600px;
+      border-radius: 10px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+      transition: opacity 0.5s;
+    }
+
+    .selected-image.hidden {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .selected-image.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Kép Galéria</h1>
+  
+  <div class="gallery">
+    <img src="https://picsum.photos/id/1015/300/200" alt="Kép 1">
+    <img src="https://picsum.photos/id/1025/300/200" alt="Kép 2">
+    <img src="https://picsum.photos/id/1035/300/200" alt="Kép 3">
+    <img src="https://picsum.photos/id/1045/300/200" alt="Kép 4">
+    <img src="https://picsum.photos/id/1055/300/200" alt="Kép 5">
+  </div>
+
+  <img src="" alt="Kiválasztott Kép" id="selectedImage" class="selected-image hidden">
+
+  <script>
+
+
+/*
+    Kép megnyitásánál az alábbi osztályt kell eltávolítani és hozzárendelni az adott képhez
+    .selected-image.hidden {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+
+    Ezen kívül bezárható legyena a kép, a képről való elkattintással
+
+  </script>
+
+  </body>
+</html>
+```
+
 
 
 </details>
@@ -572,8 +690,142 @@ A kód egy weboldal, amely egy gomb segítségével lehetővé teszi a felhaszn�
 
   <summary><strong>Todo List</strong></summary>
 
+  Ez a to-do lista**, amely lehetővé teszi feladatok hozzáadását, megjelenítését, és törlését.
+
+#### **Funkciók**
+1. **Feladat hozzáadása**: Az új feladatokat a felhasználó egy szövegdobozba írja be, majd az "Hozzáadás" gomb megnyomásával kerülnek hozzáadásra a listához.
+2. **Feladat törlés**: Minden egyes feladat mellett található egy "Törlés" gomb, amely eltávolítja azt a listából.
+3. **Enter gombos hozzáadás**: Az új feladat hozzáadása az "Enter" gomb lenyomásával is történhet.
+
+#### **JavaScript megvalósítása**
+- **Feladat hozzáadása**: Az `addBtn` gombra kattintva vagy az "Enter" billentyű lenyomásával hozzáadódik egy új feladat a `todos` tömbhöz, majd az `renderList` függvény frissíti a feladatlistát.
+- **Feladat törlése**: A "Törlés" gombra kattintva az adott feladat törlődik a `todos` tömbből, és újra rendereljük a listát.
+- **Lista renderelése**: A `renderList` függvény felelős a feladatok megjelenítéséért a weboldalon. Minden feladat egy `<li>` elemként jelenik meg, a hozzá tartozó törlés gombbal.
+
+```html
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <title>Dinamikus To-Do Lista</title>
+  <style>
+    body {
+      background: linear-gradient(135deg, #f06, #f79);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background: #fff;
+      padding: 20px 30px;
+      border-radius: 15px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      width: 300px;
+      text-align: center;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    input[type="text"] {
+      width: 80%;
+      padding: 10px;
+      border: 2px solid #f06;
+      border-radius: 5px;
+      margin-bottom: 10px;
+      transition: border-color 0.3s;
+    }
+
+    input[type="text"]:focus {
+      border-color: #333;
+      outline: none;
+    }
+
+    button {
+      padding: 10px 20px;
+      background: #f06;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: #c0058e;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin-top: 20px;
+    }
+
+    li {
+      background: #f9f9f9;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background 0.3s;
+    }
+
+    li:hover {
+      background: #e9e9e9;
+    }
+
+    .delete-btn {
+      background: #e74c3c;
+      border: none;
+      color: #fff;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .delete-btn:hover {
+      background: #c0392b;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>To-Do Lista</h2>
+    <input type="text" id="todoInput" placeholder="Új feladat...">
+    <button id="addBtn">Hozzáadás</button>
+    <ul id="todoList"></ul>
+  </div>
+
+  <script>
+
+    // Hivatkozások
+
+    // Esemény a Hozzáadás gombra
 
 
+    // Esemény az Enter billentyű lenyomására
+
+
+    // Lista renderelése
+
+
+
+  </script>
+  
+
+</body>
+</html>
+```
 
 </details>
 

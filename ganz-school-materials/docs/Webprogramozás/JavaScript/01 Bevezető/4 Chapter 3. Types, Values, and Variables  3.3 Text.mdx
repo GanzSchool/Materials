@@ -1,0 +1,588 @@
+---
+title: Szöveges típus a JavaScriptben
+---
+
+## Stringek a JavaScriptben
+
+A JavaScript nyelvben a szövegek kezelésére a **string** típus szolgál. A string egy olyan adatstruktúra, amely egy **változtathatatlan (immutable)**, sorrendezett karakterláncot tartalmaz. Ez azt jelenti, hogy ha egy string létrejött, annak tartalma nem módosítható. Új stringek létrehozásával lehet azonban manipulálni az értéket.
+
+<details className="dropdown-task">
+
+  <summary><strong>Mit jelent, az hogy immutable?</strong></summary>
+
+#### A stringek immutabilitása JavaScriptben
+
+A JavaScript stringek immutábilisak, ami azt jelenti, hogy egy string tartalma nem változtatható meg a memóriában. Ha egy string módosítását próbáljuk elérni, valójában egy új string jön létre, és nem a meglévő string változik.
+
+#### Példa az immutabilitásra
+
+```javascript
+let originalString = "hello";
+
+// Megpróbáljuk megváltoztatni a string egy karakterét
+originalString[0] = "H";
+console.log(originalString); // => "hello" (a string nem változik)
+```
+
+
+#### További példa immutabilitásra:
+
+```javascript
+let greeting = "Hi";
+
+// Egy új string létrehozása összefűzéssel
+let newGreeting = greeting + ", how are you?";
+console.log(newGreeting); // => "Hi, how are you?"
+
+// Az eredeti string változatlan marad
+console.log(greeting); // => "Hi"
+```
+
+</details>
+
+#### A string felépítése
+A string egy **16 bites értékek sorozata**, ahol minden egyes 16 bites érték jellemzően egy Unicode karaktert képvisel. Ez lehetővé teszi, hogy a stringek gyakorlatilag bármilyen nyelv karaktereit, szimbólumait és speciális jeleit tartalmazzák.
+
+Példa Unicode karakterek használatára:
+```javascript
+let str = "é"; // Az é betű Unicode kódja
+console.log(str); // => "é"
+```
+
+A string hossza a benne található 16 bites értékek (karakterek) számát jelöli. Az üres string olyan string, amely nem tartalmaz karaktereket, azaz hossza 0.
+
+Példa üres stringre:
+```javascript
+let empty = "";
+console.log(empty.length); // => 0
+```
+
+#### Indexelés a stringekben
+A JavaScript stringek **nulláról indexeltek**, ami azt jelenti, hogy a string első karaktere a 0. indexen található, a második az 1. indexen, és így tovább. A karakterek eléréséhez szögletes zárójelbe írt indexet használunk, például:
+
+```javascript
+let greeting = "hello";
+console.log(greeting[0]); // => "h"
+console.log(greeting[1]); // => "e"
+console.log(greeting[greeting.length - 1]); // => "o" (az utolsó karakter)
+```
+
+Fontos megjegyezni, hogy ha egy index meghaladja a string hosszát, akkor `undefined` értéket kapunk:
+
+```javascript
+let word = "world";
+console.log(word[10]); // => undefined
+```
+
+#### Egyetlen karakter reprezentálása
+A JavaScript-ben nincs külön típus, amely kizárólag egyetlen karaktert reprezentálna (mint például a `char` más programozási nyelvekben). Ehelyett egy karaktert egy **1 hosszúságú string** formájában kezelünk:
+
+```javascript
+let char = "a"; // Ez egy 1 hosszúságú string
+console.log(char.length); // => 1
+```
+
+#### Példák stringek létrehozására
+Stringek létrehozására háromféle idézőjelet használhatunk:
+
+**Kettős idézőjelek:**
+```javascript
+let doubleQuoted = "Ez egy string.";
+```
+
+**Egyszeres idézőjelek:**
+```javascript
+let singleQuoted = 'Ez is egy string.';
+```
+
+**Backtick (Template Literal):**
+```javascript
+let backtick = `Ez egy dinamikus string, például: ${2 + 3}`;
+console.log(backtick); // => "Ez egy dinamikus string, például: 5"
+```
+
+A backtick idézőjelek különösen hasznosak több soros stringeknél és változók, kifejezések behelyettesítésénél:
+
+```javascript
+let name = "Anna";
+let greeting = `Szia, ${name}! Hogy vagy?`;
+console.log(greeting); // => "Szia, Anna! Hogy vagy?"
+```
+
+#### Stringek tulajdonságai és metódusai
+A JavaScript stringekhez számos beépített tulajdonság és metódus tartozik, amelyekkel könnyen manipulálhatjuk őket. Például:
+
+**Hossz lekérdezése:**
+```javascript
+let text = "Hello, világ!";
+console.log(text.length); // => 13
+```
+
+**Karakterek kiválasztása:**
+```javascript
+let word = "JavaScript";
+console.log(word.charAt(4)); // => "S" (az 5. karakter)
+console.log(word[4]); // => "S" (ugyanaz, egyszerűbb szintaxis)
+```
+
+**String részleteinek kivágása:**
+   - `slice`: Részlet kivágása kezdő és opcionális záró index alapján.
+   - `substring`: Hasonló a slice-hoz, de nem támogat negatív indexeket.
+   - `substr`: Hasonló, de a második paraméter a hosszúságot adja meg.
+
+Példa:
+```javascript
+let phrase = "JavaScript is fun!";
+console.log(phrase.slice(0, 10)); // => "JavaScript"
+console.log(phrase.substring(0, 10)); // => "JavaScript"
+console.log(phrase.substr(0, 10)); // => "JavaScript"
+```
+
+**Stringek összehasonlítása:**
+```javascript
+let a = "alma";
+let b = "banán";
+console.log(a < b); // => true (ábécérend szerinti összehasonlítás)
+```
+
+**Stringek összefűzése:**
+```javascript
+let firstName = "John";
+let lastName = "Doe";
+let fullName = firstName + " " + lastName;
+console.log(fullName); // => "John Doe"
+```
+
+#### ES6 és karakterek iterációja:
+   Az ES6 óta a JavaScript stringek **iterálhatók**. Ha a `for/of` ciklust vagy a spread (`...`) operátort használod egy stringen, akkor a stringet karakterenként iterálja, nem pedig 16 bites értékenként.
+
+---
+
+## String-literálok a JavaScriptben
+
+A stringek a JavaScriptben alapvető típusok, amelyek a szöveges adatokat reprezentálják. Stringeket szinte minden JavaScript kódban használunk, legyen szó felhasználói adatok megjelenítéséről, HTML elemek manipulációjáról vagy különböző üzenetek megjelenítéséről.
+
+A JavaScriptben a stringek definiálásához háromféle határolót használhatsz:
+- **Egyes idézőjel**: `'string'`
+- **Dupla idézőjel**: `"string"`
+- **Backtick** (ES6 óta): `` `string` ``
+
+#### stringek definiálása - Alapvető szintaxis
+
+A különböző idézőjel-típusok lehetővé teszik, hogy rugalmasan dolgozhass stringekkel.
+
+##### Példák alapvető stringekre:
+```javascript
+let ures = ''; // Üres string, amely nulla karakterből áll
+let szoveg = "Hello, világ!"; // Dupla idézőjelben definiált string
+let htmlAttr = 'name="myform"'; // HTML-elem attribútum stringben
+let osszetett = "O'Reilly's JavaScript könyve"; // Apostróf dupla idézőjellel
+```
+
+#### Backtick stringek (Template Literals)
+Az **ES6** verziótól kezdve a JavaScript bevezette a **backtick** (`` ` ``) stringeket, amelyek a stringekkel való munkát még egyszerűbbé és hatékonyabbá teszik. A backtick szintaxis különösen hasznos a következő helyzetekben:
+
+1. **Interpoláció (kifejezések beágyazása):** A backtick lehetővé teszi, hogy JavaScript kifejezéseket ágyazz be a stringbe `${}` szintaxissal. Ez rendkívül hasznos dinamikus értékek hozzáadásához.
+
+   ##### Példa interpolációra:
+   ```javascript
+   let nev = "Anna";
+   let koszontes = `Hello, ${nev}! Hogyan vagy ma?`;
+   console.log(koszontes); // => "Hello, Anna! Hogyan vagy ma?"
+   ```
+
+2. **Több soros stringek:** A backtick karakterek használatával könnyedén írhatsz több soros szöveget anélkül, hogy plusz karaktereket kellene hozzáadnod.
+
+   ##### Példa több soros stringekre:
+   ```javascript
+   let tobbSor = `Ez egy
+                  több soros
+                  string.`;
+    console.log(tobbSor);
+   /*
+   Ez egy
+   több soros
+   string.
+   */
+   ```
+
+#### stringek hossza
+A JavaScriptben a stringek hossza a `.length` tulajdonsággal érhető el, amely a string karaktereinek számát adja vissza:
+```javascript
+let szoveg = "JavaScript";
+console.log(szoveg.length); // => 10
+```
+
+#### Különleges karakterek kezelése
+A stringek tartalmazhatnak különleges karaktereket, mint például idézőjeleket, amelyeket escape karakterrel (\) kell megadni:
+
+##### Példa escape karakterre:
+```javascript
+let mondat = 'O\'Reilly JavaScript könyve';
+console.log(mondat); // => "O'Reilly JavaScript könyve"
+```
+
+Alternatív megoldás lehet az idézőjel-típusok vegyes használata:
+```javascript
+let mondat = "O'Reilly JavaScript könyve";
+console.log(mondat); // => "O'Reilly JavaScript könyve"
+```
+
+#### stringek és HTML kombinációja
+JavaScript kódok gyakran tartalmaznak HTML-elemeket, amelyekben stringeket kell használni. Ebben az esetben érdemes az idézőjel-típusokat megkülönböztetni, hogy elkerüld a szintaktikai hibákat:
+
+##### Példa HTML és JavaScript kombinálására:
+```html
+<button onclick="alert('Köszönöm!')">Kattints ide</button>
+```
+Ebben a példában:
+- A `onclick` attribútum **dupla idézőjelek** között van megadva.
+- A JavaScript stringje **egyes idézőjelek** között szerepel.
+
+
+---
+
+## Műveletek stingekkel
+
+#### JavaScript karakterláncok kezelése
+
+A JavaScript egyik beépített képessége a karakterláncok, vagyis stringek kezelése, módosítása és összehasonlítása. Mivel a szöveges adatok szinte minden alkalmazásban alapvető szerepet játszanak, fontos megérteni, hogyan lehet hatékonyan dolgozni velük. Ebben a fejezetben megvizsgáljuk a stringek összefűzését, összehasonlítását, keresését, módosítását, valamint néhány fejlettebb műveletet, mint például a Unicode-kezelést és a stringek tömbszerű elérését.
+
+
+#### Karakterláncok összefűzése (konkatenáció)
+
+A JavaScriptben két vagy több string összefűzésére a `+` operátort használhatjuk. Ha számokat adunk össze a `+` operátorral, akkor matematikai műveletként működik, de ha szövegeket adunk össze, akkor azokat egyetlen stringgé kapcsolja össze.
+
+```javascript
+let üdvözlet = "Helló, " + "világ!";
+console.log(üdvözlet); // "Helló, világ!"
+
+let név = "Anna";
+let köszöntés = "Üdvözöllek, " + név + "!";
+console.log(köszöntés); // "Üdvözöllek, Anna!"
+```
+
+A modern JavaScriptben használhatjuk a **template literálokat** (backtick – ` karakterrel), amelyek segítségével még olvashatóbb módon tudunk karakterláncokat összefűzni:
+
+```javascript
+let név = "Péter";
+let üzenet = `Helló, ${név}! Üdv a weboldalon.`;
+console.log(üzenet); // "Helló, Péter! Üdv a weboldalon."
+```
+
+
+#### Karakterláncok összehasonlítása
+
+A stringek összehasonlításához a JavaScriptben a **szigorú egyenlőség** (`===`) és a **nem egyenlőség** (`!==`) operátorokat használhatjuk. Ezek az operátorok csak akkor tekintenek két stringet egyenlőnek, ha azok pontosan ugyanazok a karakterekből állnak.
+
+```javascript
+console.log("alma" === "alma"); // true
+console.log("Alma" === "alma"); // false (kis- és nagybetű érzékeny)
+console.log("alma" !== "körte"); // true
+```
+
+Stringeket lehet **rendezési sorrend** szerint is összehasonlítani (`<`, `<=`, `>`, `>=`), mivel a JavaScript az Unicode karakterkódok alapján végzi az összehasonlítást.
+
+```javascript
+console.log("abc" < "abd"); // true, mert "c" előbb van az ABC-ben, mint "d"
+console.log("Zebra" > "alma"); // false, mert a nagybetűk előrébb vannak a Unicode táblázatban
+```
+
+
+#### Karakterláncok hosszának meghatározása
+
+Minden string rendelkezik egy `length` tulajdonsággal, amely megadja a karakterlánc hosszát (a benne lévő karakterek számát):
+
+```javascript
+let szöveg = "JavaScript";
+console.log(szöveg.length); // 10
+```
+
+#### Karakterláncok keresése és darabolása
+
+A JavaScript számos metódust biztosít a stringek keresésére és darabolására:
+
+#### Részszöveg keresése
+
+- `indexOf(substring)`: az első előfordulás pozícióját adja vissza
+- `lastIndexOf(substring)`: az utolsó előfordulás pozícióját adja vissza
+- `includes(substring)`: igaz/hamis értékkel tér vissza, ha tartalmazza a keresett részt
+- `startsWith(substring)`: igaz, ha ezzel kezdődik
+- `endsWith(substring)`: igaz, ha ezzel végződik
+
+```javascript
+let mondat = "Ez egy próbamondat";
+console.log(mondat.indexOf("egy")); // 3
+console.log(mondat.includes("próba")); // true
+console.log(mondat.startsWith("Ez")); // true
+console.log(mondat.endsWith("mondat")); // true
+```
+
+#### Részszöveg kivágása
+
+- `substring(start, end)`: megadott indexek között kivágja a szöveget
+- `slice(start, end)`: hasonló a `substring`-hez, de támogat negatív indexeket is
+- `split(separator)`: szétbontja a stringet egy adott elválasztó mentén tömbbé alakítva
+
+```javascript
+let szöveg = "Hello, világ!";
+console.log(szöveg.substring(7, 12)); // "világ"
+console.log(szöveg.slice(-6)); // "világ!"
+console.log(szöveg.split(", ")); // ["Hello", "világ!"]
+```
+
+#### String módosítása
+
+Mivel a stringek **immutábilisak** (nem módosíthatók közvetlenül), a módosító metódusok mindig új stringet adnak vissza:
+
+```javascript
+let s = "Hello, világ!";
+console.log(s.replace("Hello", "Szia")); // "Szia, világ!"
+console.log(s.toUpperCase()); // "HELLO, VILÁG!"
+console.log(s.toLowerCase()); // "hello, világ!"
+```
+
+
+
+#### Egyéb hasznos string műveletek
+
+- **Padding (kiegészítés)**: `padStart()` és `padEnd()`
+- **Whitespace eltávolítás**: `trim()`, `trimStart()`, `trimEnd()`
+- **Többszörözés**: `repeat(n)`
+
+```javascript
+console.log("5".padStart(3, "0")); // "005"
+console.log("  Szöveg  ".trim()); // "Szöveg"
+console.log("*_".repeat(5)); // "*_**_**_**_**_"
+```
+
+
+
+Ez a fejezet átfogó áttekintést nyújt a JavaScript karakterlánc-kezelési lehetőségeiről. A stringek megfelelő manipulálása és keresése alapvető készség a hatékony fejlesztéshez, így érdemes alaposan megismerni a fent bemutatott módszereket.
+
+#### Karakterláncok elérése tömbszerű módon
+
+A JavaScriptben a stringek úgy is kezelhetők, mint egy **csak olvasható tömb**, így a karakterek eléréséhez használhatunk szögletes zárójeleket (`[]`). Ez egy alternatíva a `charAt()` metódus helyett.
+
+```javascript
+let s = "hello, world";
+console.log(s[0]); // "h": az első karakter
+console.log(s[s.length - 1]); // "d": az utolsó karakter
+```
+
+Ahogy korábban említésre került, **a stringek immutábilisak** (nem módosíthatók közvetlenül), így az `s[0] = "H";` művelet nem fogja ténylegesen módosítani a string értékét.
+
+
+---
+
+## Template Literals
+
+A template (sablon) literálok  olyan stringek, amelyekbe **dinamikus JavaScript kifejezéseket** ágyazhatunk be a `${...}` szintaxis használatával. A kifejezéseket a JavaScript futás közben kiértékeli, és az eredményüket szövegként illeszti a stringbe.
+
+#### Alapvető Példa
+
+```javascript
+let nev = "Anna";
+let koszontes = `Szia, ${nev}!`;
+console.log(koszontes); // "Szia, Anna!"
+```
+
+Ebben a példában a `nev` változó értéke automatikusan beépül a stringbe, feleslegessé téve a hagyományos konkatenációt:
+
+
+```javascript
+// ES6 előtt
+let koszontes = "Szia, " + nev + "!";
+```
+
+<details className="dropdown-task">
+
+  <summary><strong>Another one</strong></summary>
+
+#### Példa
+
+```javascript
+let termek = "laptop";
+let ar = 250000;
+let arfolyam = 360;
+
+let uzenet = `A(z) ${termek} ára: ${ar} HUF (${(ar / arfolyam).toFixed(2)} EUR).`;
+console.log(uzenet);
+```
+
+Az eredmény:
+
+```
+A(z) laptop ára: 250000 HUF (694.44 EUR).
+```
+
+Láttál egy ilyet is.
+
+</details>
+
+---
+
+## Gyakorló feladatok
+
+<details className="dropdown-task">
+
+  <summary>
+  <strong>Indexelés a stringekben</strong>
+  
+  Van egy string változód: `"Hello, world!"`. Írd ki a következőket a konzolra:  
+    - Az első karaktert.  
+    - Az utolsó karaktert.  
+    - Az ötödik karaktert.  
+  </summary>
+
+```javascript
+const text = "Hello, world!";
+console.log(text[0]); // Az első karakter
+console.log(text[text.length - 1]); // Az utolsó karakter
+console.log(text[4]); // Az ötödik karakter
+```
+</details>
+
+
+<details className="dropdown-task">
+
+  <summary>
+  <strong>Stringek tulajdonságai és metódusai</strong>
+  
+  Van egy string: `"JavaScript is fun!"`. Írd ki:  
+    - A string hosszát.  
+    - A string kisbetűs változatát.  
+    - A string első szóközének indexét.  
+  </summary>
+
+```javascript
+const text = "JavaScript is fun!";
+console.log(text.length); // String hossza
+console.log(text.toLowerCase()); // Kisbetűs változat
+console.log(text.indexOf(" ")); // Első szóköz indexe
+```
+
+</details>
+
+
+<details className="dropdown-task">
+
+  <summary>
+  <strong>Karakterláncok összefűzése (konkatenáció)</strong>
+  
+  Van két változód: `firstName = "John"` és `lastName = "Doe"`. Készíts belőlük egy teljes nevet úgy, hogy közöttük legyen egy szóköz, és írd ki a konzolra.
+  </summary>
+
+```javascript
+const firstName = "John";
+const lastName = "Doe";
+const fullName = firstName + " " + lastName; // Összefűzés szóközzel
+console.log(fullName);
+```
+
+</details>
+
+
+<details className="dropdown-task">
+
+  <summary>
+  <strong>Karakterláncok összehasonlítása</strong>
+  
+  Van két változód: `word1 = "apple"` és `word2 = "banana"`. Írd ki a konzolra, hogy:  
+1. Egyenlő-e a két szó.  
+2. Az első szó lexikografikusan kisebb-e a másodiknál.  
+  </summary>
+
+```javascript
+const word1 = "apple";
+const word2 = "banana";
+console.log(word1 === word2); // Egyenlőség vizsgálat
+console.log(word1 < word2); // Lexikografikus összehasonlítás
+```
+
+</details>
+
+
+<details className="dropdown-task">
+
+  <summary>
+  <strong>Karakterláncok hosszának meghatározása</strong>
+  
+  Van egy stringed: `"How long am I?"`. Írd ki a konzolra, hogy hány karakter hosszú ez a string.
+  </summary>
+
+```javascript
+const text = "How long am I?";
+console.log(text.length); // String hossza
+```
+
+</details>
+
+<details className="dropdown-task">
+
+  <summary>
+  <strong>Részszöveg keresése</strong>
+  
+  Van egy stringed: `"I love programming in JavaScript!"`.  
+1. Írd ki, hogy szerepel-e benne a `"programming"` szó.  
+2. Ha igen, írd ki annak kezdő indexét.  
+  </summary>
+
+```javascript
+const text = "I love programming in JavaScript!";
+const keyword = "programming";
+console.log(text.includes(keyword)); // Szó szerepel-e
+console.log(text.indexOf(keyword)); // Kezdő index
+```
+
+</details>
+
+<details className="dropdown-task">
+
+  <summary>
+  <strong>Részszöveg kivágása</strong>
+  
+  Van egy stringed: `"Welcome to JavaScript!"`. Vágd ki belőle a `"JavaScript"` szót, és írd ki a konzolra.  
+  </summary>
+
+```javascript
+const text = "Welcome to JavaScript!";
+const sliced = text.slice(11, 21); // "JavaScript" kezdő és záró index
+console.log(sliced);
+```
+
+</details>
+
+<details className="dropdown-task">
+
+  <summary>
+  <strong>String módosítása</strong>
+  
+ Van egy stringed: `"Hello, world!"`. Cseréld ki benne a `"world"` szót `"JavaScript"`-re, és írd ki az új szöveget a konzolra.  
+
+  </summary>
+
+```javascript
+const text = "Hello, world!";
+const modified = text.replace("world", "JavaScript");
+console.log(modified);
+```
+
+</details>
+
+<details className="dropdown-task">
+
+  <summary>
+  <strong>Template Literals</strong>
+  
+  Van két változód: `name = "Alice"` és `age = 25`. Írj ki egy mondatot a konzolra a következő formátumban:  
+`"Alice 25 éves."` (Használj template literált.)  
+  </summary>
+
+```javascript
+const name = "Alice";
+const age = 25;
+console.log(`${name} ${age} éves.`);
+```
+
+</details>

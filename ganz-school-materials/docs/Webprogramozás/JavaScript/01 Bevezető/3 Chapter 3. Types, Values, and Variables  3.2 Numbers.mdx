@@ -1,0 +1,1432 @@
+---
+title: Number típus a JavaScriptben
+---
+
+A JavaScriptben a Number típus szolgál arra, hogy egész számokat és valós számokat (tizedestörteket) kezelje.
+
+A JavaScript a számokat a 64 bites lebegőpontos formátumban ábrázolja, amelyet az IEEE 754 szabvány határoz meg. Ez azt jelenti, hogy képes olyan nagy számokat ábrázolni, mint ±1,7976931348623157 × 10¹⁰⁸, és olyan kicsiket, mint ±5 × 10⁻³²⁴.
+
+A JavaScript számformátuma pontosan képes ábrázolni minden egész számot −9 007 199 254 740 992 (−2⁵³) és 9 007 199 254 740 992 (2⁵³) között, beleértve ezeket a határértékeket is. Ha ennél nagyobb egész értékeket használsz, elveszhet a pontosság a számjegyek végén.
+
+A JavaScriptben vannak olyan műveletek, amelyek 32 bites egész számokkal történnek.
+
+Bizonyos műveletek (például a tömbindexelés vagy a bitműveletek) a JavaScriptben nem a teljes 64 bites számformátumot használják, hanem csak 32 bites egész számokkal dolgoznak. Ez hatással lehet a műveletek eredményére, ha nagyon nagy vagy nagyon kicsi számokkal dolgozol.
+
+<details className="dropdown-task">
+
+  <summary><strong>Ez azt jelenti hogy:</strong></summary>
+
+Vegyünk egy egyszerű példát.
+
+Tegyük fel, hogy van egy számunk, amely túl nagy ahhoz, hogy 32 bites egész számként pontosan ábrázolható legyen.
+
+#### AND
+
+JavaScriptben, ha két számra alkalmazunk bitműveletet (például **AND**), akkor a számokat először 32 bites formátumban ábrázolja. Ezért ha túl nagy számokkal dolgozunk, azok nem biztos, hogy a várt eredményt adják.
+
+```javascript
+let a = 0xFFFFFFFF;  // A 32 bites szám legnagyobb értéke (4294967295)
+let b = 0x1;          // Egy nagyon kicsi szám
+
+let result = a & b;
+console.log(result);  // Kimenet: 1
+```
+
+Ebben az esetben **a** egy 32 bites szám legnagyobb értéke (0xFFFFFFFF), ami egy 32 bites bináris számként `11111111111111111111111111111111` néz ki. Ha alkalmazzuk az **AND** operátort a 0x1-el (ami csak egy bitet tartalmaz), akkor az eredmény csak az utolsó bitet érinti, és az **1** lesz.
+
+#### Miért van ez hatással a számokra?
+
+A 32 bites korlátozás azt jelenti, hogy az operációk csak ennyi bitet figyelembe véve történnek, így ha ennél nagyobb számot próbálsz kezelni, az értékek "lefelejtődnek", és pontatlan lesz az eredmény
+
+#### Példa 2: Számok átvitele bitműveletekkel
+
+```javascript
+let num = 2147483648;  // 2^31, egy 33 bites szám
+let result = num & 0xFFFFFFFF;  // Bitwise AND a 32 bites maszkkal
+
+console.log(result);  // Kimenet: 0
+```
+
+Ebben az esetben **num** egy 33 bites szám (2^31), de mivel a bitművelet csak 32 bites egész számokkal történik, az eredmény **0** lesz, mivel a 33. bit lemarad.
+
+#### Mi a lényeg?
+
+A 32 bites számformátum miatt a számok bizonyos műveletek közben "elveszítik" a nagyobb biteket, és csak az alsó 32 bitet tartják meg. Ez eredményezhet váratlan viselkedést, ha olyan műveleteket hajtasz végre, amelyek túl nagy számokat érintenek.
+
+
+Mit jelent az, hogy valami 32 bites?
+
+A "32 bites" kifejezés arra utal, hogy egy szám vagy adat 32 bit (vagyis 32 darab 0-ból és 1-ből álló egység) hosszúságú. A számítógépes rendszerekben a "bit" a legkisebb adategység, amely 0 vagy 1 értéket vehet fel. A "bites" kifejezés tehát arra utal, hogy egy adat tárolása vagy feldolgozása során 32 darab 0 és 1-ből álló kombinációval dolgozunk.
+
+Például, ha egy szám 32 bites, akkor azt úgy ábrázoljuk, hogy 32 darab bináris számjegyből (0 és 1) áll. Ez a következőképpen nézhet ki:
+
+- 32 bites szám bináris formátumban: `11111111111111111111111111111111` (ez egy 32 darab 1-ből álló szám).
+- Ez a szám 4 bájtnyi (1 bájt = 8 bit) helyet foglal el a memóriában.
+
+</details>
+
+<details className="dropdown-task">
+
+  <summary><strong>Mit jelent az, hogy valami 32 meg 64 bites?</strong></summary>
+
+#### Hogyan működik egy 32 bites szám?
+- **Maximális érték**: A 32 bites egész számok maximális értéke 2^31 - 1 (vagyis 2,147,483,647), ha az adat előjellel (plusz és mínusz számok) van tárolva. Ha nincs előjel, akkor a maximális érték 2^32 - 1 (vagyis 4,294,967,295).
+- **Minimális érték**: A negatív számok a legnagyobb bitet (az ún. "jelzőbitet") használják, tehát a 32 bites előjeles egész számok minimális értéke -2^31, azaz -2,147,483,648.
+
+#### Miért fontos a "32 bites" jelzés?
+A "32 bites" kifejezés segít meghatározni, hogy mennyi adat fér el egy adott memóriahelyen vagy regiszterben. A rendszer, a programok és az operációs rendszerek 32 bites architektúrája meghatározza a memóriakezelés határait, és hogy milyen gyorsan tudnak egyes műveletek futni.
+
+**Példa 32 bites számokra:**
+- A számok tárolása 32 biten azt jelenti, hogy ezek az adatok nem foglalhatnak el többet, mint 32 bitet (4 bájt).
+- A bitműveletek (pl. bitwise AND, OR) is 32 bites adatokat kezelnek, így amikor a számokat 32 bites formátumban használják, a számítógép csak 32 bitet vesz figyelembe a számok manipulálásakor.
+
+A **64 bites** ugyanúgy egy adat tárolásának vagy feldolgozásának formátuma, de itt **64 bitet** használunk. Azaz a számok vagy adatok 64 darab 0-ból és 1-ből állnak, tehát egy-egy szám vagy adat kétszer akkora helyet foglal el a memóriában, mint egy 32 bites adat.
+
+#### Hogyan működik a 64 bites szám?
+
+- **Maximális érték**: A 64 bites előjeles egész számok maximális értéke 2^63 - 1 (vagyis 9,223,372,036,854,775,807). Ha nincs előjel, akkor a maximális érték 2^64 - 1, azaz 18,446,744,073,709,551,615.
+- **Minimális érték**: A 64 bites előjeles egész számok minimális értéke -2^63, azaz -9,223,372,036,854,775,808.
+
+Ez azt jelenti, hogy a 64 bites számok sokkal nagyobb és kisebb értékeket képesek ábrázolni, mint a 32 bites számok. 
+
+#### Miért fontos a "64 bites" jelzés?
+
+A "64 bites" kifejezés az adatkezelés és memóriafelhasználás terén jelentős különbségeket jelent a számítógépekben, mivel a rendszer képes nagyobb számok tárolására és gyorsabb adatfeldolgozásra, mivel egyetlen műveletben kétszer annyi adatot tud kezelni, mint a 32 bites rendszerek.
+
+A 64 bites architektúrák előnyei:
+- **Nagyobb memória**: Mivel a címek 64 biten vannak tárolva, a 64 bites rendszerek sokkal nagyobb memória címtartományt képesek kezelni (akár 18,4 milliárd gigabájtot, vagyis 18 exabájt).
+- **Nagyobb számok**: A 64 bites számok képesek sokkal nagyobb és kisebb számokat tárolni, így jobban illeszkednek a tudományos számításokhoz, titkosításhoz és más olyan alkalmazásokhoz, ahol nagy precizitásra és széles értéktartományra van szükség.
+
+#### Példa 64 bites számokra:
+
+- **64 bites szám bináris formátumban**:  
+  `1111111111111111111111111111111111111111111111111111111111111111` (64 darab 1-ből álló szám).
+  
+  Ez egy 64 bites bináris szám, ami 8 bájt (64 bit) memóriahelyet foglal el.
+
+- **Maximális érték**:  
+  A maximális 64 bites szám, ha előjel nélküli (unsigned), 18,446,744,073,709,551,615, míg előjeles egész számként a maximális érték 9,223,372,036,854,775,807.
+
+#### Hogyan néz ki a 64 bites tárolás?
+
+A 64 bites formátum nagyobb számok tárolására alkalmas, tehát például:
+- **32 bites számok esetében**: a legnagyobb szám, amit ábrázolhatunk, 4,294,967,295.
+- **64 bites számok esetében**: a legnagyobb szám 18,446,744,073,709,551,615.
+
+#### 64 bites és 32 bites összehasonlítás:
+
+- **32 bites rendszer**: 32 bit = 4 bájt. A legnagyobb szám, amit tárolhatunk, 4,294,967,295.
+- **64 bites rendszer**: 64 bit = 8 bájt. A legnagyobb szám, amit tárolhatunk, 18,446,744,073,709,551,615.
+
+A 64 bites számok tehát kétszer annyi helyet igényelnek, így sokkal nagyobb számok kezelésére képesek.
+
+</details>
+
+---
+
+## Integer Literals
+
+Az Integer Literals kifejezés az egész számú literálokat jelöli, tehát olyan számokat, amelyek nem tartalmaznak tizedesjegyeket, és egy egész számot képviselnek. JavaScript-ben az egész számú literálok olyan számok, mint például 10, -42, 1000.
+A javaScript képes értelmezni a különbőző számrendszerekhez tartozó integer értékeket.
+
+**Alapértelmezett típus (decimális) literálok**:  
+   A JavaScript-ben az egész számokat alapértelmezés szerint tízes számrendszerben (base-10) írjuk, tehát sima számjegyeket használunk, mint például `03` vagy `10000000`. Az ilyen számok az alapértelmezett egész számok.
+
+**Hexadecimális (16-os számrendszer) literálok**:  
+   A JavaScript támogatja a hexadecimális számokat is, amelyek `0x` vagy `0X` előtaggal kezdődnek, és utána az 0–9 közötti számjegyeket, illetve az `a`–`f` (vagy `A`–`F`) betűket tartalmazhatják, amelyek a 10-15 értékeket képviselik. Példák:
+   - `0xff` (ami 255-öt jelent, mivel 15 * 16 + 15 = 255)
+   - `0xBADCAFE` (ami 195939070-et jelent)
+   
+**Bináris (2-es számrendszer) és oktális (8-as számrendszer) literálok** (ES6 és későbbi verziókban):  
+   A JavaScript az ES6-tól kezdve lehetőséget ad bináris és oktális számok kifejezésére is:
+   - **Bináris számok** `0b` vagy `0B` előtaggal, például `0b10101` (ami 21-et jelent)
+   - **Oktális számok** `0o` vagy `0O` előtaggal, például `0o377` (ami 255-öt jelent)
+
+#### Összefoglalva
+- Alapértelmezett a tízes számrendszer (decimal), de ezn kívül használatóak még a:
+- Hexadecimális számok (16-os számrendszer)
+- Bináris számok (2-es számrendszer)
+- Oktális számok (8-as számrendszer)
+
+
+<details className="dropdown-task">
+
+  <summary><strong>Gyakorlati példák integer literálokra</strong></summary>
+
+
+#### **Tízes számrendszer (Decimal)**
+A tízes számrendszer az alapértelmezett számformátum, amit leggyakrabban használunk.
+
+```javascript
+123           // Egyszerű egész szám
+456789        // Nagyobb szám
+-9876         // Negatív szám
+```
+
+#### **Hexadecimális számrendszer (Hexadecimal)**  
+A hexadecimális számrendszer a `0x` előtagot használja, és a számok 0–9, illetve az `a–f` karakterekből állnak.
+
+```javascript
+0x1A        // 26 (1 * 16 + 10)
+0x7F        // 127 (7 * 16 + 15)
+0xABC123    // 11256099 (10 * 16^5 + 11 * 16^4 + 12 * 16^3 + 1 * 16^2 + 2 * 16^1 + 3)
+```
+
+#### **Bináris számrendszer (Binary)**  
+A bináris számrendszer a `0b` vagy `0B` előtagot használja, és csak 0-kat és 1-eket tartalmaz.
+
+```javascript
+0b1010       // 10 (1 * 2^3 + 0 * 2^2 + 1 * 2^1 + 0 * 2^0)
+0b11111111   // 255 (1 * 2^7 + 1 * 2^6 + 1 * 2^5 + 1 * 2^4 + 1 * 2^3 + 1 * 2^2 + 1 * 2^1 + 1 * 2^0)
+0b100110101  // 309 (1 * 2^8 + 0 * 2^7 + 0 * 2^6 + 1 * 2^5 + 1 * 2^4 + 0 * 2^3 + 1 * 2^2 + 0 * 2^1 + 1 * 2^0)
+```
+
+#### **Oktális számrendszer (Octal)**  
+Az oktális számrendszer a `0o` vagy `0O` előtagot használja, és a számok 0–7 között vannak.
+
+```javascript
+0o10        // 8 (1 * 8^1 + 0 * 8^0)
+0o77        // 63 (7 * 8^1 + 7 * 8^0)
+0o123       // 83 (1 * 8^2 + 2 * 8^1 + 3 * 8^0)
+```
+
+#### Összefoglalás:
+- **Tízes számrendszer (Decimal)**: A leggyakoribb, egyszerű számok, például `123` vagy `-9876`.
+- **Hexadecimális számrendszer (Hexadecimal)**: A `0x` előtaggal, például `0x1A` vagy `0xABC123`.
+- **Bináris számrendszer (Binary)**: A `0b` előtaggal, például `0b1010` vagy `0b11111111`.
+- **Oktális számrendszer (Octal)**: A `0o` előtaggal, például `0o10` vagy `0o77`.
+
+Ezek különböző számformátumok, amelyeket a JavaScript támogat, és mindegyiknek megvan a maga hasznos alkalmazása, különösen számítógépes programozásban és alacsony szintű műveletekben.
+
+</details>
+
+
+<details className="dropdown-task">
+
+  <summary><strong>Melyikkel hol találkozhatunk?</strong></summary>
+
+
+#### **Tízes számrendszer (Decimal)**
+A tízes számrendszer az alapértelmezett formátum a legtöbb programozási feladatban, ahol a számok egyszerűen jelennek meg.
+
+- **Pénzügyi számítások**: Az árak és összegek kezelésére általában tízes számrendszert használunk, mert az emberek napi életében is ezt a rendszert alkalmazzuk.
+
+```javascript
+let price = 150.75;  // Termék ára, tízes számrendszerben
+let tax = price * 0.2;  // Adó kiszámítása (20%)
+console.log(tax);  // Kiírja: 30.15
+```
+
+#### **Hexadecimális számrendszer (Hexadecimal)**
+A hexadecimális számrendszert gyakran használják számítógépes memóriacímek, színek és alacsony szintű programozás során.
+
+- **Színek**: A webfejlesztésben a színek hexadecimális kódokkal (pl. `#FF5733`) vannak ábrázolva.
+
+```javascript
+let color = 0xFF5733;  // Hexadecimális színkód
+console.log(color.toString(16));  // Hexadecimálisként kiírja: 'ff5733'
+```
+
+- **Memóriacímek**: A memóriacímek ábrázolásánál is gyakori a hexadecimális formátum, mivel a gépek alacsony szintű kezelése során a memóriacímek könnyebben kezelhetők így.
+
+```javascript
+let address = 0x7FFE23;  // Memóriacím
+console.log(address);  // Kiírja a cím hexadecimális értékét
+```
+
+#### **Bináris számrendszer (Binary)**
+A bináris számrendszer a számítógépek belső működésében alapvető szerepet játszik, mivel a számítógépek biteken alapuló információt tárolnak és dolgoznak fel.
+
+- **Bitwise műveletek**: Bináris számokkal végezhetünk bitwise műveleteket, például bitelcsúsztatást vagy bitenkénti összeadást.
+
+```javascript
+let a = 0b1010;  // 10 bináris formában
+let b = 0b1100;  // 12 bináris formában
+let result = a & b;  // Bitwise AND művelet (csak azokat az értelemezzük, ahol mindkét bit 1)
+console.log(result.toString(2));  // Binárisan kiírja: '1000' (8)
+```
+
+#### **Oktális számrendszer (Octal)**
+Az oktális számrendszert régebben főként rendszerszintű programozásban használták, és a Unix rendszerekben a fájlok jogosultságait oktális formában ábrázolják.
+
+- **Fájlok jogosultságai (Unix)**: A Unix-alapú rendszerekben a fájlok jogosultságait oktális számokkal ábrázolják, például `0755` jelenti a fájl olvasási és végrehajtási jogosultságait.
+
+```javascript
+let filePermissions = 0o755;  // Oktális formátumban: rwxr-xr-x
+console.log(filePermissions.toString(8));  // Oktálisként kiírja: '755'
+```
+
+</details>
+
+---
+
+## Floating-point Literals
+
+A **lebegőpontos literálok** (floating-point literals) a JavaScriptben olyan számok, amelyek nem egész számok, hanem tizedestörtek vagy tudományos jelöléssel írt számok. Ezeket a számokat a lebegőpontos számábrázolás szabályai szerint kezelik, és az **IEEE 754-es szabványt** használják.
+
+A lebegőpontos literáloknak három fő formája van:
+
+**Tizedespontos alak**:
+   - Olyan szám, amely tartalmaz egy tizedespontot (pl. `3.14`).
+   - Példák:
+     ```javascript
+     let pi = 3.14;
+     let price = 19.99;
+     let negativeNumber = -0.5;
+     ```
+
+**Tudományos jelölés (exponenciális alak)**:
+   - A számot `e` vagy `E` után következő egész szám exponensével adjuk meg, amely a tíz hatványát jelzi.
+   - Példák:
+     ```javascript
+     let bigNumber = 1.23e6; // 1.23 * 10^6 = 1230000
+     let smallNumber = 5e-3; // 5 * 10^-3 = 0.005
+     ```
+
+**Egész számként, de tizedesponttal írt alak**:
+   - Még ha nincs is szám a tizedespont után, akkor is lebegőpontos számnak számít.
+   - Példa:
+     ```javascript
+     let wholeNumber = 10.0; // Lebegőpontos szám
+     ```
+
+Tulajdonságok
+- A JavaScriptben minden szám (akár egész, akár lebegőpontos) a **Number** adattípushoz tartozik.
+- A **lebegőpontos számok pontossága korlátozott**, így előfordulhatnak kerekítési hibák, például:
+  ```javascript
+  console.log(0.1 + 0.2); // Nem pontosan 0.3, hanem 0.30000000000000004
+  ```
+
+#### Mire kell figyelni?
+- **Kerekítési hibák**: A lebegőpontos számok számításai nem mindig pontosak az ábrázolásuk korlátozásai miatt.
+- **Tizedespont használata**: Ha tizedespontot használsz, mindig lebegőpontos szám lesz belőle, még akkor is, ha nincs utána tört érték.
+
+<details className="dropdown-task">
+
+  <summary><strong>Gyakorlati példák lebegőpontos literálokra</strong></summary>
+
+**Tizedespontos alak**
+Olyan számok, amelyek tartalmaznak egy tizedespontot, és legalább egy számjegy található a tizedespont után.
+
+```javascript
+// Példa 1
+let pi = 3.14; // A pi értéke tizedespontos számként
+
+// Példa 2
+let discount = 19.99; // Egy áru ára tizedespontos értékkel
+
+// Példa 3
+let temperature = -7.5; // Negatív tizedespontos szám
+```
+
+
+**Tudományos jelölés (exponenciális alak)**
+Olyan számok, amelyek az `e` vagy `E` után megadják a számítandó tíz hatványát.
+
+```javascript
+// Példa 1
+let bigNumber = 1.2e6; // 1.2 * 10^6 = 1200000
+
+// Példa 2
+let smallNumber = 4.5e-4; // 4.5 * 10^-4 = 0.00045
+
+// Példa 3
+let speedOfLight = 3e8; // 3 * 10^8 = 300,000,000 (a fény sebessége méter/s)
+```
+
+
+**Egész számként, de tizedesponttal írt alak**
+Olyan számok, amelyek tizedespontot tartalmaznak, de a tizedespont után nem található számjegy.
+
+```javascript
+// Példa 1
+let roundedValue = 10.0; // Egész szám tizedesponttal
+
+// Példa 2
+let exactValue = 42.0; // Egy pontos egész érték lebegőpontos formában
+
+// Példa 3
+let negativeWhole = -5.0; // Negatív egész szám tizedesponttal
+```
+
+
+  </details>
+
+
+<details className="dropdown-task">
+
+  <summary><strong>Melyikkel hol találkozhatunk?</strong></summary>
+
+---
+
+**Tizedespontos alak**
+
+Vásárlásnál egy termék árának kezelése
+```javascript
+let itemPrice = 49.99; // Egy termék ára forintban
+let taxRate = 0.27; // ÁFA-kulcs (27%)
+let totalPrice = itemPrice + itemPrice * taxRate;
+
+console.log(`A teljes ár ÁFA-val: ${totalPrice.toFixed(2)} Ft`);
+// Eredmény: A teljes ár ÁFA-val: 63.49 Ft
+```
+> Az árak pontos kezelése pénzügyi alkalmazásokban.
+
+---
+
+**Tudományos jelölés (exponenciális alak)**
+
+Csillagászati számítások (például a Föld és a Nap távolsága)
+```javascript
+let earthToSunDistance = 1.496e11; // A Föld és a Nap távolsága méterben (149,600,000,000 m)
+let lightSpeed = 3e8; // A fény sebessége méter/másodperc
+
+let travelTime = earthToSunDistance / lightSpeed; // Utazási idő másodpercben
+console.log(`A fény ${travelTime} másodperc alatt ér a Napból a Földre.`);
+// Eredmény: A fény 498.6666666666667 másodperc alatt ér a Napból a Földre.
+```
+> Nagyon nagy vagy nagyon kicsi számok kezelése tudományos területeken.
+
+
+**Egész számként, de tizedesponttal írt alak**
+
+Időzítés egy stopperben
+```javascript
+let elapsedTime = 10.0; // A stopperrel mért idő másodpercben
+let lapTime = 15.0; // Egy köridő másodpercben
+
+let totalTime = elapsedTime + lapTime;
+console.log(`Teljes idő: ${totalTime} másodperc.`);
+// Eredmény: Teljes idő: 25 másodperc.
+```
+> Amikor az egész szám tizedespontos ábrázolása egyértelműbbé teszi az adatokat (pl. időmérésnél vagy pontos mértékegységeknél).
+
+
+  </details>
+
+---
+
+## Számelválasztók numerikus literálokban 
+A JavaScript lehetővé teszi, hogy aláhúzásjeleket (_) használj numerikus literálokban, hogy hosszabb számokat könnyebben olvashatóbbá tegyél:  
+
+- **Ezres tagolásra:** `let billion = 1_000_000_000;`  
+- **Hexadecimális bájtcsoportok tagolására:** `let bytes = 0x89_AB_CD_EF;`  
+- **Bináris bitek csoportosítására:** `let bits = 0b0001_1101_0111;`  
+- **Tizedes törteknél is működik:** `let fraction = 0.123_456_789;`  
+
+2020 elején ez a funkció még nem volt teljesen szabványosított.
+
+---
+
+## Arithmetic in JavaScript
+
+Az **aritmetikai műveletek a JavaScriptben** a programozási nyelvben végezhető alapvető matematikai műveleteket jelenti, például az összeadást, kivonást, szorzást és osztást. Emellett kiterjedhet a bonyolultabb matematikai műveletekre is, például hatványozásra, maradékos osztásra, és speciális matematikai függvények használatára (mint a kerekítés, gyökvonás vagy trigonometriai műveletek).
+
+#### Alapvető műveletek:
+**Összeadás (+)**  
+   ```javascript
+   let a = 5;
+   let b = 10;
+   let c = a + b; // 15
+   ```
+
+**Kivonás (-)**  
+   ```javascript
+   let a = 10;
+   let b = 3;
+   let c = a - b; // 7
+   ```
+
+**Szorzás (*)**  
+   ```javascript
+   let a = 4;
+   let b = 5;
+   let c = a * b; // 20
+   ```
+
+**Osztás (/)**  
+   ```javascript
+   let a = 20;
+   let b = 4;
+   let c = a / b; // 5
+   ```
+
+**Maradékos osztás (%)**  
+   ```javascript
+   let a = 10;
+   let b = 3;
+   let c = a % b; // 1 (mert 10 / 3 maradéka 1)
+   ```
+
+**Hatványozás (**):  
+   ```javascript
+   let a = 2;
+   let b = 3;
+   let c = a ** b; // 8 (2 a harmadikon)
+   ```
+
+a JavaScriptben az **alapvető aritmetikai operátorokon** túl (mint az összeadás, kivonás, szorzás, osztás) elérhetők **összetettebb matematikai műveletek is**, amelyeket a **Math objektum** biztosít.  
+
+A Math objektum tartalmaz:
+- **Metódusokat**, amelyekkel különböző matematikai számításokat végezhetünk (például négyzetgyök, kerekítés, hatványozás).
+- **Konstansokat**, amelyek matematikai állandókat reprezentálnak, mint például a π (pi) vagy az Euler-féle szám (*e*).
+
+
+<details className="dropdown-task">
+
+  <summary><strong>Math objektum metódusai</strong></summary>
+
+1. **Hatványozás:**
+   ```javascript
+   Math.pow(2, 53); // => 9007199254740992
+   // 2 az 53. hatványon.
+   ```
+
+2. **Kerekítés a legközelebbi egész számra:**
+   ```javascript
+   Math.round(0.6); // => 1
+   // Kerekítés 1-re, mert 0.6 közelebb van az 1-hez, mint a 0-hoz.
+   ```
+
+3. **Felfelé kerekítés:**
+   ```javascript
+   Math.ceil(0.6); // => 1
+   // Felfelé kerekítés a legközelebbi egész számra.
+   ```
+
+4. **Lefelé kerekítés:**
+   ```javascript
+   Math.floor(0.6); // => 0
+   // Lefelé kerekítés a legközelebbi egész számra.
+   ```
+
+5. **Abszolút érték:**
+   ```javascript
+   Math.abs(-5); // => 5
+   // Negatív szám pozitívvá alakítása.
+   ```
+
+6. **Legnagyobb érték kiválasztása:**
+   ```javascript
+   Math.max(5, 10, 15); // => 15
+   ```
+
+7. **Legkisebb érték kiválasztása:**
+   ```javascript
+   Math.min(5, 10, 15); // => 5
+   ```
+
+8. **Véletlenszám generálása (0 és 1 között):**
+   ```javascript
+   Math.random(); // Példa: 0.48391234
+   ```
+
+9. **Pi értéke:**
+   ```javascript
+   Math.PI; // => 3.141592653589793
+   ```
+
+10. **Az Euler-féle szám:**
+    ```javascript
+    Math.E; // => 2.718281828459045
+    ```
+
+11. **Négyzetgyök:**
+    ```javascript
+    Math.sqrt(3); // => 1.7320508075688772
+    ```
+
+12. **Köbgyök:**
+    ```javascript
+    Math.pow(3, 1 / 3); // => 1.4422495703074083
+    ```
+
+13. **Sinus:**
+    ```javascript
+    Math.sin(0); // => 0
+    ```
+
+14. **Természetes logaritmus:**
+    ```javascript
+    Math.log(10); // => 2.302585092994046
+    ```
+
+15. **10-es alapú logaritmus:**
+    ```javascript
+    Math.log(100) / Math.LN10; // => 2
+    ```
+
+16. **2-es alapú logaritmus:**
+    ```javascript
+    Math.log(512) / Math.LN2; // => 9
+    ```
+
+17. **e a 3. hatványon:**
+    ```javascript
+    Math.exp(3); // => 20.085536923187668
+    ```
+
+18. **Köbgyök egyszerűsített módon (ES6):**
+    ```javascript
+    Math.cbrt(27); // => 3
+    ```
+
+19. **Pitagorasz-tétel (négyzetek összege gyökvonással):**
+    ```javascript
+    Math.hypot(3, 4); // => 5
+    ```
+
+20. **10-es alapú logaritmus egyszerűsítve:**
+    ```javascript
+    Math.log10(100); // => 2
+    ```
+
+21. **2-es alapú logaritmus egyszerűsítve:**
+    ```javascript
+    Math.log2(1024); // => 10
+    ```
+
+22. **(1 + x) természetes logaritmusa (pontos kis x-nél):**
+    ```javascript
+    Math.log1p(0.001); // => 0.0009995003330834232
+    ```
+
+23. **e^x - 1 kis x-re pontosan:**
+    ```javascript
+    Math.expm1(0.001); // => 0.0010005001667083846
+    ```
+
+24. **Szám előjele:**
+    ```javascript
+    Math.sign(-5); // => -1
+    Math.sign(0);  // => 0
+    Math.sign(5);  // => 1
+    ```
+
+25. **Optimalizált szorzás 32 bites számokkal:**
+    ```javascript
+    Math.imul(2, 3); // => 6
+    ```
+
+26. **Vezető nullák száma 32 bites számban:**
+    ```javascript
+    Math.clz32(0xf); // => 28
+    ```
+
+27. **Tört részek levágása (truncálás):**
+    ```javascript
+    Math.trunc(3.9); // => 3
+    ```
+
+28. **32 bites lebegőpontos szám kerekítése:**
+    ```javascript
+    Math.fround(1.337); // => 1.3370000123977661
+    ```
+
+29. **Hiperbolikus szinusz:**
+    ```javascript
+    Math.sinh(1); // => 1.1752011936438014
+    ```
+
+30. **Hiperbolikus arkusz-szinusz:**
+    ```javascript
+    Math.asinh(1); // => 0.881373587019543
+    ```
+
+</details>
+
+
+
+A Math objektum a JavaScriptben egy előre definiált eszköztár, amely lehetővé teszi a programozóknak, hogy egyszerűen elérjenek és használjanak bonyolultabb matematikai műveleteket és értékeket. Így nem kell őket kézzel implementálni, hanem egyszerűen hivatkozhatók, például `Math.PI` vagy `Math.sqrt()`.
+
+---
+
+## Binary Floating-Point and Rounding Errors
+
+A **bináris lebegőpontos számábrázolás és kerekítési hibák** témája JavaScript-ben is fontos, mivel a lebegőpontos számok számításakor előfordulhatnak pontossági problémák, amelyek hibás eredményekhez vezethetnek.
+
+**Bináris lebegőpontos számábrázolás**
+
+A számítógépek, köztük a JavaScript, bináris formában (0-k és 1-ek sorozataként) tárolják a számokat. A lebegőpontos számok, mint például a `1.23`, a számításokat segítő IEEE 754 szabvány alapján kerülnek ábrázolásra. Ez egy nagyon elterjedt szabvány, de van egy hátránya: nem minden számot lehet pontosan ábrázolni binárisan. 
+
+**Miért van kerekítési hiba?**
+
+Bizonyos számok, amelyek a tizedes (decimális) rendszerben végesek, binárisan végtelen sorozatot alkothatnak. Például a `0.1` decimális szám binárisan nem ábrázolható pontosan, mivel annak bináris kiterjesztése végtelen hosszú.
+
+Ezért a JavaScript, amikor egy ilyen számot binárisan tárol, csak egy **közelítő értéket** tud tárolni, ami kerekítési hibákat okozhat a számítások során. 
+
+**Példa kerekítési hibára**
+Egy gyakori példa, amely bemutatja a kerekítési hibákat JavaScript-ben:
+
+```javascript
+console.log(0.1 + 0.2);  // 0.30000000000000004
+```
+
+Bár logikailag azt várnánk, hogy az eredmény `0.3` lesz, a számítógép belső ábrázolása miatt a valós eredmény `0.30000000000000004`. Ez a kerekítési hiba a bináris lebegőpontos ábrázolás következménye.
+
+**JavaScript-ben található további tipikus hibák**
+- A kerekítési hibák nemcsak az egyszerű számokkal fordulnak elő, hanem komplexebb műveletek, mint például a szorzás, osztás és a nagy számú műveletek során is.
+- Az összeadás és kivonás során is lehetnek pontatlanságok, különösen, ha az egyes számok különböző mértékű kerekítést igényelnek.
+
+
+<details className="dropdown-task">
+
+  <summary><strong>További példa kerekítési problémára</strong></summary>
+
+```javascript
+let a = 0.7 + 0.1; 
+let b = 0.6 + 0.2; 
+a === b // => false: a két érték nem egyezik meg!
+a === 0.8 // => false: 0.7 + 0.1 nem egyenlő 0.8-cal
+b === 0.8 // => true: 0.6 + 0.2 valóban egyenlő 0.8-cal
+```
+
+**Kiértékelés:**
+
+- **`let a = 0.7 + 0.1;`**
+  - A számítógép a `0.7` és a `0.1` összeadásakor a bináris lebegőpontos ábrázolás miatt nem pontosan `0.8`-at kap, hanem egy olyan értéket, ami nagyon közel áll hozzá (például `0.7999999999999999`).
+
+- **`let b = 0.6 + 0.2;`**
+  - Itt a `0.6` és a `0.2` összeadásakor a számítógép helyesen ábrázolja a `0.8`-at, tehát nincs kerekítési hiba.
+
+- **`a === b`**
+  - Mivel `a` nem pontosan `0.8` (hanem annak egy közelítő értéke), míg `b` pontosan `0.8`, az összehasonlítás `false`-t ad.
+
+- **`a === 0.8`**
+  - Az `a` változó értéke egy kicsit kisebb, mint `0.8`, ezért az összehasonlítás ismét `false`-t eredményez.
+
+- **`b === 0.8`**
+  - Itt a számítógép helyesen ábrázolja a `0.8`-at, ezért az összehasonlítás `true`-t ad.
+
+</details>
+
+---
+
+## Arbitrary Precision Integers with BigInt
+
+A **BigInt** egy olyan JavaScript típus, amely lehetővé teszi a tetszőleges pontosságú egész számok kezelését. Ez akkor válik különösen fontossá, ha olyan nagy számokkal dolgozol, amelyek meghaladják a JavaScript alapértelmezett **`Number`** típusának tárolási képességeit.
+
+**Miért van szükség BigInt-re?**
+
+A JavaScript alapértelmezett számtípusa a **`Number`**, amely IEEE 754 lebegőpontos számábrázolás alapján működik. Ez a típus azonban csak **64-bites** pontosságú, és nem képes pontosan kezelni a nagyon nagy egész számokat (például a milliárdokat, vagy még nagyobbakat). Az `Number` típus legnagyobb értéke körülbelül **1.8 × 10^308**, és a legkisebb értéke **-1.8 × 10^308**. Azonban, ha ennél nagyobb egész számokra van szükség, a `BigInt` biztosítja a szükséges pontosságot.
+
+**A BigInt használata**
+
+A **BigInt** típusú számokat a `n` betű hozzáadásával hozhatjuk létre a számok végén. Ezen kívül **`BigInt()`** konstruktorral is létrehozhatunk BigInt objektumokat.
+
+#### Példák a használatra:
+
+```javascript
+// BigInt létrehozása literálként
+let largeNumber = 1234567890123456789012345678901234567890n;
+console.log(largeNumber);  // 1234567890123456789012345678901234567890n
+
+// BigInt létrehozása a BigInt() konstruktorral
+let bigIntFromConstructor = BigInt("1234567890123456789012345678901234567890");
+console.log(bigIntFromConstructor);  // 1234567890123456789012345678901234567890n
+```
+
+**Miért fontos a BigInt?**
+
+Néhány alkalmazásban és területen a számok hatalmas mértékben megnövekedhetnek, például:
+- **Kriptográfia**: Nagy egész számok használata a titkosításhoz és aláírásokhoz.
+- **Pénzügyi számítások**: Nagy tranzakciók, nagy értékű pénzügyi számítások esetén.
+- **Tudományos számítások**: Olyan esetekben, ahol nagyon nagy egész számokra van szükség.
+
+A `BigInt` segítségével ezeket a problémákat biztonságosan és pontosan kezelhetjük.
+
+**BigInt műveletek**
+
+A **BigInt** műveletek alapvetően ugyanúgy működnek, mint a szokásos `Number` típusú műveletek, de figyelnünk kell arra, hogy nem keverhetjük őket közvetlenül `Number` típusú értékekkel.
+
+#### Példák műveletekre:
+
+```javascript
+let a = 1000000000000000000000000000n;  // Nagy szám
+let b = 2000000000000000000000000000n;  // Még nagyobb szám
+
+let sum = a + b;  // Összeadás
+console.log(sum);  // 3000000000000000000000000000n
+
+let product = a * b;  // Szorzás
+console.log(product);  // 2000000000000000000000000000000000000000000000000000000000000000n
+```
+
+**BigInt és Number típus keverése**
+A **BigInt** és a **Number** típusokat nem lehet közvetlenül összeadni, kivéve, ha mindkét típus ugyanarra a típusra van konvertálva.
+
+#### Hiba példák:
+
+```javascript
+let bigIntNumber = 10n;
+let regularNumber = 5;
+
+console.log(bigIntNumber + regularNumber);  // TypeError: Cannot mix BigInt and other types
+```
+
+A fenti kód hibát fog dobni, mert nem lehet közvetlenül összeadni a `BigInt` és a `Number` típusokat.
+
+#### Megoldás:
+
+A típusokat explicit módon kell konvertálni, hogy össze lehessen adni őket:
+
+```javascript
+let bigIntNumber = 10n;
+let regularNumber = 5;
+
+console.log(bigIntNumber + BigInt(regularNumber));  // 15n
+```
+
+Vagy fordítva:
+
+```javascript
+let bigIntNumber = 10n;
+let regularNumber = 5;
+
+console.log(Number(bigIntNumber) + regularNumber);  // 15
+```
+
+
+Bár a `BigInt` lehetővé teszi a tetszőleges pontosságú egész számok kezelését, vannak bizonyos korlátozások:
+- Nem lehet használni a **`BigInt` típusú számokkal** a **`Math`** objektum metódusait (pl. `Math.sqrt()`).
+- A **`BigInt`** nem támogatja az egyes operátorokat, mint a **`+`** sztringekhez, mivel a `BigInt` mindig egész számokkal dolgozik.
+
+A **BigInt** a JavaScript-ben egy nagyon hasznos eszköz, amikor nagy, pontos egész számokra van szükség. Ez különösen hasznos lehet kriptográfiai alkalmazásokban, tudományos számításokban vagy bármilyen más helyzetben, ahol a számok mérete meghaladja a szokásos `Number` típus határait. Azonban fontos megjegyezni, hogy a `BigInt` és a `Number` típusokat nem lehet közvetlenül keverni, ezért megfelelő típuskonverzióra van szükség.
+
+Ez a típus segít elkerülni a **lebegőpontos számábrázolás** hibáit és a kerekítési problémákat, amelyek a **`Number`** típus esetén előfordulhatnak.
+
+---
+
+## Dates and Times
+
+A **Dátumok és Időpontok** kezelése JavaScript-ben fontos téma, mivel a legtöbb webalkalmazásban szükség van dátumokkal való munkára: például események időpontjainak megjelenítése, dátumok közötti számítások, helyi időzónák kezelése stb. A JavaScript beépített `Date` objektuma és annak metódusai segítenek a dátumok és időpontok kezelésében.
+
+#### **A Date objektum**
+A JavaScript-ben a dátumokat és időpontokat a **`Date`** objektummal lehet kezelni. Ez az objektum az alapértelmezett eszköz a dátumok és időpontok létrehozásához, manipulálásához és formázásához.
+
+#### Dátum létrehozása:
+
+```javascript
+// Aktuális dátum és idő
+let currentDate = new Date();
+console.log(currentDate);  // Példa: Mon Jan 27 2025 15:20:30 GMT+0100 (Central European Standard Time)
+
+// Dátum létrehozása év, hónap, nap szerint
+let specificDate = new Date(2025, 0, 27);  // Figyelem: a hónapok 0-tól kezdődnek (0: január)
+console.log(specificDate);  // Példa: Mon Jan 27 2025 00:00:00 GMT+0100 (Central European Standard Time)
+```
+
+- A `Date` konstruktor nélküli hívás a **currentDate** változót az aktuális dátummal és időponttal tölti meg.
+- A hónapok a `Date` konstruktorban **0-tól 11-ig** terjednek, így a január hónapot a `0`-val kell megadni.
+
+#### Dátum létrehozása ISO 8601 formátumban:
+
+```javascript
+let isoDate = new Date('2025-01-27T15:20:30Z');
+console.log(isoDate);  // Mon Jan 27 2025 16:20:30 GMT+0100 (Central European Standard Time)
+```
+
+A `new Date()` konstruktorhoz ISO 8601 formátumban megadott dátum is adható. Itt az "T" a dátum és az idő közötti elválasztó, míg a "Z" az UTC időzónát jelöli.
+
+#### **Dátumok manipulálása**
+A `Date` objektummal különféle műveleteket végezhetünk, például dátumok összehasonlítása, napok hozzáadása, vagy a hónapok és évek módosítása.
+
+#### Napok hozzáadása, eltávolítása:
+
+```javascript
+let today = new Date();
+console.log("Mai dátum:", today);
+
+// Hozzáadunk 5 napot
+today.setDate(today.getDate() + 5);
+console.log("5 nap múlva:", today);
+```
+
+- A `setDate()` metódus a hónap napját állítja be, és ha meghaladja a hónap napjainak számát, akkor automatikusan átugrik a következő hónapra.
+
+#### Hónapok és évek manipulálása:
+
+```javascript
+let anotherDate = new Date();
+console.log("Eredeti dátum:", anotherDate);
+
+// 3 hónap hozzáadása
+anotherDate.setMonth(anotherDate.getMonth() + 3);
+console.log("3 hónap múlva:", anotherDate);
+
+// Év módosítása
+anotherDate.setFullYear(2026);
+console.log("Új év:", anotherDate);
+```
+
+- A `getMonth()` és `setMonth()` a hónapok kezelésére szolgálnak.
+- A `getFullYear()` és `setFullYear()` az évet kezelik.
+
+#### **Dátumok és Időpontok összehasonlítása**
+A dátumok összehasonlítása a JavaScript-ben egyszerűen történik, mivel a `Date` objektumok **komparálhatóak** (összehasonlíthatóak) más `Date` objektumokkal.
+
+```javascript
+let date1 = new Date(2025, 0, 27);
+let date2 = new Date(2025, 0, 28);
+
+console.log(date1 < date2);  // true: date1 korábbi mint date2
+console.log(date1 > date2);  // false: date1 nem későbbi mint date2
+console.log(date1 === date2);  // false: dátumok nem egyeznek
+```
+
+- **`<`, `>`, `===`** operátorok használhatóak a dátumok összehasonlítására.
+
+#### **Dátumok formázása**
+A `Date` objektumok nem rendelkeznek beépített módszerrel a rugalmas formázásra, de több lehetőség is van a dátumok formázására.
+
+#### Alapvető metódusok a `Date` objektumban:
+
+```javascript
+let date = new Date();
+
+console.log(date.toString());  // "Mon Jan 27 2025 15:20:30 GMT+0100 (Central European Standard Time)"
+console.log(date.toLocaleDateString());  // "2025. 01. 27."
+console.log(date.toLocaleTimeString());  // "15:20:30"
+```
+
+- **`toString()`**: A `Date` objektumot teljes szöveges formában adja vissza.
+- **`toLocaleDateString()`** és **`toLocaleTimeString()`**: A dátumot és az időt lokális formátumban adja vissza.
+
+
+#### **Időzónák kezelése**
+JavaScript alapértelmezetten a böngésző helyi időzónájában kezeli a dátumokat, de van lehetőség az időzónák kezelésére is.
+
+```javascript
+let utcDate = new Date('2025-01-27T15:20:30Z');  // UTC időzónában
+console.log(utcDate.toLocaleString('en-US', { timeZone: 'America/New_York' }));  // New York időzóna
+```
+
+A `toLocaleString()` metódus segítségével az időzóna is beállítható, hogy különböző helyi időpontokat jelenítsünk meg.
+
+#### **Dátumok és időpontok helyes kezelése**
+- **Dátumok biztonságos kezelése**: Ha dátumokat kell tárolni és kezelni, mindig használjunk ISO 8601 formátumot (`YYYY-MM-DD`), hogy elkerüljük az eltérő dátumformátumokból adódó hibákat.
+- **Egységes időzónák**: Ha a dátumokat és időpontokat több különböző időzónában használjuk, érdemes figyelmet fordítani a pontos időzóna kezelésére, például UTC vagy ISO 8601 formátumban.
+
+A JavaScript Date objektumának számos beépített metódusa van, amelyek segítenek a dátumok és időpontok manipulálásában, formázásában és összehasonlításában. Íme egy lista a legfontosabb metódusokról, amiket érdemes ismerni:
+
+<details className="dropdown-task">
+
+  <summary><strong>Létrehozás</strong></summary>
+
+
+- **`new Date()`**: Létrehozza az aktuális dátumot és időpontot.
+- **`new Date(milliseconds)`**: Létrehozza a dátumot a `milliseconds` alapján (az 1970. január 1. 00:00:00 UTC-tól eltelt milliszekundumok száma).
+- **`new Date(dateString)`**: Létrehozza a dátumot egy ISO 8601 formátumban megadott dátum karakterlánc alapján.
+- **`new Date(year, month, day, hours, minutes, seconds, milliseconds)`**: Létrehozza a dátumot, amelyet év, hónap, nap, óra, perc, másodperc és milliszekundumok alapján hoz létre. (A hónapok 0-tól kezdődnek!)
+
+</details>
+
+
+<details className="dropdown-task">
+
+  <summary><strong>Dátum és idő lekérdezése</strong></summary>
+
+
+- **`getDate()`**: Visszaadja a hónap napját (1-31).
+- **`getDay()`**: Visszaadja a hét napját (0-6), ahol 0 a vasárnap.
+- **`getFullYear()`**: Visszaadja az évet (4 számjegyű).
+- **`getHours()`**: Visszaadja az órát (0-23).
+- **`getMilliseconds()`**: Visszaadja a milliszekundumokat (0-999).
+- **`getMinutes()`**: Visszaadja a perceket (0-59).
+- **`getMonth()`**: Visszaadja a hónapot (0-11), ahol 0 a január.
+- **`getSeconds()`**: Visszaadja a másodperceket (0-59).
+- **`getTime()`**: Visszaadja a dátumot az 1970. január 1. 00:00:00 UTC-tól eltelt milliszekundumok formájában.
+- **`getTimezoneOffset()`**: Visszaadja a helyi idő és UTC közötti eltérést percekben (pl. -60, ha az időzóna egy órával előrébb van az UTC-től).
+
+</details>
+
+
+<details className="dropdown-task">
+
+  <summary><strong>Dátum és idő beállítása</strong></summary>
+
+
+- **`setDate(day)`**: Beállítja a hónap napját.
+- **`setFullYear(year, month, day)`**: Beállítja az évet, hónapot és napot.
+- **`setHours(hours, minutes, seconds, milliseconds)`**: Beállítja az órát, percet, másodpercet és milliszekundumot.
+- **`setMilliseconds(milliseconds)`**: Beállítja a milliszekundumokat.
+- **`setMinutes(minutes, seconds, milliseconds)`**: Beállítja a perceket, másodperceket és milliszekundumokat.
+- **`setMonth(month, day)`**: Beállítja a hónapot és a napot.
+- **`setSeconds(seconds, milliseconds)`**: Beállítja a másodperceket és a milliszekundumokat.
+- **`setTime(milliseconds)`**: Beállítja a dátumot a megadott milliszekundumok alapján, az 1970. január 1. 00:00:00 UTC-tól eltelt idő szerint.
+
+</details>
+
+
+<details className="dropdown-task">
+
+  <summary><strong>Formázás</strong></summary>
+
+
+- **`toDateString()`**: Visszaadja a dátumot csak a napra, hónapra, évre vonatkozó formátumban (pl. "Mon Jan 27 2025").
+- **`toISOString()`**: Visszaadja a dátumot ISO 8601 formátumban (pl. "2025-01-27T15:20:30.000Z").
+- **`toJSON()`**: Visszaadja a dátumot JSON-kompatibilis formátumban (általában ugyanaz, mint az `toISOString()`).
+- **`toLocaleDateString(locales, options)`**: A dátumot a helyi beállításoknak megfelelően adja vissza.
+- **`toLocaleTimeString(locales, options)`**: Az időt a helyi beállításoknak megfelelően adja vissza.
+- **`toLocaleString(locales, options)`**: A dátumot és időt a helyi beállításoknak megfelelően adja vissza.
+- **`toString()`**: Visszaadja a dátumot teljes szöveges formátumban (pl. "Mon Jan 27 2025 15:20:30 GMT+0100 (Central European Standard Time)").
+
+
+</details>
+
+
+<details className="dropdown-task">
+
+  <summary><strong>Időzónák</strong></summary>
+
+
+- **`toLocaleString(locales, { timeZone })`**: Különböző időzónák használata a `toLocaleString` metóduson belül.
+
+
+</details>
+
+
+---
+
+## Gyakorló feladatok
+
+### Integer Literals
+
+
+<details className="dropdown-task">
+
+  <summary>
+  <strong>Számok összege</strong>
+  
+  Adj össze három egész számot: **10**, **25** és **50**. Írasd ki az eredményt a konzolra.
+  </summary>
+
+```javascript
+let num1 = 10;
+let num2 = 25;
+let num3 = 50;
+
+let sum = num1 + num2 + num3;
+
+console.log(`A számok összege: ${sum}`);
+```
+
+</details>
+
+<details className="dropdown-task">
+
+  <summary>
+  <strong>Kör kerülete</strong>
+  
+Egy kör sugara **7** egység. Számítsd ki a kör kerületét az alábbi képlettel: 
+ 
+- Kerület = 2 × r × π
+
+👉 Használj Math.PI-t a π értékére.
+  
+  </summary>
+
+```javascript
+let radius = 7; // A kör sugara
+let circumference = 2 * radius * Math.PI; // Kör kerülete
+
+console.log(`A kör kerülete: ${circumference.toFixed(2)} egység`);
+```
+
+
+
+</details>
+
+<details className="dropdown-task">
+
+  <summary>
+  <strong>Maradékos osztás</strong>
+  
+  Egy süteményes dobozban **28** sütemény van, és 5 ember között szeretnéd szétosztani. Számítsd ki:  
+  - Hány darabot kap mindenki (egész osztás eredménye).  
+  - Mennyi sütemény marad a dobozban.
+
+  </summary>
+
+```javascript
+let totalCookies = 28; // Sütemények száma
+let people = 5; // Emberek száma
+
+let cookiesPerPerson = Math.floor(totalCookies / people); // Sütemények egyenlő elosztása
+let remainingCookies = totalCookies % people; // Maradék sütemények
+
+console.log(`Mindenki kap: ${cookiesPerPerson} süteményt`);
+console.log(`A dobozban marad: ${remainingCookies} sütemény`);
+```
+
+
+</details>
+
+<details className="dropdown-task">
+
+  <summary>
+  <strong>Páros vagy páratlan szám?</strong>
+  
+  Írj egy programot, amely megvizsgálja, hogy egy adott egész szám (**12345**) páros vagy páratlan. Az eredményt írasd ki a konzolra.
+  
+  </summary>
+
+```javascript
+let number = 12345; // Vizsgálandó szám
+
+if (number % 2 === 0) {
+  console.log(`${number} páros szám`);
+} else {
+  console.log(`${number} páratlan szám`);
+}
+```
+
+
+</details>
+
+<details className="dropdown-task">
+
+  <summary>
+  <strong>Fibo-sorozat első 5 eleme</strong>
+
+  A Fibonacci-sorozat első öt eleme **0**, **1**, **1**, **2**, **3**. Számold ki és írasd ki a 6. elem értékét is!  
+A Fibonacci-sorozat képlete: **F(n) = F(n-1) + F(n-2)** 
+
+  </summary>
+
+```javascript
+let fib1 = 0; // Első elem
+let fib2 = 1; // Második elem
+let fib3 = fib1 + fib2; // Harmadik elem
+let fib4 = fib2 + fib3; // Negyedik elem
+let fib5 = fib3 + fib4; // Ötödik elem
+let fib6 = fib4 + fib5; // Hatodik elem
+
+console.log(`Fibonacci-sorozat első 5 eleme: ${fib1}, ${fib2}, ${fib3}, ${fib4}, ${fib5}`);
+console.log(`A Fibonacci-sorozat 6. eleme: ${fib6}`);
+```
+
+
+
+</details>
+
+
+
+
+### Floating-point Literals
+
+<details className="dropdown-task">
+
+  <summary>
+  <strong>Adó kiszámítás</strong><br/>
+Egy termék ára **19,99 Ft**, az ÁFA **27%**. Számítsd ki és írasd ki:  
+- Az ÁFA összegét.
+- A termék végső árát ÁFA-val együtt.  
+
+👉 **Tipp:** Használj `toFixed()`-et a kerekítéshez. Kerekítsd az eredményeket két tizedesjegyre.
+  </summary>
+
+**Megoldás**
+```javascript
+let price = 19.99; // Termék ára
+let taxRate = 0.27; // ÁFA-kulcs (27%)
+
+let taxAmount = price * taxRate; // ÁFA összege
+let finalPrice = price + taxAmount; // Végső ár ÁFA-val együtt
+
+console.log(`ÁFA összege: ${taxAmount.toFixed(2)} Ft`);
+console.log(`Végső ár: ${finalPrice.toFixed(2)} Ft`);
+```
+
+</details>
+
+<details className="dropdown-task">
+
+  <summary>
+  <strong>Távolság kiszámítása</strong>
+
+  Egy autó 4,5 órán keresztül halad 72,8 km/h sebességgel.  
+- Számítsd ki a megtett távolságot.  
+
+👉 **Képlet:** Távolság = idő × sebesség.
+  </summary>
+ 
+```javascript
+let time = 4.5; // Idő órában
+let speed = 72.8; // Sebesség km/h-ban
+
+let distance = time * speed; // Távolság kiszámítása
+
+console.log(`Megtett távolság: ${distance.toFixed(2)} km`);
+```
+
+</details>
+<details className="dropdown-task">
+
+  <summary>
+  <strong>Kamatos kamat kiszámítása</strong>
+
+Egy banki befektetés **100,000 Ft**, az éves kamatláb **5%**, és a pénz 3 évig kamatozik. Számítsd ki, hogy mennyi lesz a befektetés értéke a 3 év után.  
+
+👉 **Képlet:** Végösszeg = befektetés × (1 + kamatláb)^évek. Használd a **Math.pow()** metódust a hatványozás kiszámítására.
+  </summary>
+
+```javascript
+let principal = 100000; // Befektetés összege
+let interestRate = 0.05; // Éves kamatláb (5%)
+let years = 3; // Évek száma
+
+let totalAmount = principal * Math.pow(1 + interestRate, years); // Kamatos kamat képlet
+
+console.log(`A befektetés értéke 3 év után: ${totalAmount.toFixed(2)} Ft`);
+``` 
+
+</details>
+<details className="dropdown-task">
+
+  <summary>
+  <strong>Kerekítési hiba vizsgálata</strong>
+  
+  Írasd ki az alábbi művelet eredményét:  
+```javascript
+console.log(0.1 + 0.2);
+```  
+Ezután írasd ki ugyanezt a kerekített formában, 2 tizedesjegyre kerekítve.  
+
+👉 **Tipp:** Vizsgáld meg, miért nem pontos az eredmény! 
+  
+  </summary>
+
+```javascript
+let result = 0.1 + 0.2;
+
+console.log(`Pontatlan eredmény: ${result}`); // Kerekítési hiba miatt nem pontos
+console.log(`Kerekített eredmény: ${result.toFixed(2)}`); // Kerekítés 2 tizedesjegyre
+```
+
+</details>
+<details className="dropdown-task">
+
+  <summary>
+  <strong>Fény utazási ideje</strong>
+
+  A Hold távolsága a Földtől körülbelül **384,400 km**, a fény sebessége **299,792 km/s**.  
+  - Számítsd ki, mennyi idő alatt ér el a fény a Holdról a Földre másodpercben.  
+  </summary>
+
+```javascript 
+let moonDistance = 384400; // Hold távolsága km-ben
+let lightSpeed = 299792; // Fény sebessége km/s-ban
+
+let travelTime = moonDistance / lightSpeed; // Idő = távolság / sebesség
+
+console.log(`A fény utazási ideje a Holdtól a Földig: ${travelTime.toFixed(2)} másodperc`);
+
+``` 
+
+
+</details>
+
+
+
+### Math objektum metódusai
+
+<details className="dropdown-task">
+
+  <summary>
+  <strong>Hatványozás</strong>
+
+  Határozd meg 3 ötödik hatványát.
+  </summary>
+
+```javascript
+const result1 = Math.pow(3, 5);
+console.log(`3 ötödik hatványa: ${result1}`);
+```
+
+</details>
+
+<details className="dropdown-task">
+
+  <summary>
+  <strong>Kerekítés a legközelebbi egész számra</strong>
+
+  Kerekítsd a 7.6 számot a legközelebbi egész számra.
+
+  </summary>
+
+```javascript
+const result2 = Math.round(7.6);
+console.log(`7.6 kerekítve: ${result2}`);  
+```
+
+</details>
+
+<details className="dropdown-task">
+
+  <summary>
+  <strong>Abszolút érték</strong>
+
+Határozd meg a -15 abszolút értékét
+  </summary>
+
+```javascript
+const result5 = Math.abs(-15);
+console.log(`-15 abszolút értéke: ${result5}`);
+```
+
+</details>
+
+
+<details className="dropdown-task">
+
+  <summary>
+	<strong>Véletlenszám generálása</strong>
+  
+  Generálj egy véletlenszámot 0 és 1 között.
+  </summary>
+
+```javascript
+const result8 = Math.random();
+console.log(`Véletlenszám 0 és 1 között: ${result8}`);
+```
+
+</details>
+
+<details className="dropdown-task">
+
+  <summary>
+	<strong>Legkisebb érték kiválasztása</strong>
+  
+  Válaszd ki a legkisebb értéket a következő számok közül: 34, 8, 19.
+  </summary>
+
+```javascript
+const result7 = Math.min(34, 8, 19);
+console.log(`A legkisebb szám: ${result7}`);
+```
+
+</details>
+
+<details className="dropdown-task">
+
+  <summary>
+	<strong>Pitagorasz-tétel</strong>
+
+  Kiszámítani egy derékszögű háromszög átfogóját, ha az oldalai 3 és 4.
+  </summary>
+
+```javascript
+const result13 = Math.sqrt(Math.pow(3, 2) + Math.pow(4, 2));
+console.log(`A háromszög átfogója: ${result13}`);
+```
+
+</details>
+
+### Dátum és idő
+
+<details className="dropdown-task">
+
+  <summary>
+  <strong>Jelenlegi dátum kiírása</strong>
+
+  Írd ki a jelenlegi dátumot év-hónap-nap formátumban.
+  </summary>
+
+```javascript
+let date = new Date();
+let currentDate = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+```
+
+**Magyarázat:**  
+- `new Date()` létrehozza az aktuális dátumot és időt.  
+- `getFullYear()` visszaadja az aktuális évszámot.  
+- `getMonth()` visszaadja a hónapot (0-tól kezdve, tehát január = 0). Ezért hozzáadunk `+1`-et, hogy a hónap számát megfelelően megkapjuk.  
+- `getDate()` visszaadja a hónap adott napját.  
+- Az értékeket `-` jellel fűzzük össze, hogy év-hónap-nap formátumot kapjunk.
+
+</details>
+
+<details className="dropdown-task">
+
+  <summary>
+  <strong>Hét napja</strong>
+
+  Írd ki a hét napját (pl. hétfő, kedd, stb.) a jelenlegi dátum alapján.
+  </summary>
+
+```javascript
+let date = new Date();
+let daysOfWeek = ['vasárnap', 'hétfő', 'kedd', 'szerda', 'csütörtök', 'péntek', 'szombat'];
+let currentDay = daysOfWeek[date.getDay()];
+```
+
+**Magyarázat:**  
+- A `getDay()` visszaadja az aktuális napot 0-tól 6-ig (vasárnap = 0, hétfő = 1 stb.).  
+- A `daysOfWeek` tömb tartalmazza a hét napjainak neveit magyarul.  
+- Az aktuális nap nevét a tömb indexével érjük el, amelyet a `getDay()` visszaad.
+
+</details>
+
+<details className="dropdown-task">
+
+  <summary>
+  <strong>Jelenlegi idő kiírása</strong>
+
+  Írd ki a jelenlegi időt óra:perc:másodperc formátumban.
+  </summary>
+
+```javascript
+let date = new Date();
+let currentTime = date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
+```
+
+**Magyarázat:**  
+- `getHours()` visszaadja az aktuális órát.  
+- `getMinutes()` visszaadja az aktuális percet.  
+- `getSeconds()` visszaadja az aktuális másodpercet.  
+- Az értékeket `:` jellel fűzzük össze, hogy óra:perc:másodperc formátumot kapjunk.
+
+</details>
+
+<details className="dropdown-task">
+
+  <summary>
+  <strong>Dátum növelése egy nappal</strong>
+
+  Növeld meg a mai dátumot egy nappal és írd ki az új dátumot.
+  </summary>
+
+```javascript
+let date = new Date();
+date.setDate(date.getDate() + 1);
+let newDate = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+```
+
+**Magyarázat:**  
+- `getDate()` visszaadja az aktuális napot.  
+- `setDate()` beállítja a dátum napját. Ha hozzáadunk `+1`-et, akkor a következő napot kapjuk meg.  
+- Az új dátumot év-hónap-nap formátumban állítjuk össze ugyanúgy, mint az első feladatban.
+
+</details>
+
+<details className="dropdown-task">
+
+  <summary>
+  <strong>Különbség két dátum között</strong>
+
+  Számold ki két dátum közötti különbséget napokban.
+  </summary>
+
+```javascript
+let date1 = new Date('2025-01-01');
+let date2 = new Date('2025-01-10');
+let difference = (date2 - date1) / (1000 * 60 * 60 * 24);
+```
+
+**Magyarázat:**  
+- `new Date('2025-01-01')` és `new Date('2025-01-10')` két adott dátumot hoz létre.  
+- A két dátum közötti különbséget kivonással számoljuk (`date2 - date1`), amely milliszekundumban adja meg az értéket.  
+- A különbséget napokká alakítjuk: 1000 milliszekundum = 1 másodperc, 60 másodperc = 1 perc, 60 perc = 1 óra, 24 óra = 1 nap. Ezért osztjuk az értéket `1000 * 60 * 60 * 24`-gyel.
+
+</details>
