@@ -1,0 +1,181 @@
+---
+title: Mutability és Immutability
+---
+
+
+## Immutable Primitive Values (nem változtatható primitív értékek)
+
+Az *immutable primitive values* (nem változtatható primitív értékek) olyan adatokat jelentenek, amelyek értéke nem változtatható meg miután létrehozták őket. Ezek az értékek az alapvető (primitív) típusok, mint például a számok, karakterláncok (string), boolean értékek, `null`, `undefined` és `symbol` JavaScript-ben.
+
+
+- **Number**
+- **String**
+- **Boolean**
+- **undefined**
+- **null**
+- **Symbol**
+- **BigInt** (újabb verziókban)
+
+Ezek az értékek "nem változtathatók", ami azt jelenti, hogy egy változóhoz rendeltek egy primitív értéket, azt az értéket nem lehet módosítani, csak új értéket adhatunk neki.
+
+```js
+let a = 10;
+let b = a; // b = 10
+a = 20; // a értéke megváltozik
+
+console.log(a); // 20
+console.log(b); // 10
+```
+
+Ebben a példában, amikor `a` értékét 10-re rendeltük, majd azt hozzárendeltük `b`-hez, akkor `b` is megkapta az 10-et, de amikor `a` értékét később megváltoztattuk, **`b` nem változott**. Az értékek másolatot kaptak, és a változtatás nem érintette a másik változót.
+
+---
+
+## Mutable Object References (változtatható objektum hivatkozások)
+
+A **mutábilis (változtatható)** típusok azok az adatok, amelyek referencia típusúak. A JavaScriptben az objektumok, tömbök és funkciók **mutable** típusok, ami azt jelenti, hogy az ezekhez a típusokhoz rendelt hivatkozásokat (referenciákat) lehet módosítani.
+
+Ezek az adatstruktúrák **referenciával működnek**, tehát ha két változó egy objektumra mutat, és az egyik változóval módosítjuk az objektumot, akkor a másik változó értéke is módosulni fog, mivel mindkét változó ugyanarra a referencia értékre mutat.
+
+```js
+let obj1 = {name: 'John', age: 30};
+let obj2 = obj1;  // obj2 referencia az obj1-re
+
+obj1.age = 31;  // obj1 értékének módosítása
+
+console.log(obj1.age); // 31
+console.log(obj2.age); // 31 (mivel obj2 ugyanarra az objektumra mutat)
+```
+
+Ebben a példában, amikor `obj1.age` értékét megváltoztatjuk, az `obj2` is automatikusan tükrözi ezt, mivel mindkét változó ugyanarra az objektumra mutat. Az objektumot nem másoltuk le, így a változás mindkét változót érinti.
+
+---
+
+**Összehasonlítás: Immutable Primitives vs Mutable Objects**
+
+| Típus | Képesség | Példa |
+|-------|----------|-------|
+| **Immutable** | Az értéke nem módosítható. Másolatot készítünk, nem az eredeti értéket módosítjuk. | `let a = 10; let b = a; a = 20;` |
+| **Mutable** | Az érték változtatható, a változtatás más változókra is hatással lehet, ha azok ugyanarra a referenciára mutatnak. | `let obj1 = {name: 'John'}; let obj2 = obj1; obj1.name = 'Jane';` |
+
+
+- **Immutable primitív értékek**: Az értékek nem változtathatók meg. Példák: `number`, `string`, `boolean`, `null`, `undefined`.
+- **Mutable objektum hivatkozások**: Az értékek változtathatók. Példák: `object`, `array`, `function`.
+
+---
+
+## Gyakorlati példák
+
+Ezek az adattípusok alapvetően **immutable** típusok, mivel az értékük egyszerűen nem módosítható. Ha próbálunk módosítani egy ilyet, akkor egy új értéket hozunk létre, és nem az eredetit változtatjuk meg.
+
+### **Immutability példák egyszerű adattípusokkal**
+
+<details className="dropdown-task">
+
+  <summary>
+  <strong>Szám (number)</strong>
+  
+  
+  </summary>
+
+
+   ```javascript
+   let x = 5;
+   x = 10; // Egy új értéket adunk neki, nem módosítjuk az eredeti számot
+   console.log(x); // 10
+   // Az eredeti 5-ös érték nem változott, a változó most már 10-es értéket tárol.
+   ```
+</details>
+
+<details className="dropdown-task">
+
+  <summary>
+  <strong>Szöveg (string)</strong>
+  
+  
+  </summary>
+
+
+   ```javascript
+   let str = "hello";
+   str = str + " world"; // Új stringet hozunk létre a meglévő sztring alapján
+   console.log(str); // "hello world"
+   // A "hello" eredeti érték nem változott, egy új sztring jött létre.
+   ```
+</details>
+
+<details className="dropdown-task">
+
+  <summary>
+  <strong>Boolean (logikai érték)</strong>
+  
+  
+  </summary>
+
+
+   ```javascript
+   let isTrue = true;
+   isTrue = false; // Az új érték false, az eredeti érték true marad
+   console.log(isTrue); // false
+   // A változó most már false-t tárol, de az eredeti true érték nem módosult.
+   ```
+</details>
+
+- Minden egyes esetben, amikor a változó értékét módosítjuk (például a számot 5-ről 10-re vagy a sztringet „hello”-ról „hello world”-ra), **nem módosítjuk az eredeti adatot**, hanem **új értéket hozunk létre**, és hozzárendeljük a változóhoz.
+- Az **immutabilitás** itt azt jelenti, hogy ezeknek az alapvető típusoknak az értékei nem változnak meg az eredeti példányban, hanem egy új példány jön létre a módosításokkal.
+
+### **Mutability (Módosíthatóság)**
+
+<details className="dropdown-task">
+
+  <summary>
+  <strong>Objektum módosítása</strong>
+  
+  
+  </summary>
+
+   ```javascript
+   let person = { name: "John", age: 30 };
+   person.age = 31; // Módosítjuk az objektum egyik tulajdonságát
+   console.log(person); // { name: "John", age: 31 }
+   ```
+</details>
+
+<details className="dropdown-task">
+
+  <summary>
+  <strong>Tömb elemének módosítása</strong>
+  
+  
+  </summary>
+
+   ```javascript
+   let numbers = [1, 2, 3];
+   numbers[0] = 10; // Az első elem módosítása
+   console.log(numbers); // [10, 2, 3]
+   ```
+</details>
+
+<details className="dropdown-task">
+
+  <summary>
+  <strong>Objektum hozzáadása a tömbhöz</strong>
+  
+  
+  </summary>
+
+
+   ```javascript
+   let fruits = ["apple", "banana"];
+   fruits.push("cherry"); // Új elem hozzáadása a tömbhöz
+   console.log(fruits); // ["apple", "banana", "cherry"]
+   ```
+</details>
+
+
+- A mutábilis adatstruktúráknál az eredeti objektum vagy tömb módosulhat, míg az immutábilisaknál új példányt hozunk létre a módosításokkal, miközben az eredeti érték változatlan marad.
+
+
+
+
+

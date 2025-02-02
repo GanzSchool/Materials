@@ -1,0 +1,760 @@
+---
+title: Boolean értékek JavaScriptben
+---
+
+## Mi az a Boolean?
+
+A **Boolean** (logikai) érték egy olyan adattípus a JavaScriptben, amely kizárólag két értéket vehet fel: **true** (igaz) vagy **false** (hamis). Ez az adattípus elengedhetetlen a programozásban, mert segít a feltételes logika kezelésében, döntések meghozatalában és a vezérlési struktúrak működtetésében.
+
+---
+
+## Boolean értékek létrehozása
+
+Boolean értékek két módon hozhatók létre JavaScriptben:
+1. **Közvetlenül a true vagy false kulcsszavakkal:**
+   ```js
+   let igaz = true;
+   let hamis = false;
+   ```
+2. **Logikai kifejezések eredményeként:**
+   ```js
+   let nagyobb = 10 > 5;  // true
+   let egyenlo = (3 === 3);  // true
+   let kisebb = (4 < 2);  // false
+   ```
+
+---
+   
+## Boolean értékek használata feltételes szerkezetekben
+
+A Boolean értékek leggyakoribb felhasználása a feltételes utasításokban történik, mint például az `if/else` szerkezetekben:
+
+<details className="dropdown-task">
+
+  <summary>
+  <strong>Elágazás-gyorstalpaló</strong>
+
+  </summary>
+
+Az `if` és `else` szerkezetek a JavaScriptben az alapvető feltételes logika megvalósításához használatosak. Ezek segítségével különböző kódrészleteket hajthatsz végre attól függően, hogy egy feltétel igaz-e vagy sem.
+
+#### `if` és `else` alapok
+
+#### `if` szerkezet
+Az `if` kulcsszóval kezdődő szerkezet lehetővé teszi, hogy egy feltételt vizsgálj. Ha a feltétel **igaz** (true), akkor a blokkban lévő kód végrehajtódik. Ha a feltétel **hamis** (false), akkor a kód nem fut le.
+
+**Alapszerkezet:**
+```js
+if (feltétel) {
+    // Ha a feltétel igaz, végrehajtódik ez a kód
+}
+```
+
+**Példa:**
+```js
+let szam = 10;
+if (szam > 5) {
+    console.log("A szám nagyobb, mint 5");
+}
+```
+
+Ha a feltétel (`szam > 5`) igaz, a `"A szám nagyobb, mint 5"` üzenet fog megjelenni a konzolon.
+
+#### `else` szerkezet
+Az `else` a `if` blokk után következik, és akkor fut le, ha az `if` feltétel hamis. Az `else` blokkban lévő kód végrehajtódik, ha a feltétel nem teljesül.
+
+**Alapszerkezet:**
+```js
+if (feltétel) {
+    // Ha a feltétel igaz, végrehajtódik ez a kód
+} else {
+    // Ha a feltétel hamis, végrehajtódik ez a kód
+}
+```
+
+**Példa:**
+```js
+let szam = 3;
+if (szam > 5) {
+    console.log("A szám nagyobb, mint 5");
+} else {
+    console.log("A szám nem nagyobb, mint 5");
+}
+```
+
+Mivel a feltétel (`szam > 5`) hamis, a `"A szám nem nagyobb, mint 5"` üzenet jelenik meg a konzolon.
+
+#### `else if` szerkezet
+Ha több különböző feltételt szeretnél vizsgálni, akkor használhatod az `else if` szerkezetet. Ez lehetővé teszi, hogy több feltételt is ellenőrizz.
+
+**Alapszerkezet:**
+```js
+if (feltétel1) {
+    // Ha feltétel1 igaz, végrehajtódik ez a kód
+} else if (feltétel2) {
+    // Ha feltétel1 hamis és feltétel2 igaz, végrehajtódik ez a kód
+} else {
+    // Ha egyik feltétel sem igaz, végrehajtódik ez a kód
+}
+```
+
+**Példa:**
+```js
+let eletkor = 20;
+if (eletkor >= 18) {
+    console.log("Felnőtt vagy");
+} else if (eletkor >= 13) {
+    console.log("Tini vagy");
+} else {
+    console.log("Gyerek vagy");
+}
+```
+
+Itt a kód először megnézi, hogy az életkor nagyobb vagy egyenlő-e 18-cal, és ha igen, akkor a `"Felnőtt vagy"` üzenet jelenik meg. Ha nem, akkor megnézi a következő feltételt, hogy tinédzser-e. Ha egyik feltétel sem igaz, akkor a `"Gyerek vagy"` üzenetet írja ki.
+
+#### A feltételek kiértékelése
+Az `if`-ben szereplő feltétel minden esetben egy logikai kifejezés, amely `true` (igaz) vagy `false` (hamis) értéket ad vissza. Ha egy kifejezés `true`, akkor az `if` blokk fut le, ha `false`, akkor az `else` vagy `else if` blokk (ha van).
+
+Példák:
+- Ha egy számot vizsgálsz, használhatod az összehasonlító operátorokat: `>`, `<`, `>=`, `<=`, `==`, `===`, `!=`.
+- Ha egy változót vizsgálsz, az automatikusan kiértékelhető logikai értékként: minden érték, ami nem falsy, igaznak számít.
+
+#### További példák:
+
+**Feltételes logikai operátorok használata:**
+```js
+let szam = 7;
+if (szam % 2 === 0) {
+    console.log("Páros");
+} else {
+    console.log("Páratlan");
+}
+```
+
+**Bonyolultabb logikai kifejezés:**
+```js
+let age = 25;
+let city = "Budapest";
+
+if (age >= 18 && city === "Budapest") {
+    console.log("Felnőtt és Budapestet választotta");
+} else {
+    console.log("Nem felel meg mindkét feltételnek");
+}
+```
+
+#### Összegzés:
+- Az `if` szerkezet egy feltételt vizsgál, és ha az igaz, végrehajtja a hozzá tartozó kódot.
+- Az `else` az `if` után jön, és akkor fut le, ha az `if` feltétel hamis.
+- Az `else if` több feltétel egyidejű kezelésére szolgál.
+- A feltételek kiértékelése logikai értékek (igaz/hamis) alapján történik.
+
+
+</details>
+
+
+
+
+```js
+let szam = 10;
+if (szam > 5) {
+    console.log("A szám nagyobb, mint 5.");
+} else {
+    console.log("A szám nem nagyobb, mint 5.");
+}
+```
+
+Ebben a példában a `szam > 5` kifejezés **true** lesz, így az `if` blokk fut le.
+
+---
+
+## Falsy és truthy értékek
+
+A **falsy** és **truthy** fogalmak JavaScriptben arra vonatkoznak, hogy egy érték hogyan viselkedik logikai kifejezésekben. Amikor egy értéket logikailag értékelünk, JavaScript automatikusan meghatározza, hogy az igaznak (truthy) vagy hamisnak (falsy) számít.
+
+#### **Falsy értékek**
+A **falsy** értékek azok, amelyek a logikai kifejezésekben **hamis** (false) értékként viselkednek. JavaScriptben hét olyan érték van, amely falsy:
+
+- `false`
+- `0`
+- `-0` (negatív nulla)
+- `0n` (BigInt nulla)
+- `""` (üres string)
+- `null`
+- `undefined`
+- `NaN` (Not-a-Number)
+
+**Példa:**
+```js
+let ertek = 0;
+if (ertek) {
+    console.log("Ez egy truthy érték");
+} else {
+    console.log("Ez egy falsy érték");
+}
+// A kimenet: "Ez egy falsy érték"
+```
+
+#### **Truthy értékek**
+A **truthy** értékek azok, amelyek a logikai kifejezésekben **igaz** (true) értékként működnek, még akkor is, ha nem maguk a `true` értékek.
+
+Minden olyan érték **truthy**, amely nem szerepel a falsy értékek listáján. Tehát bármi, ami nem a falsy értékek közé tartozik, **truthy** lesz.
+
+**Példa truthy értékekre:**
+- `1`
+- `"hello"` (nem üres string)
+- `[]` (üres tömb)
+- `{}` (üres objektum)
+- `true`
+- `function() {}` (függvény)
+- `new Date()` (dátum objektum)
+
+**Példa:**
+```js
+let ertek = 1;
+if (ertek) {
+    console.log("Ez egy truthy érték");
+} else {
+    console.log("Ez nem egy truthy érték");
+}
+// A kimenet: "Ez egy truthy érték"
+```
+
+<details className="dropdown-task">
+
+  <summary>
+  <strong>Példa a feltételek vizsgálatára</strong>
+  
+  A feltétel kiértékelésénél JavaScript megvizsgálja a kifejezést és annak megfelelő ág fut le, amelyikre teljesül a feltétel.
+  </summary>
+
+```js
+let ertek1 = "";  // falsy
+let ertek2 = "valami";  // truthy
+
+if (ertek1) {
+    console.log("ertek1 truthy");
+} else {
+    console.log("ertek1 falsy");
+}
+
+if (ertek2) {
+    console.log("ertek2 truthy");
+} else {
+    console.log("ertek2 falsy");
+}
+```
+
+**Kimenet:**
+```
+ertek1 falsy
+ertek2 truthy
+```
+
+</details>
+
+---
+
+## Logikai operátorok
+
+A JavaScriptben három fontos logikai operátor van:
+
+1. **AND (&&) - És**: Két operandus esetén **true** lesz, ha mindkettő igaz.
+   ```js
+   console.log(true && false);  // false
+   console.log(5 > 2 && 8 > 3); // true
+   ```
+
+2. **OR (||) - Vagy**: **true** lesz, ha legalább az egyik operandus igaz.
+   ```js
+   console.log(true || false);  // true
+   console.log(4 < 2 || 6 > 5); // true
+   ```
+
+3. **NOT (!) - Nem**: Megfordítja a logikai értéket.
+   ```js
+   console.log(!true);  // false
+   console.log(!false); // true
+   ```
+
+---
+
+## Összehasonlító operátorok ismétlése
+
+
+
+<details className="dropdown-task">
+
+  <summary>
+  <strong>`=` – Az értékadás operátor</strong>
+  
+  
+  </summary>
+
+Ez nem összehasonlítási operátor, hanem **értékadásra** szolgál.
+
+**Példa:**
+```js
+let x = 10;  // Az érték 10 lesz hozzárendelve a x változóhoz.
+```
+</details>
+
+<details className="dropdown-task">
+
+  <summary>
+  <strong>`==` – Egyenlőség operátor (egyszerű egyenlőség)</strong>
+  
+  
+  </summary>
+Az **`==`** operátor akkor ad vissza `true`-t, ha a két operandus **értéke megegyezik**, függetlenül azok típusától. Ha a típusok eltérnek, JavaScript automatikusan **konvertálja** az értékeket (tipuskonverzió) a saját belső szabályai szerint.
+
+**Példa:**
+```js
+console.log(5 == "5");  // true
+console.log(true == 1);  // true
+console.log(0 == false);  // true
+console.log(null == undefined);  // true
+```
+
+A JavaScript az operátor használatakor típuskonverziót végez, ha szükséges, tehát a típusok nem számítanak annyira. Ez lehet hasznos, de néha **nem kívánatos** viselkedést is eredményezhet, ha nem vagyunk tisztában a típuskonverzióval.
+</details>
+
+<details className="dropdown-task">
+
+  <summary>
+  <strong>`===`  Szoros egyenlőség operátor (strict equality)</strong>
+  
+  
+  </summary>
+
+A **`===`** operátor **nem végez típuskonverziót**. Csak akkor ad vissza `true`-t, ha mind a két operandus **értéke** és **típusa is megegyezik**.
+
+Ez a legjobb választás, amikor pontosan szeretnénk összehasonlítani két értéket, és biztosak akarunk lenni abban, hogy nem történik típuskonverzió.
+
+**Példa:**
+```js
+console.log(5 === "5");  // false (mivel a típusok eltérnek: number vs string)
+console.log(1 === true);  // false (mivel a típusok eltérnek: number vs boolean)
+console.log(0 === false);  // false (mivel a típusok eltérnek: number vs boolean)
+console.log(null === undefined);  // false (mivel a típusok eltérnek)
+```
+
+Itt látható, hogy a `===` nem végez automatikus típuskonverziót, tehát csak akkor ad `true`-t, ha mind a típus, mind az érték pontosan megegyezik.
+</details>
+
+
+#### Miért fontos a `==` és `===` közötti különbség?
+
+**A `==` használata** során sokszor nem vesszük észre a típuskonverziót, és a kódunk nem úgy működhet, ahogyan várjuk. Például:
+   ```js
+   console.log(0 == false);  // true (mivel a JavaScript átalakítja a 0-t false-szá)
+   console.log(0 === false); // false (mivel a típusok eltérnek: number vs boolean)
+   ```
+   
+**A `===` használata** biztonságosabb, mivel biztosítja, hogy csak akkor lesz igaz az összehasonlítás, ha a típusok is pontosan megegyeznek. Ezt kell használni, ha pontosan szeretnénk összehasonlítani két értéket.
+
+#### Hogyan alkalmazható ez a `falsy`/`truthy` kontextusban?
+
+A **truthy** és **falsy** értékek viselkedését az `if` szerkezetekben az `==` vagy `===` operátorok nem befolyásolják közvetlenül, de fontos, hogy megértsük a különbséget, mert a következő esetek előfordulhatnak:
+
+- Ha a `==` operátort használjuk, akkor a `0`, `false`, `""`, `null`, `undefined`, `NaN` mind **falsy** értékként kezelendő.
+- Ha a `===` operátort használjuk, a típusoknak is pontosan meg kell egyezniük.
+
+#### Példa:
+
+```js
+let ertek = 0;
+
+if (ertek == false) {
+    console.log("A '0' falsy érték");
+} else {
+    console.log("A '0' nem falsy");
+}
+
+if (ertek === false) {
+    console.log("A '0' szigorúan false");
+} else {
+    console.log("A '0' nem szigorúan false");
+}
+```
+
+**Kimenet:**
+```
+A '0' falsy érték
+A '0' nem szigorúan false
+```
+
+Az első `if` feltétel igaz, mert `0` falsy, és a `==` operátor típuskonverziót végez. A második feltétel pedig hamis, mert a `0` és a `false` típusai eltérnek, és `===`-szel csak akkor lenne igaz, ha mindkét érték ugyanazt a típust és értéket képviselné.
+
+#### Összegzés:
+- **`=`**: Az értékadás operátor.
+- **`==`**: Az **egyszerű egyenlőség operátor**, amely típuskonverziót végez.
+- **`===`**: A **szoros egyenlőség operátor**, amely nem végez típuskonverziót, és csak akkor ad vissza `true`-t, ha mind az értékek, mind a típusok pontosan megegyeznek.
+
+
+#### További összehasnlító operátor
+A JavaScriptben többféle **összehasonlító operátor** létezik, amelyek segítségével két értéket összehasonlíthatsz, és logikai **true** vagy **false** értéket kapsz vissza. 
+
+<details className="dropdown-task">
+
+  <summary>
+  <strong>`!=` (különbözőség, típuskonverzióval)</strong>
+  
+  
+  </summary>
+
+A **`!=`** operátor az értékek **különbségét** ellenőrzi, és **típuskonverzióval** működik. Ha a két érték különbözőek, akkor **true**, ha megegyeznek, akkor **false**.
+
+#### Példák:
+
+```js
+console.log(5 != 3);   // true (különböző értékek)
+console.log('5' != 5); // false (típuskonverzióval ugyanaz az érték)
+console.log(0 != false); // false (false-t 0-ra konvertálja)
+console.log(null != undefined); // false (null és undefined különlegesek)
+```
+
+A **`!=`** operátor egyenértékű a **`==`** operátorral, csak fordítva, tehát azt vizsgálja, hogy az értékek nem egyenlőek-e, figyelembe véve a típuskonverziót.
+</details>
+
+
+
+
+<details className="dropdown-task">
+
+  <summary>
+  <strong>`!==` (szigorú különbözőség, típusellenőrzés)</strong>
+  
+  
+  </summary>
+
+A **`!==`** operátor a **`!==`** szigorú különbséget vizsgál, tehát nemcsak az értékek, hanem a típusok is fontosak. Ha az értékek **különbözőek** vagy a típusok nem egyeznek, akkor **true** értéket ad vissza.
+
+#### Példák:
+
+```js
+console.log(5 !== 3);   // true (különböző értékek)
+console.log('5' !== 5); // true (különböző típusok)
+console.log(0 !== false); // true (különböző típusok)
+console.log(null !== undefined); // true (különböző típusok)
+```
+
+A **`!==`** operátor szigorúbb, mert itt is figyelembe kell venni a típusokat. Ha az értékek különböznek vagy ha a típusok nem azonosak, akkor **true** értéket ad vissza.
+</details>
+
+<details className="dropdown-task">
+
+  <summary>
+  <strong>`>` (nagyobb, mint)</strong>
+  
+  
+  </summary>
+
+A **`>`** operátor összehasonlítja, hogy az első érték **nagyobb**-e, mint a második. Ha igen, akkor **true** értéket ad vissza.
+
+#### Példák:
+
+```js
+console.log(5 > 3); // true (5 nagyobb, mint 3)
+console.log(3 > 5); // false (3 nem nagyobb, mint 5)
+console.log(5 > 5); // false (5 nem nagyobb, mint 5)
+console.log('10' > 5); // true (típuskonverzióval a string '10' nagyobb, mint a szám 5)
+```
+
+A **`>`** operátor a két operandust összehasonlítja, és **true** értéket ad, ha az első operandus nagyobb a másodiknál.
+</details>
+
+<details className="dropdown-task">
+
+  <summary>
+  <strong>`<` (kisebb, mint)</strong>
+  
+  
+  </summary>
+
+A **`<`** operátor összehasonlítja, hogy az első érték **kisebb**-e, mint a második. Ha igen, akkor **true** értéket ad vissza.
+
+#### Példák:
+
+```js
+console.log(3 < 5); // true (3 kisebb, mint 5)
+console.log(5 < 3); // false (5 nem kisebb, mint 3)
+console.log(5 < 5); // false (5 nem kisebb, mint 5)
+console.log('3' < 5); // true (típuskonverzióval a string '3' kisebb, mint a szám 5)
+```
+
+A **`<`** operátor a két operandust összehasonlítja, és **true** értéket ad, ha az első operandus kisebb a másodiknál.
+</details>
+
+
+<details className="dropdown-task">
+
+  <summary>
+  <strong>`>=` (nagyobb vagy egyenlő, mint)</strong>
+  
+  
+  </summary>
+
+A **`>=`** operátor összehasonlítja, hogy az első érték **nagyobb vagy egyenlő**-e a második értékkel.
+
+#### Példák:
+
+```js
+console.log(5 >= 5); // true (5 egyenlő 5-tel)
+console.log(3 >= 5); // false (3 nem nagyobb vagy egyenlő 5-tel)
+console.log(5 >= 3); // true (5 nagyobb, mint 3)
+```
+</details>
+
+<details className="dropdown-task">
+
+  <summary>
+  <strong>`<=` (kisebb vagy egyenlő, mint)</strong>
+  
+  
+  </summary>
+
+A **`<=`** operátor összehasonlítja, hogy az első érték **kisebb vagy egyenlő**-e a második értékkel.
+
+#### Példák:
+
+```js
+console.log(3 <= 5); // true (3 kisebb vagy egyenlő 5-tel)
+console.log(5 <= 5); // true (5 egyenlő 5-tel)
+console.log(5 <= 3); // false (5 nem kisebb vagy egyenlő 3-mal)
+```
+</details>
+
+
+
+
+
+#### Összegzés
+
+- **`!=`**: Különbség, **típuskonverzióval**.
+- **`!==`**: Szigorú különbség, **típusellenőrzés** nélkül.
+- **`>`**, **`<`**, **`>=`**, **`<=`**: Számok összehasonlítása, a megfelelő műveletek szerint.
+
+---
+
+## Boolean konverzió
+
+JavaScriptben bármely érték explicit módon Boolean típussá alakítható a `Boolean()` függvény segítségével:
+
+```js
+console.log(Boolean(0));       // false
+console.log(Boolean(""));      // false
+console.log(Boolean("hello")); // true
+console.log(Boolean([]));      // true
+```
+
+A `Boolean()` függvény minden truthy értéket **true**-vá alakít, és minden falsy értéket **false**-sá.
+
+---
+
+## Gyakorlati példa
+
+<details className="dropdown-task">
+
+  <summary>
+  <strong>Login</strong>
+  
+  Ez a kód ellenőrzi, hogy a felhasználó be van-e jelentkezve, majd a megfelelő üzenetet jeleníti meg.
+  </summary>
+
+```js
+let userLoggedIn = true;
+if (userLoggedIn) {
+    console.log("Üdvözöljük a rendszerben!");
+} else {
+    console.log("Kérjük, jelentkezzen be!");
+}
+```
+</details>
+
+---
+
+## Gyakorló feladatok
+
+### Logikai értékek
+
+<details className="dropdown-task">
+
+  <summary>
+  <strong>Összehasonlítás</strong>
+  
+  Készíts egy JavaScript kódot, ami két számot hasonlít össze, és kiírja, hogy az első szám nagyobb-e a másodiknál. Ha igaz, akkor a "Az első szám nagyobb" üzenet jelenjen meg, különben a "Az első szám nem nagyobb" üzenet
+  </summary>
+
+    ```javascript
+    let a = 10;
+    let b = 5;
+    if (a > b) {
+    console.log("Az első szám nagyobb");
+    } else {
+    console.log("Az első szám nem nagyobb");
+        }
+    ```
+</details>
+
+<details className="dropdown-task">
+
+  <summary>
+  <strong>Páros vagy páratlan</strong>
+  
+  Írj egy kódot, amely ellenőrzi, hogy egy adott szám páratlan vagy páros. A kimenet "Páros" vagy "Páratlan" legyen, a szám alapján.
+  </summary>
+
+    ```javascript
+    let szam = 7;
+    if (szam % 2 === 0) {
+        console.log("Páros");
+    } else {
+        console.log("Páratlan");
+    }
+    ```
+
+</details>
+
+<details className="dropdown-task">
+
+  <summary>
+  <strong>Egyenlő vagy sem</strong>
+  
+  Készíts egy kódot, amely két változó értékeit hasonlítja össze (pl. a neveket), és kiírja, hogy egyenlőek-e vagy sem
+  </summary>
+
+    ```javascript
+    let nev1 = "Anna";
+    let nev2 = "Anna";
+    if (nev1 === nev2) {
+        console.log("A két név egyenlő");
+    } else {
+        console.log("A két név nem egyenlő");
+    }
+    ```
+
+</details>
+
+### Truthy és Falsy értékek
+
+<details className="dropdown-task">
+
+  <summary>
+  <strong>Változó érték</strong>
+  
+  Készíts egy kódot, amely egy változó értékét (0, "", false, null, stb.) ellenőrzi, és kiírja, hogy "Falsy érték" vagy "Truthy érték", attól függően, hogy a változó milyen értéket tartalmaz.
+  </summary>
+
+```javascript
+let ertek = 0; // Próbálj ki más falsy és truthy értékeket is
+if (!ertek) {
+    console.log("Falsy érték");
+} else {
+    console.log("Truthy érték");
+}
+```
+
+</details>
+
+<details className="dropdown-task">
+
+  <summary>
+  <strong>Tömb elemekinek vizsgálata</strong>
+  
+  Írj egy programot, amely egy tömb elemeit vizsgálja. Ha az elem falsy érték, akkor írd ki, hogy "Falsyként kezelve", ha truthy, akkor "Truthyként kezelve".
+  </summary>
+
+```javascript
+let tomb = [0, "", "hello", false, [], {}];
+for (let elem of tomb) {
+    if (!elem) {
+        console.log(`${elem} - Falsyként kezelve`);
+    } else {
+        console.log(`${elem} - Truthyként kezelve`);
+    }
+}
+```
+
+</details>
+
+<details className="dropdown-task">
+
+  <summary>
+  <strong>falsy or not?</strong>
+  
+  Készíts egy kódot, amely ellenőrzi egy változó értékét, és ha az falsy, akkor a változót true értékre állítja, különben false-ra.
+  </summary>
+
+```javascript
+let valtozo = 0; // Falsy érték
+if (!valtozo) {
+    valtozo = true;
+} else {
+    valtozo = false;
+}
+console.log(valtozo);  // true
+```
+
+</details>
+
+
+### Boolean konverzió
+
+<details className="dropdown-task">
+
+  <summary>
+  <strong>Átalakítás</strong>
+  
+  Készíts egy kódot, amely egy számot Boolean értékre alakít, és kiírja az eredményt (például egy 5-öt).
+  </summary>
+
+```javascript
+let szam = 5;
+let boolErtek = Boolean(szam);
+console.log(boolErtek);  // true
+```
+
+</details>
+
+<details className="dropdown-task">
+
+  <summary>
+  <strong>Konvertálás</strong>
+  
+  Írj egy kódot, amely egy üres sztringet (""), egy számot (0) és egy tömböt ([]) Boolean értékre konvertál, és mindegyik eredményét jelenítse meg a konzolon.
+  </summary>
+
+```javascript
+let ertek1 = "";
+let ertek2 = 0;
+let ertek3 = [];
+console.log(Boolean(ertek1));  // false
+console.log(Boolean(ertek2));  // false
+console.log(Boolean(ertek3));  // true
+```
+
+</details>
+
+<details className="dropdown-task">
+
+  <summary>
+  <strong>Hello</strong>
+  
+  Készíts egy kódot, amely egy sztringet ("hello") és egy üres sztringet ("") Boolean értékre alakít, és összehasonlítja a két eredményt, hogy mi a különbség.
+  </summary>
+
+```javascript
+let sztring1 = "hello";
+let sztring2 = "";
+console.log(Boolean(sztring1));  // true
+console.log(Boolean(sztring2));  // false
+console.log(Boolean(sztring1) === Boolean(sztring2));  // false
+```
+
+</details>
+
+
+
+
+
