@@ -369,6 +369,7 @@
   const addBtn = document.getElementById('addBtn');
   const favList = document.getElementById('favList');
 
+  // Enter gomb lenyomásának figyelése
   [22].[23]('[24]', addFavorite);
   favInput.addEventListener('keydown', (e) => {
     if (e.[25] [26] '[27]') {
