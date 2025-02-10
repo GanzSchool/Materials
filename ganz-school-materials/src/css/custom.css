@@ -32,3 +32,46 @@
 html {
   scroll-behavior: smooth;
 }
+
+
+.solution-btn {
+  /* Alapszín, ami a Docusaurus theme "primary" változóját használja */
+  background-color: var(--ifm-color-primary);
+  color: #fff;
+
+  /* Alap stílusok */
+  display: inline-block;
+  padding: 0.6rem 1.2rem;
+  margin-top: 0.5rem;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+
+  /* Animációs áttűnések */
+  transition: 
+    background-color 0.3s,
+    transform 0.3s,
+    box-shadow 0.3s;
+}
+
+/* Hover (egér fölé) állapot */
+.solution-btn:hover {
+  background-color: var(--ifm-color-primary-dark);
+  transform: translateY(-2px);        /* Enyhe felugráshatás */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Kattintás közben */
+.solution-btn:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+/* Billentyűzet fókusz - a jobb hozzáférhetőség miatt */
+.solution-btn:focus {
+  outline: 2px solid var(--ifm-color-primary-light);
+  outline-offset: 2px;
+}
+
