@@ -159,7 +159,7 @@ myPromise
 <details className="dropdown-task">
 
   <summary>
-  <strong></strong>
+  <strong>Promise példa</strong>
   
   
   </summary>
