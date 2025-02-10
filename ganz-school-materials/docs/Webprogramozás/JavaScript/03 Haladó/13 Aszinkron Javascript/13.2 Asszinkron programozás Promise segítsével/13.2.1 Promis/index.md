@@ -288,7 +288,130 @@ myPromise
 ## Gyakorlati feladatok
 
 
+<details className="dropdown-task">
 
+  <summary>
+  <strong>Promise - szerencsejáték</strong>
+  
+  
+  </summary>
+
+
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <title>Promise Példa - Véletlenszerű eredmény</title>
+  <style>
+    body {
+      margin: 0; 
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to top right, #ffecd2, #fcb69f);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+      padding: 30px;
+      text-align: center;
+      max-width: 400px;
+      width: 80%;
+      animation: fadeIn 0.8s ease-in-out;
+    }
+    .result {
+      margin-top: 20px;
+      font-size: 1.2rem;
+      min-height: 2em; /* hely fenntartása az üzenetnek */
+    }
+    .success {
+      color: #2e7d32;
+      border: 2px solid #2e7d32;
+      padding: 10px;
+      border-radius: 4px;
+      transition: transform 0.2s;
+    }
+    .success:hover {
+      background-color: #c8e6c9;
+      transform: scale(1.03);
+    }
+    .error {
+      color: #c62828;
+      border: 2px solid #c62828;
+      padding: 10px;
+      border-radius: 4px;
+      transition: transform 0.2s;
+    }
+    .error:hover {
+      background-color: #ffcdd2;
+      transform: scale(1.03);
+    }
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    button {
+      background-color: #ff9800;
+      border: none;
+      color: #fff;
+      padding: 10px 20px;
+      margin-top: 15px;
+      font-size: 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    button:hover {
+      background-color: #fb8c00;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Szerencsepróba</h1>
+    <p>Kattints a gombra, és 2 másodperc múlva kiderül, hogy nyertél-e!</p>
+    <button id="tryButton">Próba szerencse</button>
+    <div id="result" class="result"></div>
+  </div>
+
+  <script>
+    const button = document.getElementById("tryButton");
+    const resultDiv = document.getElementById("result");
+
+    button.addEventListener("click", () => {
+      // Minden kattintás előtt töröljük az esetleges régi stílust és szöveget
+      resultDiv.textContent = "";
+      resultDiv.className = "result";
+
+      // Új Promise létrehozása
+
+        // Szimulálunk egy 2 másodperces "munkát"
+
+          // Generálunk egy véletlenszámot 0 és 1 között
+
+          
+          // 0.5-nél nagyobb szám esetén siker, különben hiba
+
+
+      // Promise sikeres lefutása => .then()
+
+  </script>
+</body>
+</html>
+
+
+
+</details>
 
 
 
