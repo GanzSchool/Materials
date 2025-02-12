@@ -296,7 +296,7 @@ myPromise
   
   </summary>
 
-```html
+
 <!DOCTYPE html>
 <html lang="hu">
 <head>
@@ -394,21 +394,36 @@ myPromise
       resultDiv.className = "result";
 
       // Új Promise létrehozása
-
+      const lotteryPromise = new Promise((resolve, reject) => {
         // Szimulálunk egy 2 másodperces "munkát"
-
+        setTimeout(() => {
           // Generálunk egy véletlenszámot 0 és 1 között
-
+          const randomNum = Math.random();
           
           // 0.5-nél nagyobb szám esetén siker, különben hiba
-
+          if (randomNum > 0.5) {
+            resolve("Gratulálok, nyertél!");
+          } else {
+            reject("Sajnos most nem jött össze. Próbáld újra!");
+          }
+        }, 2000);
+      });
 
       // Promise sikeres lefutása => .then()
-
+      lotteryPromise
+        .then((successMessage) => {
+          resultDiv.textContent = successMessage;
+          resultDiv.classList.add("success");
+        })
+        // Promise hibás lefutása => .catch()
+        .catch((errorMessage) => {
+          resultDiv.textContent = errorMessage;
+          resultDiv.classList.add("error");
+        });
+    });
   </script>
 </body>
 </html>
-```
 
 
 
