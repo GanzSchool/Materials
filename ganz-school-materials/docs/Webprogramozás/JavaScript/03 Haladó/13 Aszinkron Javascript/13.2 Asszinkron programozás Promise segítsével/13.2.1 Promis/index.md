@@ -296,7 +296,7 @@ myPromise
   
   </summary>
 
-
+```html
 <!DOCTYPE html>
 <html lang="hu">
 <head>
@@ -424,6 +424,7 @@ myPromise
   </script>
 </body>
 </html>
+```
 
 
 

@@ -164,3 +164,18 @@
   </script>
 </body>
 </html>
+
+
+module.exports = (client, MEMBER_LOG_CHANNEL_ID) => {
+  console.log("📢 Joined-Left(memberEvents.js) logging events loaded!");
+  client.on('ready', async () => {
+      console.log("✅ Invite cache initialized.");
+      for (const [guildId, guild] of client.guilds.cache) {
+          try {
+              const invites = await guild.invites.fetch();
+              inviteCache.set(guildId, new Map(invites.map(inv => [inv.code, inv.uses])));
+          } catch (err) {
+              console.error(`Could not fetch invites for ${guild.name}:`, err);
+          }
+      }
+  });
