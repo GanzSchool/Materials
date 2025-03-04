@@ -150,10 +150,10 @@
 
       const queryPromise = new Promise((resolve, reject) => {
         // Felhasználó által megadott focista azonosító
-        const playerId = parseInt(playerIdInput.value.trim(), 10);
+        const playerId = parseInt(playerIdInput.value.trim());
 
         if (isNaN(playerId)) {
-          reject("Kérlek, érvényes azonosítót adj meg!");
+          alert("Kérlek, érvényes azonosítót adj meg!");
           return;
         }
 
