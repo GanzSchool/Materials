@@ -150,10 +150,10 @@
 
       const queryPromise = new Promise((resolve, reject) => {
         // Felhasználó által megadott autó azonosító
-        const carId = parseInt(carIdInput.value.trim(), 10);
+        const carId = parseInt(carIdInput.value.trim());
 
         if (isNaN(carId)) {
-          reject("Kérlek, érvényes azonosítót adj meg!");
+          alert("Kérlek, érvényes azonosítót adj meg!");
           return;
         }
 
