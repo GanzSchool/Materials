@@ -150,10 +150,10 @@
 
       const queryPromise = new Promise((resolve, reject) => {
         // Felhasználó által megadott rekord azonosító
-        const recordId = parseInt(recordIdInput.value.trim(), 10);
+        const recordId = parseInt(recordIdInput.value.trim());
 
         if (isNaN(recordId)) {
-          reject("Kérlek, érvényes azonosítót adj meg!");
+          alert("Kérlek, érvényes azonosítót adj meg!");
           return;
         }
 
