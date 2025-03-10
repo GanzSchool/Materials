@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <title>Adatbázis lekérdezés</title>
+  <style>
+    :root {
+      --bg-color: #2c3e50;              /* Sötét kékes szürke (nem fekete) */
+      --container-bg: #ecf0f1;           /* Világos, sziget jellegű */
+      --primary-color: #3498db;          /* Friss kék */
+      --primary-color-dark: #2980b9;
+      --success-color: #2ecc71;
+      --error-color: #e74c3c;
+      --text-color: #2c3e50;             /* A konténer szövege sötét kékes */
+      --border-radius: 10px;
+      --shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: var(--bg-color);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background: var(--container-bg);
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+      padding: 30px 25px;
+      max-width: 400px;
+      width: 90%;
+      text-align: center;
+      animation: fadeIn 0.8s ease-in-out;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      font-size: 1.8rem;
+      color: var(--primary-color);
+    }
+
+    p {
+      margin-bottom: 20px;
+      color: var(--text-color);
+      font-size: 1rem;
+    }
+
+    input {
+      width: 80%;
+      padding: 12px;
+      font-size: 1rem;
+      border: 2px solid #ccc;
+      border-radius: var(--border-radius);
+      margin-bottom: 15px;
+      outline: none;
+      transition: border-color 0.3s, transform 0.2s;
+    }
+    
+    input:focus {
+      border-color: var(--primary-color);
+      transform: scale(1.02);
+    }
+
+    button {
+      width: 80%;
+      padding: 12px;
+      font-size: 1rem;
+      font-weight: 500;
+      color: #fff;
+      background: var(--primary-color);
+      border: none;
+      border-radius: var(--border-radius);
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.2s;
+    }
+
+    button:hover {
+      background: var(--primary-color-dark);
+      transform: translateY(-2px);
+    }
+
+    .result {
+      margin-top: 20px;
+      font-size: 1.1rem;
+      min-height: 2em;
+      white-space: pre-line;
+      padding: 10px;
+      border: 2px dashed transparent;
+      border-radius: var(--border-radius);
+      transition: border-color 0.3s, background-color 0.3s;
+    }
+
+    .success {
+      color: var(--success-color);
+      border-color: var(--success-color);
+      background: rgba(46, 204, 113, 0.15);
+    }
+
+    .error {
+      color: var(--error-color);
+      border-color: var(--error-color);
+      background: rgba(231, 76, 60, 0.15);
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Adatbázis lekérdezés</h1>
+    <p>Írd be a rekord azonosítóját (pl. 2)!</p>
+    <input type="number" id="recordIdInput" placeholder="Pl. 2">
+    <button id="fetchRecord">Lekérdezés</button>
+    <div id="result" class="result"></div>
+  </div>
+
+  <script>
+    const recordIdInput = document.getElementById("recordIdInput");
+    const fetchButton = document.getElementById("fetchRecord");
+    const resultDiv = document.getElementById("result");
+
+    // Belső "adatbázis" rekordokkal
+    const database = [
+      { id: 1, name: "Kovács Péter", email: "peter.kovacs@example.com" },
+      { id: 2, name: "Nagy Anna", email: "anna.nagy@example.com" },
+      { id: 3, name: "Tóth Gábor", email: "gabor.toth@example.com" }
+    ];
+
+    fetchButton.addEventListener("click", () => {
+      resultDiv.textContent = "";
+      resultDiv.className = "result";
+
+      const queryPromise = new Promise((resolve, reject) => {
+        // Felhasználó által megadott rekord azonosító
+        const recordId = parseInt(recordIdInput.value.trim());
+
+        if (isNaN(recordId)) {
+          alert("Kérlek, érvényes azonosítót adj meg!");
+          return;
+        }
+
+        // Szimulálunk egy 2 másodperces aszinkron lekérdezést
+        setTimeout(() => {
+          // Megkeressük a rekordot az "adatbázisban"
+          const record = database.find(item => item.id === recordId);
+
+          if (record) {
+            const formatted = `Név: ${record.name}\n Email: ${record.email}`;
+            resolve(formatted);
+          } else {
+            reject("Nincs ilyen rekord!");
+          }
+        }, 2000);
+      });
+
+      queryPromise
+        .then((formattedRecord) => {
+          resultDiv.textContent = formattedRecord;
+          resultDiv.classList.add("success");
+        })
+        .catch((errorMsg) => {
+          resultDiv.textContent = errorMsg;
+          resultDiv.classList.add("error");
+        });
+    });
+  </script>
+</body>
+</html>
