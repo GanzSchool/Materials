@@ -1,5 +1,5 @@
 ---
-title: Promis
+title: Promise
 ---
 
 ## Mi az a Promise?
