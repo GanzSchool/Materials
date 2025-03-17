@@ -132,7 +132,120 @@ for (let num of numbers) {
 
 ---
 
-## Legfontosabb különbségek
+## forEach
+
+Nagyon jó kérdés! Összeállítottam egy **átfogó, érthető magyarázatot a `forEach` és az `elágazások` kapcsolatáról**, hogy tanulóknak, kezdőknek is világos legyen. Itt egy jól tagolt, példákkal illusztrált anyag:  
+
+
+#### `forEach` és az elágazások (if/else) kapcsolata
+
+#### Mi az a `forEach`?
+
+A `forEach` egy beépített JavaScript **tömbmetódus**, amely **végigmegy** a tömb elemein, és **minden egyes elemre végrehajt** egy adott utasítást.  
+➡️ **Minden elemmel csinál valamit.**
+
+```javascript
+let szamok = [1, 2, 3, 4, 5];
+
+szamok.forEach(function(szam) {
+    console.log(szam);
+});
+```
+
+👉 Ez kiírja:  
+```
+1
+2
+3
+4
+5
+```
+
+
+#### Hogyan kapcsolódik az elágazás a `forEach`-hez?
+
+A `forEach` **önmagában nem dönt semmiről**, csak végigmegy a tömbön.  
+Az **elágazás (if/else)** viszont **döntési lehetőséget ad**: **mit csináljunk egyes elemekkel**?  
+
+🔑 **A `forEach` és az if/else együtt** teszik lehetővé, hogy **bizonyos elemekre különféle műveleteket végezzünk**.
+
+
+#### Példa: páros és páratlan számok szétválogatása
+
+```javascript
+let szamok = [1, 2, 3, 4, 5];
+
+szamok.forEach(function(szam) {
+    if (szam % 2 === 0) {
+        console.log(szam + " páros szám");
+    } else {
+        console.log(szam + " páratlan szám");
+    }
+});
+```
+
+👉 Kimenet:  
+```
+1 páratlan szám  
+2 páros szám  
+3 páratlan szám  
+4 páros szám  
+5 páratlan szám  
+```
+
+✅ A `forEach` **végigmegy a tömbön**,  
+✅ Az **if/else** pedig **eldönti**, hogy az aktuális szám páros vagy páratlan.  
+
+
+#### Mire NEM alkalmas a `forEach`?
+
+- **Nem ad vissza új tömböt**. (Erre ott van pl. a `map`, `filter`.)
+- **Nem lehet vele megszakítani a ciklust** (pl. `break` nem működik benne).
+- **Nem lehet vele közvetlenül adatot gyűjteni**, csak ha előtte létrehozunk egy tömböt, és azt módosítjuk.
+
+Példa, hogy mit nem lehet:
+
+```javascript
+// break nem működik így:
+szamok.forEach(function(szam) {
+    if (szam === 3) break; // Hibát fog dobni!
+});
+```
+
+
+#### Elágazás több feltétellel
+
+```javascript
+let jegyek = [5, 3, 2, 4, 1];
+
+jegyek.forEach(function(jegy) {
+    if (jegy === 5) {
+        console.log("Jeles");
+    } else if (jegy === 4) {
+        console.log("Jó");
+    } else if (jegy === 3) {
+        console.log("Közepes");
+    } else if (jegy === 2) {
+        console.log("Elégséges");
+    } else {
+        console.log("Elégtelen");
+    }
+});
+```
+
+Kimenet:  
+```
+Jeles  
+Közepes  
+Elégséges  
+Jó  
+Elégtelen
+```
+
+
+---
+
+### Legfontosabb különbségek
 
 A különböző ciklustípusok között több fontos különbség van, amelyeket érdemes figyelembe venni a megfelelő ciklus kiválasztásakor. Nézzük meg a legfontosabb eltéréseket!
 
