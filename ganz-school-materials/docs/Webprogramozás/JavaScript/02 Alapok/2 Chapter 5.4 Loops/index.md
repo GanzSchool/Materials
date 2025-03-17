@@ -134,118 +134,114 @@ for (let num of numbers) {
 
 ## forEach
 
-Nagyon jó kérdés! Összeállítottam egy **átfogó, érthető magyarázatot a `forEach` és az `elágazások` kapcsolatáról**, hogy tanulóknak, kezdőknek is világos legyen. Itt egy jól tagolt, példákkal illusztrált anyag:  
-
-
-#### `forEach` és az elágazások (if/else) kapcsolata
-
-#### Mi az a `forEach`?
-
-A `forEach` egy beépített JavaScript **tömbmetódus**, amely **végigmegy** a tömb elemein, és **minden egyes elemre végrehajt** egy adott utasítást.  
-➡️ **Minden elemmel csinál valamit.**
-
-```javascript
-let szamok = [1, 2, 3, 4, 5];
-
-szamok.forEach(function(szam) {
-    console.log(szam);
-});
-```
-
-👉 Ez kiírja:  
-```
-1
-2
-3
-4
-5
-```
-
-
-#### Hogyan kapcsolódik az elágazás a `forEach`-hez?
-
-A `forEach` **önmagában nem dönt semmiről**, csak végigmegy a tömbön.  
-Az **elágazás (if/else)** viszont **döntési lehetőséget ad**: **mit csináljunk egyes elemekkel**?  
-
-🔑 **A `forEach` és az if/else együtt** teszik lehetővé, hogy **bizonyos elemekre különféle műveleteket végezzünk**.
-
-
-#### Példa: páros és páratlan számok szétválogatása
-
-```javascript
-let szamok = [1, 2, 3, 4, 5];
-
-szamok.forEach(function(szam) {
-    if (szam % 2 === 0) {
-        console.log(szam + " páros szám");
-    } else {
-        console.log(szam + " páratlan szám");
-    }
-});
-```
-
-👉 Kimenet:  
-```
-1 páratlan szám  
-2 páros szám  
-3 páratlan szám  
-4 páros szám  
-5 páratlan szám  
-```
-
-✅ A `forEach` **végigmegy a tömbön**,  
-✅ Az **if/else** pedig **eldönti**, hogy az aktuális szám páros vagy páratlan.  
-
-
-#### Mire NEM alkalmas a `forEach`?
-
-- **Nem ad vissza új tömböt**. (Erre ott van pl. a `map`, `filter`.)
-- **Nem lehet vele megszakítani a ciklust** (pl. `break` nem működik benne).
-- **Nem lehet vele közvetlenül adatot gyűjteni**, csak ha előtte létrehozunk egy tömböt, és azt módosítjuk.
-
-Példa, hogy mit nem lehet:
-
-```javascript
-// break nem működik így:
-szamok.forEach(function(szam) {
-    if (szam === 3) break; // Hibát fog dobni!
-});
-```
-
-
-#### Elágazás több feltétellel
-
-```javascript
-let jegyek = [5, 3, 2, 4, 1];
-
-jegyek.forEach(function(jegy) {
-    if (jegy === 5) {
-        console.log("Jeles");
-    } else if (jegy === 4) {
-        console.log("Jó");
-    } else if (jegy === 3) {
-        console.log("Közepes");
-    } else if (jegy === 2) {
-        console.log("Elégséges");
-    } else {
-        console.log("Elégtelen");
-    }
-});
-```
-
-Kimenet:  
-```
-Jeles  
-Közepes  
-Elégséges  
-Jó  
-Elégtelen
-```
-
+**Összefoglaló a forEach metódusról JavaScriptben**
 
 ---
 
-### Legfontosabb különbségek
+#### Mire való?
+A `forEach` metódus elsősorban tömbök (vagy tömbszerű objektumok) bejárására szolgál. Minden egyes tömbelemre meghív egy általunk megadott függvényt, így könnyen végezhetünk műveleteket az egyes elemekkel (például kiiratás, módosítás, számítás stb.).
+
+---
+
+#### Alap szintaxis
+A `forEach` metódus meghívása így néz ki:
+
+```javascript
+tomb.forEach(function(elem, index, eredetiTomb) {
+    // Itt hajtod végre a kívánt műveleteket.
+});
+```
+
+- `elem`: Az aktuális tömbelem értéke.
+- `index`: Az aktuális elem indexe a tömbön belül (opcionális paraméter).
+- `eredetiTomb`: Maga a tömb, amin a `forEach` fut (opcionális paraméter).
+
+Példa alap függvényhívásra:
+
+```javascript
+var szamok = [10, 20, 30];
+
+szamok.forEach(function(ertek) {
+    console.log(ertek);
+});
+```
+
+
+
+#### Mi az elvi különbség a `for of`-hoz képest?
+
+**Használati mód**  
+   - A `forEach` egy metódus, amit kifejezetten tömbök (és tömbszerű objektumok) használhatnak.  
+   - A `for...of` egy JavaScript nyelvi szerkezet, mely bármely iterálható objektumon (tömb, Map, Set, stb.) bevethető.
+
+ **Visszatérési érték**  
+   - A `forEach` mindig `undefined` értéket ad vissza.  
+   - A `for...of` egy ciklusszerkezet, nincs közvetlen „visszatérési értéke”, de a loop segítségével folyamatosan hozzáférünk az elemekhez.
+
+ **Megszakítás (break, continue)**  
+   - A `forEach` metódusban nem lehet a bejárást egyszerűen „break” vagy „continue” utasítással megszakítani. Ha valamit meg akarsz szakítani, egyéb megoldásokat (például kivétel dobása) kell használnod, ami nem túl elegáns.  
+   - A `for...of` ciklusban használhatóak a szokásos vezérlési szerkezetek (`break`, `continue`), így rugalmasabban megszakítható vagy átugorható az iteráció.
+
+ **Paraméterek**  
+   - A `forEach`-nél a callback függvény paraméterként automatikusan megkapja az éppen feldolgozott elem értékét, indexét és a teljes tömbreferenciát.  
+   - A `for...of` használatakor a változóba alapértelmezetten csak az elem értéke kerül, az index nincs kinyerve (ha indexre is szükség van, azt külön meg lehet oldani például a `for...of` ciklusban `entries()` hívásával).
+
+
+#### Példák
+
+#### 1. példa: Tömb elemeinek kiiratása
+```javascript
+var nevek = ["Anna", "Béla", "Cecil"];
+
+nevek.forEach(function(nev) {
+    console.log("Név: " + nev);
+});
+```
+**Eredmény**:  
+```
+Név: Anna
+Név: Béla
+Név: Cecil
+```
+
+#### 2. példa: Tömb elemeinek módosítása és összegyűjtése
+```javascript
+var szamok = [2, 4, 6];
+var duplazott = [];
+
+szamok.forEach(function(ertek) {
+    duplazott.push(ertek * 2);
+});
+
+console.log(duplazott); // [4, 8, 12]
+```
+
+#### 3. példa: Index és teljes tömb használata
+```javascript
+var gyumolcsok = ["alma", "banán", "cseresznye"];
+
+gyumolcsok.forEach(function(elem, index, eredetiTomb) {
+    console.log(
+        "Index: " + index +
+        ", Elem: " + elem +
+        ", Eredeti tömb hossza: " + eredetiTomb.length
+    );
+});
+```
+**Lehetséges eredmény**:  
+```
+Index: 0, Elem: alma, Eredeti tömb hossza: 3
+Index: 1, Elem: banán, Eredeti tömb hossza: 3
+Index: 2, Elem: cseresznye, Eredeti tömb hossza: 3
+```
+
+
+**Összegzés**  
+A `forEach` egy kényelmes és könnyen olvasható módja a tömbök elemenkénti feldolgozásának, különösen akkor, ha minden elemmel valamilyen műveletet akarunk végezni, és nincs szükségünk a ciklus idő előtti megszakítására. Ha viszont fontos a `break` vagy a `continue` használata, illetve iterálható, de nem feltétlenül tömb típusú objektummal dolgozunk, akkor a `for...of` szerkezet rugalmasabb választás lehet.
+
+---
+
+## Legfontosabb különbségek
 
 A különböző ciklustípusok között több fontos különbség van, amelyeket érdemes figyelembe venni a megfelelő ciklus kiválasztásakor. Nézzük meg a legfontosabb eltéréseket!
 
