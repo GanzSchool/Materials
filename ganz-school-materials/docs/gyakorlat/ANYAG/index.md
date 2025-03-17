@@ -1,4 +1,0 @@
----
-id: bevezeto
-title: Alapok
----

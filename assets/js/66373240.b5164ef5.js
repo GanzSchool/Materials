@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkganz_school_materials=self.webpackChunkganz_school_materials||[]).push([[1658],{320:a=>{a.exports=JSON.parse('{"metadata":{"permalink":"/Materials/blog","page":1,"postsPerPage":10,"totalPages":1,"totalCount":3,"blogDescription":"Blog","blogTitle":"Blog"}}')}}]);
