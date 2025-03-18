@@ -1,6 +1,6 @@
 ---
 id: alapok
-title: Feltételes vezérlési szerkezetek (Elágazások, Feltételes operátorok)
+title: Feltételes vezérlési szerkezetek
 ---
 
 # if, if else, else if, switch, tarnery operátorok
