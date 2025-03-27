@@ -448,4 +448,564 @@ console.log(ujTomb); // [1, 2, 3, 4, 5, 6]
 
 </details>
 
+## Gyakorlati példák
+
+### map()
+
+<details className="dropdown-task">
+
+ <summary>
+  <strong>Egyszerű szorzás</strong>
+  
+    Szorozz meg minden számot kettővel a tömbben!
+  </summary>
+
+
+    ```js
+    const numbers = [1, 2, 3, 4, 5];
+    const doubled = numbers.map(num => num * 2);
+
+    console.log(doubled); // [2, 4, 6, 8, 10]
+    ```
+
+</details>
+
+<details className="dropdown-task">
+
+ <summary>
+  <strong>Sztringek hosszának lekérdezése</strong>
+  
+  Készíts új tömböt, amely a szavak hosszát tartalmazza!
+  </summary>
+
+    ```js
+    const words = ['alma', 'körte', 'banán'];
+    const lengths = words.map(word => word.length);
+
+    console.log(lengths); // [4, 5, 5]
+    ```
+
+</details>
+
+
+<details className="dropdown-task">
+
+ <summary>
+  <strong>Objektum tulajdonságainak kiválasztása</strong>
+
+
+A `users` tömbből csinálj egy új tömböt, ami csak a neveket tartalmazza!
+  
+  
+  </summary>
+
+  ```js
+const users = [
+  { name: 'Anna', age: 25 },
+  { name: 'Béla', age: 30 },
+  { name: 'Cili', age: 22 }
+];
+
+const names = users.map(user => user.name);
+
+console.log(names); // ['Anna', 'Béla', 'Cili']
+```
+
+</details>
+
+
+<details className="dropdown-task">
+
+ <summary>
+  <strong>Feltételes szöveg hozzáadása</strong>
+  
+    Minden számhoz add hozzá, hogy „ páros” vagy „ páratlan”.
+  
+  </summary>
+
+    ```js
+    const nums = [1, 2, 3, 4];
+
+
+    const labeled = nums.map(num => 
+    num % 2 === 0 ? `${num} páros` : `${num} páratlan`
+    );
+
+    console.log(labeled);
+    // ["1 páratlan", "2 páros", "3 páratlan", "4 páros"]
+    ```
+
+</details>
+
+<details className="dropdown-task">
+
+ <summary>
+  <strong>E-mail címek generálása</strong>
+  
+
+Alakítsd át a `users` tömböt úgy, hogy minden névhez generálj egy email címet `@gmail.com` végződéssel!
+  
+  </summary>
+
+
+
+```js
+const users = ['andras', 'eszter', 'zoli'];
+
+const emails = users.map(name => `${name}@gmail.com`);
+
+console.log(emails); 
+// ['andras@gmail.com', 'eszter@gmail.com', 'zoli@gmail.com']
+```
+
+</details>
+
+### filter() & map()
+
+<details className="dropdown-task">
+
+ <summary>
+  <strong>Felnőttek nevei</strong>
+  
+Adott egy tömb személyekkel, név és életkor mezőkkel.  
+Szűrd ki a legalább 18 éveseket, majd írasd ki a nevüket egy `<div>`-be vesszővel elválasztva!
+  </summary>
+
+  ```html
+    <!DOCTYPE html>
+    <html lang="hu">
+    <head>
+    <meta charset="UTF-8">
+    <title>filter + map gyakorló</title>
+    <style>
+        body {
+        font-family: Arial, sans-serif;
+        padding: 2rem;
+        background: #e6f2f0;
+        }
+        #output {
+        background: #fff;
+        border-radius: 10px;
+        padding: 1rem;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        max-width: 400px;
+        }
+    </style>
+    </head>
+    <body>
+
+    <h2>Felnőttek nevei:</h2>
+    <div id="output"></div>
+
+    <script>
+        const people = [
+        { name: 'Anna', age: 17 },
+        { name: 'Béla', age: 22 },
+        { name: 'Cili', age: 15 },
+        { name: 'Dávid', age: 30 },
+        { name: 'Emese', age: 18 }
+        ];
+
+        const adults = people
+        .filter(person => person.age >= 18)
+        .map(person => person.name)
+        .join(', ');
+
+        document.getElementById('output').textContent = adults;
+    </script>
+
+    </body>
+    </html>  
+  ```
+
+</details>
+
 ## Gyakorlati feladatok
+
+
+### filter() & map()
+
+<details className="dropdown-task">
+
+  <summary>
+  <strong>Páros számok</strong>
+  
+  
+  </summary>
+
+    ```html
+    <!DOCTYPE html>
+    <html lang="hu">
+    <head>
+    <meta charset="UTF-8">
+    <title>1. Páros számok</title>
+    <style>
+        body {
+        background: #121212;
+        color: #e0e0e0;
+        font-family: 'Segoe UI', sans-serif;
+        margin: 0;
+        padding: 2rem;
+        }
+        .container {
+        max-width: 500px;
+        margin: 0 auto;
+        background: #1e1e1e;
+        padding: 1.5rem;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+        }
+        h2 {
+        color: #bb86fc;
+        text-align: center;
+        }
+        .output {
+        margin-top: 1rem;
+        }
+        .item {
+        padding: 0.75rem;
+        background: #2c2c2c;
+        border-radius: 6px;
+        margin-bottom: 0.5rem;
+        transition: background 0.3s ease;
+        }
+        .item:hover {
+        background: #3d3d3d;
+        }
+    </style>
+    </head>
+    <body>
+    <div class="container">
+        <h2>Páros számok</h2>
+        <div id="output" class="output"></div>
+    </div>
+
+    <script>
+        const numbers = [1, 2, 3, 4, 5, 6, 7, 8]
+
+        // Feladat: Szűrd ki a `numbers` tömbből a páros számokat.
+        // Ezután jelenítsd meg mindegyiket külön div-ben az `#output` elemben. (evenNumbersHTML)
+        // Használj külön változót a filter és a map eredményére!
+
+
+        document.getElementById('output').innerHTML = evenNumbersHTML.join('');
+    </script>
+    </body>
+    </html>
+    ```
+
+  </details>
+
+
+   <details className="dropdown-task">
+
+  <summary>
+  <strong>Szavak szűrése ("a" betű alapján)</strong>
+  
+  
+  </summary>
+
+    ```html
+    <!DOCTYPE html>
+    <html lang="hu">
+    <head>
+    <meta charset="UTF-8">
+    <title>2. Szavak szűrése ("a" betű alapján)</title>
+    <style>
+        body {
+        background: #121212;
+        color: #e0e0e0;
+        font-family: 'Segoe UI', sans-serif;
+        margin: 0;
+        padding: 2rem;
+        }
+        .container {
+        max-width: 500px;
+        margin: 0 auto;
+        background: #1e1e1e;
+        padding: 1.5rem;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+        }
+        h2 {
+        color: #bb86fc;
+        text-align: center;
+        }
+        .output {
+        margin-top: 1rem;
+        }
+        .item {
+        padding: 0.75rem;
+        background: #2c2c2c;
+        border-radius: 6px;
+        margin-bottom: 0.5rem;
+        transition: background 0.3s ease;
+        }
+        .item:hover {
+        background: #3d3d3d;
+        }
+    </style>
+    </head>
+    <body>
+    <div class="container">
+        <h2>Szavak ("a" betű)</h2>
+        <div id="output" class="output"></div>
+    </div>
+
+    <script>
+        const words = ['alma', 'körte', 'banán', 'szilva', 'eper', 'málna'];
+    
+    // Feladat: Szűrd ki azokat a szavakat a `words` tömbből, amelyek tartalmazzák az "a" betűt.
+    // Az eredményül kapott szavakat jelenítsd meg külön div-ekben az `#output` elemben. (wordsHTML)
+    // A filter és a map lépéseit külön változóban tárold!
+
+
+        document.getElementById('output').innerHTML = wordsHTML.join('');
+    </script>
+    </body>
+    </html>
+    ```
+
+  </details>
+
+
+    
+
+  <details className="dropdown-task">
+
+  <summary>
+  <strong>Admin felhasználók</strong>
+  
+  
+  </summary>
+
+    ```html
+    <!DOCTYPE html>
+    <html lang="hu">
+    <head>
+    <meta charset="UTF-8">
+    <title>Admin felhasználók</title>
+    <style>
+        body {
+        background: #121212;
+        color: #e0e0e0;
+        font-family: 'Segoe UI', sans-serif;
+        margin: 0;
+        padding: 2rem;
+        }
+        .container {
+        max-width: 500px;
+        margin: 0 auto;
+        background: #1e1e1e;
+        padding: 1.5rem;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+        }
+        h2 {
+        color: #bb86fc;
+        text-align: center;
+        }
+        .output {
+        margin-top: 1rem;
+        }
+        .item {
+        padding: 0.75rem;
+        background: #2c2c2c;
+        border-radius: 6px;
+        margin-bottom: 0.5rem;
+        transition: background 0.3s ease;
+        }
+        .item:hover {
+        background: #3d3d3d;
+        }
+    </style>
+    </head>
+    <body>
+    <div class="container">
+        <h2>Admin felhasználók</h2>
+        <div id="output" class="output"></div>
+    </div>
+
+    <script>
+        const users = [
+        { name: 'Anna', role: 'admin' },
+        { name: 'Béla', role: 'user' },
+        { name: 'Cili', role: 'admin' },
+        { name: 'Dávid', role: 'moderator' },
+        { name: 'Eszter', role: 'user' }
+        ];
+
+        
+    // Feladat: A `users` tömbből szűrd ki azokat az objektumokat, ahol a `role` értéke "admin".
+    // Ezután jelenítsd meg az adminok nevét külön div-ekben az `#output` elemben. (adminsHTML)
+    // A szűrt tömböt és a HTML-kódot külön változóban tárold!
+
+
+        document.getElementById('output').innerHTML = adminsHTML.join('');
+    </script>
+    </body>
+    </html>
+    ```
+
+  </details>
+
+
+
+<details className="dropdown-task">
+
+  <summary>
+  <strong>Drága termékek (ár > 50)</strong>
+  
+  
+  </summary>
+
+```html
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <title>Drága termékek</title>
+  <style>
+    body {
+      background: #121212;
+      color: #e0e0e0;
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 2rem;
+    }
+    .container {
+      max-width: 500px;
+      margin: 0 auto;
+      background: #1e1e1e;
+      padding: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    }
+    h2 {
+      color: #bb86fc;
+      text-align: center;
+    }
+    .output {
+      margin-top: 1rem;
+    }
+    .item {
+      padding: 0.75rem;
+      background: #2c2c2c;
+      border-radius: 6px;
+      margin-bottom: 0.5rem;
+      transition: background 0.3s ease;
+    }
+    .item:hover {
+      background: #3d3d3d;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Drága termékek (ár > 50)</h2>
+    <div id="output" class="output"></div>
+
+  </div>
+
+  <script>
+    const products = [
+      { name: 'Telefon', price: 45 },
+      { name: 'Laptop', price: 750 },
+      { name: 'Fülhallgató', price: 60 },
+      { name: 'Billentyűzet', price: 30 },
+      { name: 'Monitor', price: 150 }
+    ];
+
+    // Feladat: Szűrd ki azokat a termékeket a `products` tömbből, amelyek ára nagyobb, mint 50 Ft.
+// Jelenítsd meg a nevüket és árukat külön div-ekben az `#output` elemben.
+// A filter és map lépéseket külön változóban tárold!
+                                                 
+    document.getElementById('output').innerHTML = productsHTML.join('');
+
+    
+  </script>
+</body>
+</html>
+```
+
+  </details>
+
+
+  <details className="dropdown-task">
+
+  <summary>
+  <strong>Közelgő események</strong>
+  
+  
+  </summary>
+
+```html
+  <!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <title>Közelgő események</title>
+  <style>
+    body {
+      background: #121212;
+      color: #e0e0e0;
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 2rem;
+    }
+    .container {
+      max-width: 500px;
+      margin: 0 auto;
+      background: #1e1e1e;
+      padding: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    }
+    h2 {
+      color: #bb86fc;
+      text-align: center;
+    }
+    .output {
+      margin-top: 1rem;
+    }
+    .item {
+      padding: 0.75rem;
+      background: #2c2c2c;
+      border-radius: 6px;
+      margin-bottom: 0.5rem;
+      transition: background 0.3s ease;
+    }
+    .item:hover {
+      background: #3d3d3d;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Közelgő események</h2>
+    <div id="output" class="output"></div>
+  </div>
+
+  <script>
+    // A mai dátumot fixáltuk a példa kedvéért
+    const today = new Date('2025-03-24');
+
+    const events = [
+      { title: 'Konferencia', date: '2025-04-10' },
+      { title: 'Workshop', date: '2025-03-20' },
+      { title: 'Meetup', date: '2025-05-05' },
+      { title: 'Webinárium', date: '2025-03-23' },
+      { title: 'Kiállítás', date: '2025-06-15' }
+    ];
+
+// Feladat: Szűrd ki azokat az eseményeket az `events` tömbből, amelyek dátuma későbbi, mint a mai nap (2025-03-24).
+// Jelenítsd meg az esemény címét és dátumát külön div-ekben az `#output` elemben. (eventsHTML)
+// Használj külön változót a szűréshez és a HTML-hez!
+    
+    document.getElementById('output').innerHTML = eventsHTML.join('');
+  </script>
+</body>
+</html>
+```
+
+  </details>
