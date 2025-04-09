@@ -908,6 +908,66 @@ lekerBiztonsagosan();
 - A `catch` blokk fut le, ha bármilyen hiba történik.
 
 
+## Gyakorlati feladatok
+
+### **Szintaktikai átalakítás hagyományosról arrow-ra**
+
+#### **Feladat 1.1**  
+Az alábbi, hagyományos függvényt (`function` kulcsszóval) alakítsd át arrow függvénnyé **ugyanolyan névvel**!  
+```js
+function greet() {
+  return "Helló világ!";
+}
+```
+*(Később próbáld ki a meghívását, és nézd meg, működik-e.)*
+
+---
+
+#### **Feladat 1.2**  
+Itt már két paramétert is használunk. Alakítsd át az alábbi kódot arrow függvénnyé (ugyanolyan névvel), és cseréld ki az export részt is!  
+```js
+export function add(a, b) {
+  return a + b;
+}
+```
+
+---
+
+#### **Feladat 1.3**  
+A lenti függvényben van egy `console.log`, valamint `return`. Írd át arrow függvényre úgy, hogy **többsoros** legyen a függvénytörzs (tehát használsz kapcsos zárójeleket és `return`-t)!  
+```js
+function showUserCount(count) {
+  console.log("User count:", count);
+  return count;
+}
+```
+*(Próbáld ki: `showUserCount(5)` – a konzolra is írjon, és vissza is adja az 5-öt.)*
+
+---
+
+#### **Feladat 1.4**  
+Az alábbi hagyományos függvényt alakítsd át egysoros arrow függvénnyé úgy, hogy **implicit** legyen a `return`!  
+```js
+function isOver18(age) {
+  return age > 18;
+}
+```
+*(Tipp: egy sorba beírva már nem lesz szükség kapcsos zárójelre.)*
+
+---
+
+#### **Feladat 1.5**  
+Van egy alapértelmezett paraméter is:  
+```js
+function welcome(name = "Guest") {
+  return "Hello, " + name + "!";
+}
+```
+Alakítsd át arrow függvénnyé úgy, hogy ugyanúgy megmaradjon a default érték. Egysoros vagy többsoros is lehet, döntsd el te, melyik jobban átlátható.
+
+---
+
+
 
 
 
