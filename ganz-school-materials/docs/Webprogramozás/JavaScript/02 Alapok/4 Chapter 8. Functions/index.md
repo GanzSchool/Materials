@@ -1053,6 +1053,32 @@ Alakítsd át arrow függvénnyé úgy, hogy ugyanúgy megmaradjon a default ér
 *(Teszteld: `console.log(calculateTotal(200, 6))` → 1200, és a konzolban plusz szövegek.)*
 
 
+### **3. Blokk – Paraméterkezelés (egy, több, nulla, default, opcionális)**
+
+#### **Feladat 3.1**  
+Készíts egy `noParamHello` arrow függvényt **paraméter nélkül**, ami csak `"Hello"` sztringet ad vissza. Használd az egysoros megoldást.
+
+---
+
+#### **Feladat 3.2**  
+Alakíts ki egy `oneParamDouble` arrow függvényt, ami **egy** számot kap és annak a dupláját adja vissza. Vedd észre, hogy **egy** paraméternél a körülzáró zárójelek el is hagyhatók.
+
+---
+
+#### **Feladat 3.3**  
+Írj egy `twoParamsFullName` függvényt, ami **két** paramétert (`firstName`, `lastName`) kap, és összefűzi a kettőt `"Nagy Péter"` formátumban. Egysoros arrow formában oldd meg.
+
+---
+
+#### **Feladat 3.4**  
+Alakíts ki egy `defaultParamGreeting` függvényt, ami **egyetlen** paramétert kap (`name`), ám ha az nincs megadva, default értéke `"Anonymous"`. Adjon vissza például `"Hello Anonymous!"`.
+
+---
+
+#### **Feladat 3.5**  
+Készíts egy `optionalParamTest` függvényt, ami **nulla** vagy **egy** paramétert is elfogad (például: `str?`). Ha nem kap paramétert, `"Nincs szöveg"` stringet adjon vissza, ha kap, akkor azt a stringet kisbetűsre alakítva.
+
+
 
 
 
