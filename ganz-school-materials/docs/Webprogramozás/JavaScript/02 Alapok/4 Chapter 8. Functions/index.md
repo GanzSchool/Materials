@@ -969,6 +969,89 @@ Alakítsd át arrow függvénnyé úgy, hogy ugyanúgy megmaradjon a default ér
 
 
 
+### **2. blokk – Egysoros vs többsoros arrow függvények**
+
+#### **2.1 Feladat – A legegyszerűbb arrow függvény (nincs paraméter, nincs visszatérési érték)**
+
+**Feladat:**  
+- Hozz létre egy `sayHi` nevű arrow függvényt.  
+- Ne fogadjon paramétert.  
+- Egysoros legyen, és csak `console.log`-oljon valami rövidet, pl. `"Szia, ez egy arrow function!"`.  
+
+**Cél:**  
+- Látható legyen, hogyan néz ki a **nulla paraméteres** arrow függvény.  
+- Egyetlen sorban, kapcsos zárójelek és `return` nélkül, csak `console.log`-ol.  
+
+*(Később teszteld: `sayHi()` → kiírja a konzolra.)*
+
+---
+
+#### **2.2 Feladat – Egysoros arrow függvény, egy paraméterrel, nincs visszatérési érték**
+
+**Feladat:**  
+- Legyen `greetUser` a függvény neve.  
+- Egyetlen paramétert (pl. `name`) kapjon.  
+- Egysoros arrow formában, `console.log`-olja: `"Szia, <name>!"`.  
+
+**Cél:**  
+- Megértsük, hogy **egy paraméter** esetén elhagyhatjuk a paraméter-lista körüli `()`-t.  
+- Továbbra is **egysoros** (tehát nincs kapcsos zárójel), és nincs `return` (csak `console.log`).
+
+*(Később teszteld: `greetUser("Peti")` → `"Szia, Peti!"`.)*
+
+---
+
+#### **2.3 Feladat – Egysoros arrow függvény, egy paraméterrel, *van* visszatérési érték**
+
+**Feladat:**  
+- Írj egy `getWelcomeMessage` nevű függvényt.  
+- Egy paramétert (pl. `name`) kapjon.  
+- Egysoros arrow formában adjon **vissza** egy **stringet**: `"Üdv, <name>!"`.  
+- Ne írja ki a konzolra, hanem *return*-ölje a stringet!  
+
+**Cél:**  
+- Látható legyen, hogy egysoros arrow függvényben, ha egy kifejezést akarunk visszaadni, **nincs szükség sem `return` kulcsszóra, sem kapcsos zárójelre**.  
+- A visszatérés **implicit** (`return` helyett a függvény maga adja vissza a kifejezést).
+
+*(Később teszteld: `console.log(getWelcomeMessage("Anna"))` → kiírja, amit visszaad a függvény.)*
+
+---
+
+#### **2.4 Feladat – Többsoros arrow függvény, egy paraméterrel, több lépés (köztük console.log), explicit `return`**
+
+**Feladat:**  
+- Legyen `welcomeUserVerbose` a függvény neve.  
+- Egy paramétert (`name`) kapjon.  
+- Többsoros arrow-t használj, tehát `{ ... }` törzs kell.  
+- Először `console.log`-old: `"Beléptél, <name>!"`.  
+- Majd készíts egy változót, pl. `welcomeText = "Üdvözlünk a rendszerben: " + name`.  
+- **Végül** add vissza (return) a `welcomeText` értékét.  
+
+**Cél:**  
+- Megértsük, hogy **ha több utasítást** kell végrehajtani, **muszáj** a kapcsos zárójel és a **kötelező** `return`, ha ténylegesen vissza is akarunk adni valamit.  
+- Már nem elég az egysoros `=> ...`.
+
+*(Később teszteld: `console.log(welcomeUserVerbose("Pali"))`, és figyeld a konzolt plusz a visszatért értéket.)*
+
+---
+
+#### **2.5 Feladat – Többsoros arrow függvény, több paraméter, plusz minimális logika**
+
+**Feladat:**  
+- Legyen `calculateTotal` a függvény neve.  
+- Két paraméter: `price` és `quantity`.  
+- Többsoros arrow-t használj (mert több lépés lesz).  
+- Először `console.log`-old: `"Kiszámoljuk a végösszeget..."`.  
+- Készíts egy `sum` változót: `price * quantity`.  
+- Ha a `sum` nagyobb, mint 1000, akkor `console.log`-old: `"Nagy összeg!"`. (Nem kötelező if-else, de mutassunk be valami logikát.)  
+- Végül `return sum`.  
+
+**Cél:**  
+- Tükrözze a **többsoros** arrow funkcionalitását: van benne logging, logikai ellenőrzés, **explicit** `return`.  
+- Több paraméter → `(price, quantity) => { ... }`.
+
+*(Teszteld: `console.log(calculateTotal(200, 6))` → 1200, és a konzolban plusz szövegek.)*
+
 
 
 
