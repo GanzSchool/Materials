@@ -97,7 +97,7 @@ REST-ben nem használunk állapotjelző szavakat az URL-ben, például `/getUser
 <details className="dropdown-task">
 
   <summary>
-  <strong>REST API - kóde elemzés</strong>
+  <strong>REST API - kód elemzés</strong>
   
     
   </summary>
