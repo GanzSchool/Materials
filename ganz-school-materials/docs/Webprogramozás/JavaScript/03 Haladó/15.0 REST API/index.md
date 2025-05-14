@@ -83,7 +83,6 @@ Ugyanez vonatkozik a hibakezelésre is. Egy jól megtervezett REST API nem csak 
 }
 ```
 
----
 
 5. **Egységes erőforrásformátum és konvenciók**
 
