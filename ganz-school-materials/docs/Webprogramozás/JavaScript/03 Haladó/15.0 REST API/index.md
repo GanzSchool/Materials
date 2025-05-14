@@ -21,13 +21,12 @@ A REST API előnyei közé tartozik, hogy platformfüggetlen: a kliens és a sze
 
 Összefoglalva tehát, a REST API egy olyan rendszer, amely lehetővé teszi, hogy különböző alkalmazások HTTP-n keresztül, jól definiált szabályok szerint kommunikáljanak egymással. Az API biztosítja az interfészt, amin keresztül a kommunikáció zajlik, a REST pedig azokat az elveket adja, amelyek mentén az adatokat strukturáljuk és kezeljük. A REST API-k azért váltak ilyen népszerűvé, mert könnyen implementálhatók, jól illeszkednek az internetes működéshez, és elősegítik a skálázható, moduláris rendszerfejlesztést.
 
-Szükséged van még konkrét példákra is, például hogy néz ki egy REST API hívás a gyakorlatban?
 
 ## REST API működése
 
 A **REST (Representational State Transfer)** elv gyakorlati szempontból egy architekturális megközelítés, amely meghatározott szabályrendszert követ az internetes kommunikáció során, elsősorban HTTP protokoll használatával. Bár a REST maga nem egy technológia, hanem egy elvrendszer, gyakorlati alkalmazása meghatározza, hogyan építsünk olyan API-t, amely egyszerű, skálázható és karbantartható. Ennek gyakorlati értelmezése fejlesztőként, rendszertervezőként és felhasználóként is egyaránt fontos.
 
-### 1. **Erőforrás-orientált szemlélet**
+1. **Erőforrás-orientált szemlélet**
 
 A REST egyik legfontosabb elve, hogy a rendszer minden fontos eleme – például felhasználó, termék, megrendelés – **erőforrásként** jelenik meg. Ezek az erőforrások **URL-címeken keresztül** érhetők el, mintha mindegyik "weboldal" lenne.
 
@@ -39,7 +38,7 @@ Például:
 Az URL-eknek **leíró, hierarchikus és egységes** szerkezetűnek kell lenniük. Nem tartalmazhatnak igéket (`/getAllUsers` helyett `/users`) – hiszen a cselekvést a HTTP metódus hordozza.
 
 
-### 2. **HTTP metódusok REST szerint**
+2. **HTTP metódusok REST szerint**
 
 A REST kihasználja a HTTP szabványos metódusait. Ezek határozzák meg, hogy **mit akarunk tenni** az adott erőforrással:
 
@@ -54,14 +53,14 @@ A REST kihasználja a HTTP szabványos metódusait. Ezek határozzák meg, hogy 
 Ez a szabályrendszer következetes viselkedést biztosít a kliensek számára: ha egy fejlesztő tudja, hogyan működik egy REST API, akkor egy másik hasonlót is könnyedén használni tud.
 
 
-### 3. **Állapotmentesség (Stateless)**
+3. **Állapotmentesség (Stateless)**
 
 REST-ben minden kérés **önálló**, nem függ az előző vagy következő kéréstől. A szerver **nem tárol állapotot** a kliensről két kérés között. Ez azt jelenti, hogy minden egyes kérésben **minden szükséges információnak** benne kell lennie – például azonosító, jogosultság, adat.
 
 Ez leegyszerűsíti a skálázást: a szerverek között eloszthatók a kérések anélkül, hogy tudniuk kellene egymás állapotáról.
 
 
-### 4. **Standard válaszformátum: JSON**
+4. **Standard válaszformátum: JSON**
 
 A REST API-k válaszként általában **JSON** formátumot használnak. Ennek oka, hogy a JSON könnyen olvasható, tömör és szinte minden nyelv könnyedén tudja kezelni.
 
@@ -86,7 +85,7 @@ Ugyanez vonatkozik a hibakezelésre is. Egy jól megtervezett REST API nem csak 
 
 ---
 
-### 5. **Egységes erőforrásformátum és konvenciók**
+5. **Egységes erőforrásformátum és konvenciók**
 
 A REST-ben az **erőforrások egységes reprezentációval** jelennek meg – ez segít a rendszerek közötti kompatibilitás fenntartásában. Egy `User` objektum mindenhol ugyanazt a szerkezetet használja, függetlenül attól, hogy a listában van vagy részletezve.
 
@@ -111,7 +110,7 @@ REST-ben nem használunk állapotjelző szavakat az URL-ben, például `/getUser
 
 ---
 
-### 📁 Mappastruktúra
+📁 Mappastruktúra
 
 ```
 rest-api-example/
@@ -125,7 +124,7 @@ rest-api-example/
 
 ---
 
-### 🖥️ 1. `server.js` (Node.js + Express backend)
+🖥️ 1. `server.js` (Node.js + Express backend)
 
 ```js
 const express = require('express');
@@ -180,7 +179,7 @@ app.listen(PORT, () => {
 
 ---
 
-### 🧾 2. `users.json` (kezdeti adatfájl)
+🧾 2. `users.json` (kezdeti adatfájl)
 
 ```json
 []
@@ -188,7 +187,7 @@ app.listen(PORT, () => {
 
 ---
 
-### 🌐 3. `public/index.html`
+🌐 3. `public/index.html`
 
 ```html
 <!DOCTYPE html>
@@ -274,7 +273,7 @@ app.listen(PORT, () => {
 
 ---
 
-### 🎨 4. `public/style.css`
+🎨 4. `public/style.css`
 
 ```css
 :root {
@@ -584,7 +583,7 @@ input:focus {
 
 ---
 
-### ⚙️ 5. `public/script.js`
+⚙️ 5. `public/script.js`
 
 ```js
 document.addEventListener("DOMContentLoaded", () => {
@@ -740,7 +739,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 ---
 
-### 🚀 Használat
+🚀 Használat
 
 1. Hozd létre a fenti fájlokat.
 2. Telepítsd az Express keretrendszert:
