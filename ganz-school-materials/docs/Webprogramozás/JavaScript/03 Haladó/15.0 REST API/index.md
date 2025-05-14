@@ -92,12 +92,12 @@ REST-ben nem használunk állapotjelző szavakat az URL-ben, például `/getUser
 
 ---
 
-## Gyakorlati példa
+## Gyakorlati feladat
 
 <details className="dropdown-task">
 
   <summary>
-  <strong>REST API GYAKORLATI PÉLDA</strong>
+  <strong>REST API - kóde elemzés</strong>
   
     
   </summary>
@@ -107,7 +107,9 @@ REST-ben nem használunk állapotjelző szavakat az URL-ben, például `/getUser
 * a frontend részt HTML, CSS, JS alkotja (egyszerű beviteli űrlappal és lekérdezési funkcióval),
 * a REST API támogatja a felhasználók lekérdezését és új felhasználó hozzáadását.
 
-- FELADAT: Elemezd a public/script.js fájlt, hogy hány végpont hivatkozás található a scriptben és az egyes végpontok esetében pontosan milyen utasítást kérünk a szervertől!
+
+- 1. FELADAT: Készítsd el a lenti projektet!
+- 2. FELADAT: Elemezd a public/script.js fájlt, hogy hány végpont hivatkozás található a scriptben és az egyes végpontok esetében pontosan milyen utasítást kérünk a szervertől!
 - Ezeket szövegesen kérem feltölteni a Classroomba.
 
 
