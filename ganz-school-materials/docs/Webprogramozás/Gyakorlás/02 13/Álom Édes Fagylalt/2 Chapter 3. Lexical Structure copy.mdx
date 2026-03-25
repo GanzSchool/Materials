@@ -1,0 +1,80 @@
+---
+title: Álom Édes Fagynyalt (Hero)
+---
+
+
+## Videós bemutató
+
+<div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden', marginBottom: '1.5rem' }}>
+  <iframe
+    src="https://drive.google.com/file/d/1HBZ-rlpJJXENIC2TAd-HrQsSXBPzSwuw/preview"
+    title="Főoldali szekció bemutató"
+    style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: '0' }}
+    allow="autoplay"
+    allowFullScreen
+  />
+</div>
+
+
+---
+
+# A használt CSS-elemek magyarázata
+
+| CSS-szelektor      | Hol használom?     | Mire való?                                          | Mit eredményez?                                                                                         |
+| ------------------ | ------------------ | --------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| `html`             | teljes dokumentum  | A teljes oldal görgetési viselkedését szabályozza   | A `scroll-behavior: smooth;` miatt a menüpontokra kattintva nem hirtelen, hanem finoman gördül az oldal |
+| `.hos-szekcio`     | főoldali `section` | A hero szekció viselkedését szabályozza             | Az `overflow: hidden;` miatt a háttérelemek nem lógnak ki a szekcióból                                  |
+| `.hos-hatter`      | háttér `div`       | A teljes felületet kitöltő háttérképet állítja be   | A háttérkép teljes méretben, levágás nélkül, esztétikusan tölti ki a szekciót                           |
+| `.hos-reteg`       | fedőréteg `div`    | Egy áttetsző sötét réteget helyez a háttérképre     | A rajta lévő szöveg jobban olvashatóvá válik                                                            |
+| `.hos-tartalom`    | tartalmi `div`     | A szöveges tartalmat rendezi és emeli a háttér fölé | A tartalom középre kerül, és biztosan a háttér/fedőréteg fölött jelenik meg                             |
+| `.szekcio-eltolas` | más szekciók       | A görgetett célpont eltolását szabályozza           | Rögzített menü esetén a szekció teteje nem csúszik a navbar alá                                         |
+
+---
+
+# A használt CSS-tulajdonságok részletes magyarázata
+
+| Tulajdonság                              | Hol szerepel?               | Mire való?                                                                        | Hatása                                                           |
+| ---------------------------------------- | --------------------------- | --------------------------------------------------------------------------------- | ---------------------------------------------------------------- |
+| `scroll-behavior: smooth;`               | `html`                      | Finom görgetést ad az oldalon belüli ugrásokhoz                                   | Esztétikusabb navigáció                                          |
+| `overflow: hidden;`                      | `.hos-szekcio`              | Elrejti a kilógó tartalmakat                                                      | A háttér és a réteg nem csúszik ki a szekció határain túl        |
+| `position: absolute;`                    | `.hos-hatter`, `.hos-reteg` | Az elemet kivonja a normál dokumentumfolyamból és pontosan pozicionálhatóvá teszi | A háttér és a fedőréteg teljesen ráfeszül a szekcióra            |
+| `inset: 0;`                              | `.hos-hatter`, `.hos-reteg` | Egyszerre állítja be a `top`, `right`, `bottom`, `left` értékét 0-ra              | Az elem a teljes szülőterületet kitölti                          |
+| `background-image`                       | `.hos-hatter`               | Háttérképet állít be                                                              | Látványos vizuális alapot ad a hero szekciónak                   |
+| `background-position: center;`           | `.hos-hatter`               | Középre igazítja a háttérképet                                                    | A kép központi része marad látható                               |
+| `background-size: cover;`                | `.hos-hatter`               | A teljes területet kitölteti a háttérképpel                                       | A kép arányosan kitölti a rendelkezésre álló helyet              |
+| `background-repeat: no-repeat;`          | `.hos-hatter`               | Megakadályozza a háttérkép ismétlődését                                           | A háttér csak egyszer jelenik meg                                |
+| `background-color: rgba(0, 0, 0, 0.45);` | `.hos-reteg`                | Félig áttetsző fekete réteget ad                                                  | A szöveg olvashatóbb lesz                                        |
+| `position: relative;`                    | `.hos-tartalom`             | Lehetővé teszi a `z-index` használatát és a saját helyzetének kezelését           | A tartalom a fedőréteg fölé emelhető                             |
+| `z-index: 2;`                            | `.hos-tartalom`             | Rétegsorrendet állít                                                              | A szöveg biztosan a háttér és a réteg fölött marad               |
+| `min-height: calc(100vh - 76px);`        | `.hos-tartalom`             | Kiszámolja a minimális magasságot a viewportból és a navbar magasságából          | A tartalom nem csúszik a fix menü alá, mégis kitölti a képernyőt |
+| `display: flex;`                         | `.hos-tartalom`             | Flexbox elrendezést ad                                                            | Egyszerűbb középre rendezés                                      |
+| `flex-direction: column;`                | `.hos-tartalom`             | A belső elemek egymás alá rendeződnek                                             | Cím, szöveg és gombok függőlegesen jelennek meg                  |
+| `justify-content: center;`               | `.hos-tartalom`             | Függőlegesen középre igazít                                                       | A tartalom középen helyezkedik el                                |
+| `align-items: center;`                   | `.hos-tartalom`             | Vízszintesen középre igazít                                                       | A szöveg és a gombok középre kerülnek                            |
+| `scroll-margin-top: 50px;`               | `.szekcio-eltolas`          | A görgetett célpont fölé extra helyet hagy                                        | A fix fejléc nem takarja ki a szekció címét                      |
+
+---
+
+# A használt Bootstrap osztályok magyarázata
+
+| Osztály                  | Hol használtam?           | Mire való?                                               | Mit eredményez?                                         |
+| ------------------------ | ------------------------- | -------------------------------------------------------- | ------------------------------------------------------- |
+| `position-relative`      | `section`                 | Relatív pozicionálást ad a szülőelemnek                  | Az abszolút pozicionált háttérelemek ehhez igazodnak    |
+| `min-vh-100`             | `section`                 | Minimum a viewport magasságának 100%-át adja             | A főoldali szekció kitölti a teljes képernyőmagasságot  |
+| `container`              | `hos-tartalom`            | Középre rendezi és korlátozza a szélességet              | A tartalom nem húzódik ki a képernyő széléig            |
+| `text-center`            | `hos-tartalom`            | Középre igazítja a szöveget                              | Esztétikus, hero szekcióhoz illő megjelenés             |
+| `text-white`             | `hos-tartalom`, első gomb | Fehér színt ad a szövegnek                               | Jól olvasható marad a sötét háttéren                    |
+| `display-4`              | főcím                     | Nagyméretű címsorstílus                                  | Erőteljes, figyelemfelkeltő főcímet ad                  |
+| `fw-bold`                | főcím                     | Félkövér betűvastagság                                   | A cím hangsúlyosabb lesz                                |
+| `lead`                   | bekezdés                  | Kiemelt bevezető szövegstílus                            | A rövid leírás elegánsabb, hangsúlyosabb lesz           |
+| `mb-4`                   | bekezdés                  | Alsó margót ad                                           | A leírás és a gombok között megfelelő távolság lesz     |
+| `d-flex`                 | gombokat tartalmazó `div` | Flexbox elrendezést ad                                   | Egyszerű, rugalmas igazítást tesz lehetővé              |
+| `flex-column`            | gombokat tartalmazó `div` | A belső elemeket oszlopba rendezi                        | Mobilon a gombok egymás alatt jelennek meg              |
+| `flex-sm-row`            | gombokat tartalmazó `div` | `sm` mérettől sortörés helyett vízszintes elrendezést ad | Nagyobb képernyőn a gombok egymás mellé kerülnek        |
+| `justify-content-center` | gombokat tartalmazó `div` | Középre igazítja a flexelemeket                          | A gombok a szekció közepére kerülnek                    |
+| `gap-3`                  | gombokat tartalmazó `div` | Hézagot ad a belső elemek közé                           | A gombok nem tapadnak össze                             |
+| `btn`                    | mindkét gomb              | Alap Bootstrap gombstílus                                | Egységes, kattintható gombmegjelenés                    |
+| `btn-info`               | első gomb                 | Kitöltött, info színű gomb                               | Elsődleges műveletként kiemeli a gombot                 |
+| `btn-lg`                 | mindkét gomb              | Nagyobb gombméretet ad                                   | Kényelmesebb kattinthatóság és hangsúlyosabb megjelenés |
+| `px-4`                   | mindkét gomb              | Vízszintes belső térközt ad                              | Szélesebb, esztétikusabb gombokat eredményez            |
+| `btn-outline-light`      | második gomb              | Világos, keretes gombstílus                              | Másodlagos műveletként jeleníti meg a gombot            |

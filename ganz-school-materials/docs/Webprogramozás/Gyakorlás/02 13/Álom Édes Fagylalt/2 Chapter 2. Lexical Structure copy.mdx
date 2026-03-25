@@ -1,0 +1,56 @@
+---
+title: Álom Édes Fagynyalt (Nav)
+---
+
+
+## Videós bemutató
+
+<div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden', marginBottom: '1.5rem' }}>
+  <iframe
+    src="https://drive.google.com/file/d/1ZyoCmuAPDTpAuzik-VqGmgtymUBgPN5c/preview"
+    title="Header és navigáció bemutató"
+    style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: '0' }}
+    allow="autoplay"
+    allowFullScreen
+  />
+</div>
+
+
+---
+
+# A használt Bootstrap osztályok magyarázata
+
+Az alábbi táblázat a fejléc és a navigációs menü részben használt Bootstrap-osztályokat foglalja össze. A magyarázat a Bootstrap hivatalos Navbar, Display, Flex, Spacing, Buttons, Borders, Shadows, Containers és Breakpoints dokumentációja alapján készült. ([Bootstrap][2])
+
+| Osztály               | Hol használtam?       | Mire való?                                                | Mit eredményez?                                              |
+| --------------------- | --------------------- | --------------------------------------------------------- | ------------------------------------------------------------ |
+| `border-bottom`       | `header`              | Alsó szegélyt ad az elemnek                               | A fejléc finoman elkülönül az alatta lévő tartalomtól        |
+| `bg-white`            | `header`, `nav`       | Fehér háttérszínt ad                                      | Letisztult, világos fejlécet kapunk                          |
+| `navbar`              | `nav`                 | Bootstrap navigációs komponens alapja                     | Egységes, reszponzív menüszerkezetet ad                      |
+| `navbar-expand-lg`    | `nav`                 | `lg` mérettől felfelé vízszintesen jeleníti meg a menüt   | Mobilon összecsukható, nagyobb képernyőn szétnyíló menü lesz |
+| `navbar-light`        | `nav`                 | Világos háttérhez illő navbar-stílus                      | A menüelemek és ikonok megfelelő kontraszttal jelennek meg   |
+| `fixed-top`           | `nav`                 | A navigációs sávot a képernyő tetejére rögzíti            | Görgetéskor is látható marad a menü                          |
+| `shadow-sm`           | `nav`                 | Kisebb árnyékot ad                                        | Enyhén kiemeli a navigációs sávot                            |
+| `container`           | `nav > div`           | Középre rendezi és korlátozza a tartalom szélességét      | A menü tartalma nem tapad a képernyő széléhez                |
+| `navbar-brand`        | logó / márkanév       | A navbar kiemelt márkaeleme                               | A cím logószerű, hangsúlyos elemként jelenik meg             |
+| `fw-bold`             | márkanév              | Félkövér betűvastagság                                    | Erősebben kiemeli a márkanevet                               |
+| `navbar-toggler`      | mobil menügomb        | Összecsukható menü vezérlőgombja                          | Mobilnézetben lenyithatóvá teszi a menüt                     |
+| `d-lg-none`           | menügomb, mobil menü  | `lg` mérettől felfelé elrejti az elemet                   | A mobilos elemek csak kis képernyőn jelennek meg             |
+| `navbar-toggler-icon` | mobil menügomb ikonja | Hamburger ikont jelenít meg                               | A felhasználó felismeri, hogy ez a menü gombja               |
+| `collapse`            | menütartó blokk       | Összecsukható tartalom alaposztálya                       | A menü mobilon lenyithatóvá válik                            |
+| `navbar-collapse`     | menütartó blokk       | A navbar összehajtható tartalmának formázása              | A lenyíló menü a navbar részeként viselkedik                 |
+| `d-lg-flex`           | menütartó blokk       | `lg` mérettől flex elrendezést ad                         | Asztali nézetben vízszintes elrendezést biztosít             |
+| `flex-grow-0`         | menütartó blokk       | Megakadályozza, hogy a flex elem kitöltse a teljes helyet | A menü nem nyúlik szét feleslegesen                          |
+| `ms-auto`             | menütartó blokk       | Automatikus bal oldali margó                              | A menüelemek a jobb oldalra tolódnak                         |
+| `d-none`              | asztali menü          | Elrejti az elemet                                         | Az asztali menü alapból rejtett                              |
+| `d-lg-flex`           | asztali menü          | `lg` mérettől flex elrendezést kapcsol be                 | Az asztali menü csak nagyobb kijelzőn lesz látható           |
+| `gap-2`               | asztali és mobil menü | Hézagot tesz a flex/grid elemek közé                      | A gombok nem tapadnak össze                                  |
+| `btn`                 | összes menügomb       | Alap Bootstrap gombstílus                                 | Egységes gombmegjelenést biztosít                            |
+| `btn-outline-info`    | normál menüpontok     | Info színű keretes gomb                                   | Visszafogott, de jól látható menüpontokat ad                 |
+| `btn-info`            | kiemelt menüpont      | Info színű kitöltött gomb                                 | Erősebb hangsúlyt ad a fontos műveletnek                     |
+| `text-white`          | kiemelt gomb          | Fehér szövegszín                                          | Jobb olvashatóságot ad a színes háttéren                     |
+| `pt-3`                | mobil menü            | Felső belső térközt ad                                    | A lenyíló mobil menü nem tapad a felső elemhez               |
+| `d-grid`              | mobil menü            | Grid megjelenítést ad                                     | A mobilos gombok szépen egymás alá rendeződnek               |
+
+---
+

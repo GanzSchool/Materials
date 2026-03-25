@@ -1,0 +1,56 @@
+---
+title: Álom Édes Fagynyalt (Lekérdezés és footer)
+---
+
+## Videós bemutató
+
+<div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden', marginBottom: '1.5rem' }}>
+  <iframe
+    src="https://drive.google.com/file/d/1uGCnEjkJ1b9kYWnC9GAbyuLTgQMzOszQ/preview"
+    title="Lekérdezés és footer bemutató"
+    style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: '0' }}
+    allow="autoplay"
+    allowFullScreen
+  />
+</div>
+
+
+# A használt Bootstrap osztályok magyarázata
+
+| Osztály                  | Hol használtam?                     | Mire való?                                    | Mit eredményez?                                     |
+| ------------------------ | ----------------------------------- | --------------------------------------------- | --------------------------------------------------- |
+| `min-vh-100`             | lekérdezés szekció                  | Minimum a teljes képernyőmagasságot adja      | A szekció legalább teljes magasságú lesz            |
+| `py-5`                   | lekérdezés szekció                  | Függőleges belső térközt ad                   | A tartalom nem tapad a szekció tetejéhez és aljához |
+| `bg-white`               | lekérdezés szekció, footer          | Fehér háttérszínt állít be                    | Letisztult, világos felületet ad                    |
+| `container`              | lekérdezés szekció, footer          | Középre rendezi és korlátozza a szélességet   | A tartalom rendezett marad                          |
+| `text-center`            | címblokk, gombsor, üzenet, footer   | Középre igazítja a tartalmat                  | Áttekinthetőbb, esztétikusabb megjelenést ad        |
+| `mb-4`                   | címblokk, szűrőblokk, üzenet        | Alsó margót ad                                | Megfelelő távolságot hagy a következő elemtől       |
+| `fw-bold`                | cím                                 | Félkövér megjelenítést ad                     | A szakaszcím hangsúlyosabb lesz                     |
+| `text-muted`             | alcím, üzenet, footer szöveg        | Visszafogottabb szövegszínt ad                | A másodlagos információk kevésbé dominálnak         |
+| `row`                    | szűrőblokk, találati tartó          | Bootstrap rácssort hoz létre                  | A belső oszlopok szabályosan rendezhetők            |
+| `justify-content-center` | szűrőblokk, gombsor, találati tartó | Középre rendezi az elemeket                   | Szebb, kiegyensúlyozottabb elrendezést ad           |
+| `g-3`                    | szűrőblokk, gombsor                 | Térközt ad az elemek között                   | Az elemek nem tapadnak össze                        |
+| `g-4`                    | találati tartó                      | Nagyobb térközt ad a rácselemek között        | A kártyák jobban elkülönülnek                       |
+| `col-12`                 | szűrőoszlopok                       | Kis képernyőn teljes szélességet ad           | Mobilon minden elem külön sorba kerül               |
+| `col-lg-4`               | keresőmező oszlop                   | Nagy képernyőn 4 oszlopnyi szélességet ad     | A keresőmező szélesebb helyet kap                   |
+| `col-lg-3`               | típus- és rendezésoszlop            | Nagy képernyőn 3 oszlopnyi szélességet ad     | Kiegyensúlyozott elrendezést biztosít               |
+| `col-lg-2`               | elérhetőség oszlop                  | Nagy képernyőn 2 oszlopnyi szélességet ad     | Keskenyebb, de elegendő helyet biztosít             |
+| `form-label`             | címkék                              | Bootstrap űrlapcímke-stílust ad               | Egységes feliratmegjelenés                          |
+| `fw-semibold`            | címkék                              | Félkövérnél enyhébb kiemelést ad              | A címkék jobban elkülönülnek                        |
+| `form-control`           | szövegmező                          | Bootstrap inputmező-stílust ad                | Egységes beviteli mezőt biztosít                    |
+| `form-control-lg`        | szövegmező                          | Nagyobb inputméretet ad                       | Kényelmesebb használatot biztosít                   |
+| `form-select`            | legördülő mezők                     | Bootstrap select-mező stílust ad              | Egységes lenyíló mezőt biztosít                     |
+| `form-select-lg`         | legördülő mezők                     | Nagyobb select-mezőt ad                       | Jobban használható, hangsúlyosabb megjelenést ad    |
+| `d-flex`                 | gombsor                             | Flexbox elrendezést ad                        | Rugalmasan rendezhetők a gombok                     |
+| `flex-column`            | gombsor                             | Alapértelmezetten oszlopba rendezi a gombokat | Mobilon egymás alatt jelennek meg                   |
+| `flex-sm-row`            | gombsor                             | `sm` mérettől sorba rendezi a gombokat        | Nagyobb képernyőn egymás mellé kerülnek             |
+| `gap-3`                  | gombsor                             | Hézagot ad a flexelemek között                | A gombok nem tapadnak össze                         |
+| `btn`                    | mindkét gomb                        | Alap Bootstrap gombstílus                     | Egységes kattintható elemeket ad                    |
+| `btn-info`               | lekérdező gomb                      | Kitöltött, kiemelt stílusú gomb               | Az elsődleges műveletet hangsúlyozza                |
+| `btn-outline-secondary`  | hozzáadó gomb                       | Keretes, visszafogott gomb                    | Másodlagos műveletet jelöl                          |
+| `btn-lg`                 | mindkét gomb                        | Nagyobb gombméret                             | Jobban látható és könnyebben kattintható            |
+| `text-white`             | első gomb                           | Fehér szöveget ad                             | Jobb kontrasztot biztosít a színes háttéren         |
+| `px-5`                   | mindkét gomb                        | Nagy vízszintes belső térközt ad              | Szélesebb, hangsúlyosabb gombokat eredményez        |
+| `border-top`             | footer                              | Felső szegélyt ad                             | A lábléc elkülönül a tartalomtól                    |
+| `py-3`                   | footer                              | Függőleges belső térközt ad                   | A footer kényelmesebb megjelenésű lesz              |
+| `small`                  | footer szöveg                       | Kisebb betűméretű szövegelemet jelöl          | Visszafogott, lábléchez illő szövegmegjelenést ad   |
