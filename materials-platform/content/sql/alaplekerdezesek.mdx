@@ -1,0 +1,71 @@
+---
+title: Alaplekérdezések
+description: SELECT, WHERE és ORDER BY rendezett ismétlése.
+---
+
+# Alaplekérdezések
+
+Az adatbázis használata során ritkán van szükség az összes adat megjelenítésére. Ebben a fejezetben a lekérdezések három alapvető építőelemét tesszük rendbe: mit kérünk le, mely sorok maradnak, és milyen sorrendben jelenjenek meg.
+
+<Info title="Órai cél">A fejezet végére önállóan tudsz oszlopokat kiválasztani, rekordokat szűrni és az eredményt rendezni.</Info>
+
+## SELECT – mit szeretnél látni?
+
+A `SELECT` utasítás határozza meg, mely oszlopok jelenjenek meg az eredményben.
+
+```sql
+SELECT nev, ar
+FROM termekek;
+```
+
+### Miért ne használjunk mindig csillagot?
+
+A `SELECT *` gyors próba közben kényelmes, de egy jól megírt lekérdezésben érdemes pontosan megnevezni a szükséges oszlopokat.
+
+<Task number="1.1" title="Első lekérdezés">Jelenítsd meg a termékek nevét, kategóriáját és árát.</Task>
+
+<Solution>
+
+```sql
+SELECT nev, kategoria, ar
+FROM termekek;
+```
+
+</Solution>
+
+## WHERE – mely sorok maradjanak?
+
+A `WHERE` feltétel a rekordokat szűri. Az eredményben csak azok a sorok maradnak, amelyekre a feltétel igaz.
+
+```sql
+SELECT nev, ar
+FROM termekek
+WHERE ar > 10000;
+```
+
+<Task number="1.2" title="Szűrés több feltétellel">Listázd a 10 000 és 50 000 Ft közötti termékek nevét és árát.</Task>
+
+## ORDER BY – milyen sorrendben?
+
+Az `ORDER BY` az eredmény sorrendjét állítja be. Az `ASC` növekvő, a `DESC` csökkenő sorrendet jelent.
+
+```sql
+SELECT nev, ar
+FROM termekek
+WHERE ar > 10000
+ORDER BY ar DESC;
+```
+
+<ExpectedOutput title="Elvárt kimenet">
+
+| nev | ar |
+|---|---:|
+| Monitor | 79 990 |
+| Billentyűzet | 22 990 |
+| Egér | 12 990 |
+
+</ExpectedOutput>
+
+## Összefoglaló
+
+Egy jól olvasható alaplekérdezésnél gondolkodj ebben a sorrendben: **mit szeretnék látni → mely sorok kellenek → milyen sorrendben kérem az eredményt**.
