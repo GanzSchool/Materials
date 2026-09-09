@@ -1,0 +1,8 @@
+{
+  "version": 1,
+  "title": "Ganz Tananyag",
+  "nodes": [
+    {"type":"category","id":"database","title":"Adatbázis-kezelés","slug":"adatbazis","order":1,"children":[{"type":"category","id":"sql","title":"SQL","slug":"sql","order":1,"children":[{"type":"material","id":"sql-alaplekerdezesek","title":"Alaplekérdezések","slug":"alaplekerdezesek","description":"SELECT, WHERE és ORDER BY rendezett ismétlése.","contentPath":"sql/alaplekerdezesek.mdx","order":1,"published":true},{"type":"material","id":"sql-group-by","title":"GROUP BY és HAVING","slug":"group-by-having","description":"Csoportosítás, aggregálás és csoportfeltételek.","contentPath":"sql/group-by-having.mdx","order":2,"published":true}]}]},
+    {"type":"category","id":"frontend","title":"Frontend programozás","slug":"frontend","order":2,"children":[{"type":"category","id":"javascript","title":"JavaScript","slug":"javascript","order":1,"children":[]},{"type":"category","id":"nextjs","title":"Next.js","slug":"nextjs","order":2,"children":[]}]}
+  ]
+}

@@ -1,0 +1,49 @@
+---
+title: GROUP BY és HAVING
+description: Csoportosítás, aggregálás és csoportfeltételek.
+---
+
+# GROUP BY és HAVING
+
+Amikor nem egyes rekordokra, hanem csoportokra vagy kíváncsi, a `GROUP BY` lesz az egyik legfontosabb eszközöd. Ezzel lehet például kategóriánként darabszámot, átlagárat vagy összértéket számolni.
+
+## Mi történik csoportosításkor?
+
+A `GROUP BY` az azonos értékű rekordokat egy csoportba rendezi. Ezután egy aggregáló függvény minden csoportra egyetlen eredményt ad.
+
+<SQLExample title="Dolgozók száma osztályonként" query={`SELECT osztaly, COUNT(*) AS letszam
+FROM dolgozok
+GROUP BY osztaly;`} />
+
+<Info title="Fontos szabály">Ha a SELECT részben egy oszlop nem aggregáló függvényben szerepel, akkor általában a GROUP BY részben is szerepelnie kell.</Info>
+
+## Aggregáló függvények
+
+A leggyakoribb aggregáló függvények: `COUNT()`, `SUM()`, `AVG()`, `MIN()` és `MAX()`.
+
+<Task number="5.1" title="Csoportosítás">Jelenítsd meg kategóriánként a termékek átlagárát.</Task>
+
+<Solution>
+
+```sql
+SELECT kategoria, AVG(ar) AS atlagar
+FROM termekek
+GROUP BY kategoria;
+```
+
+</Solution>
+
+## HAVING – feltétel a csoportokra
+
+A `WHERE` még a csoportosítás előtt szűr, a `HAVING` pedig a már létrejött csoportokra ad feltételt.
+
+```sql
+SELECT kategoria, COUNT(*) AS darab
+FROM termekek
+GROUP BY kategoria
+HAVING COUNT(*) >= 3;
+```
+
+<Task number="5.2" title="HAVING">Listázd azokat a kategóriákat, amelyekben az átlagár meghaladja a 20 000 Ft-ot.</Task>
+
+<Info title="Vizsgatipp">Ha az aggregált értékre – például `COUNT(*)` vagy `AVG(ar)` – akarsz feltételt írni, jellemzően `HAVING` kell.</Info>
