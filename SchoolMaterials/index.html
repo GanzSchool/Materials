@@ -1,14 +1,1130 @@
-<!doctype html><html lang="hu"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SchoolMaterials</title>
-<style>
-:root{--bg:#0d1117;--p:#131b24;--p2:#192430;--line:#25313d;--t:#f5f7fa;--m:#92a0af;--a:#24d0b1}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 90% 0,#123028 0,transparent 28%),var(--bg);color:var(--t);font:15px Inter,system-ui,-apple-system,Segoe UI,sans-serif}button{font:inherit;color:inherit}.top{height:68px;position:sticky;top:0;z-index:5;display:flex;align-items:center;padding:0 26px;border-bottom:1px solid var(--line);background:#0d1117e8;backdrop-filter:blur(14px)}.brand{font-weight:850;font-size:18px;letter-spacing:-.4px;cursor:pointer}.brand b{display:inline-grid;place-items:center;width:32px;height:32px;margin-right:10px;border-radius:10px;background:#24d0b11a;color:#86f2dc;border:1px solid #24d0b144}.layout{display:grid;grid-template-columns:270px 1fr;min-height:calc(100vh - 68px)}aside{position:sticky;top:68px;height:calc(100vh - 68px);padding:22px 14px;border-right:1px solid var(--line)}.cap{font-size:11px;text-transform:uppercase;letter-spacing:1.6px;color:#607080;margin:4px 10px 10px}.nav{display:grid;gap:5px}.nav button{border:0;background:transparent;padding:11px 12px;border-radius:11px;text-align:left;cursor:pointer;color:#b8c3ce}.nav button:hover,.nav .on{background:#24d0b112;color:#93f2df}.muted{opacity:.46}main{padding:44px clamp(20px,5vw,70px) 70px}.page{max-width:1200px;margin:auto}.eye{font-size:12px;font-weight:800;letter-spacing:1.6px;text-transform:uppercase;color:#7ff0da;margin-bottom:14px}h1{font-size:clamp(48px,7vw,88px);line-height:.95;letter-spacing:-4px;margin:0}.lead{max-width:720px;color:var(--m);font-size:18px;line-height:1.65;margin:22px 0 38px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.card,.mod,.lessonHead,.box{border:1px solid var(--line);background:linear-gradient(180deg,#ffffff08,#ffffff03);border-radius:20px}.card{padding:22px;min-height:180px;cursor:pointer;transition:.2s}.card:hover{transform:translateY(-3px);border-color:#24d0b155}.card.off{opacity:.43;cursor:default}.card.off:hover{transform:none;border-color:var(--line)}.num{font-size:11px;color:#61707e}.card h3{font-size:23px;margin:42px 0 7px}.card p,.mod p,.box p{color:var(--m);line-height:1.55;margin:0}.tag{display:inline-block;margin-top:16px;padding:5px 8px;border:1px solid var(--line);border-radius:20px;font-size:11px;color:#7c8a98}.tag.live{color:#8df1de;border-color:#24d0b144}.sqlHero{padding:44px;border:1px solid #24d0b144;border-radius:26px;background:#24d0b109;margin-bottom:22px}.sqlHero h1{font-size:72px}.mods{display:grid;grid-template-columns:1fr 1fr;gap:18px}.mod{overflow:hidden}.modHead{padding:22px;border-bottom:1px solid var(--line)}.modHead small{color:#80eed9;font-weight:800}.mod h2{margin:8px 0 6px;font-size:25px}.list{padding:9px}.row{display:grid;grid-template-columns:34px 1fr 20px;gap:6px;align-items:center;padding:10px;border-radius:10px;cursor:pointer}.row:hover{background:#ffffff08}.row span{color:#617080;font-size:11px}.row strong{font-size:13px;line-height:1.3}.crumb{color:#718091;font-size:12px;margin-bottom:18px}.crumb button{border:0;background:none;padding:0;color:#91a1b0;cursor:pointer}.lessonHead{padding:38px;margin-bottom:16px}.lessonHead h1{font-size:clamp(36px,5vw,64px);letter-spacing:-2.8px;line-height:1.03}.pills{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:18px}.pill{font-size:11px;padding:6px 9px;border:1px solid var(--line);border-radius:20px;color:#91a0ae}.pill.a{color:#8cf0dc;border-color:#24d0b144}.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:22px}.step{padding:14px;border-radius:13px;background:var(--p2);border:1px solid var(--line)}.step b{display:block;margin-bottom:4px}.step small{color:#748394;line-height:1.4}.stage{display:grid;grid-template-columns:1.05fr .95fr;gap:16px}.box{padding:21px}.box h3{margin:0 0 8px}.lines{display:grid;gap:9px;margin-top:20px}.lines i{height:9px;border-radius:10px;background:#ffffff09}.lines i:nth-child(2){width:80%}.lines i:nth-child(3){width:91%}pre{margin:15px 0 0;padding:18px;border-radius:14px;background:#080c10;border:1px solid var(--line);color:#bcd0dc;overflow:auto}pre b{color:#82efd9}.foot{display:flex;justify-content:space-between;margin-top:16px}.btn{border:1px solid var(--line);background:var(--p);padding:10px 13px;border-radius:11px;cursor:pointer}.btn.next{background:var(--a);color:#06251e;border:0;font-weight:800}@media(max-width:900px){.grid{grid-template-columns:1fr 1fr}.mods,.stage{grid-template-columns:1fr}}@media(max-width:720px){.layout{display:block}aside{display:none}main{padding:28px 16px 50px}.grid{grid-template-columns:1fr}.steps{grid-template-columns:1fr}.sqlHero{padding:28px}.sqlHero h1{font-size:58px}}
-</style></head><body><div id="app"></div>
-<script>
-const M=[{id:"db1",name:"Adatbázis-kezelés 1",sub:"SQL alapok és egytáblás adatkezelés",l:["Adatbázis, tábla, rekord, mező és az SQL alapjai", "SELECT, FROM és oszlopok lekérdezése", "WHERE és összehasonlító feltételek", "DISTINCT, ORDER BY, ASC és DESC", "Több feltétel – AND, OR, NOT", "NULL, IS NULL és IS NOT NULL", "Adatmódosítás – INSERT, UPDATE, DELETE", "Összesítés – COUNT, SUM, AVG, MIN, MAX", "Csoportosítás – GROUP BY és HAVING", "Rendezés, szűrés, csoportosítás és összesítés egy lekérdezésben", "Adatbázis és tábla létrehozása", "SQL adattípusok", "Alapvető megszorítások – PRIMARY KEY, NOT NULL, UNIQUE", "Egytáblás komplex gyakorlás", "Egytáblás SQL számonkérés"]},{id:"db2",name:"Adatbázis-kezelés 2",sub:"Relációs adatbázisok és komplex adatbázis-kezelés",l:["Relációs adatbázisok felépítése", "Elsődleges és idegen kulcsok", "Táblák közötti kapcsolatok", "Többtáblás adatbázis létrehozása", "Adatbázis-tervezés", "Redundanciamentes adatbázis-tervezés", "Adatbázismodell-diagram készítése", "Többtáblás lekérdezések alapjai", "INNER JOIN", "Külső JOIN-ok – elsősorban LEFT JOIN", "Több tábla összekapcsolása egy lekérdezésben", "JOIN + WHERE + ORDER BY", "JOIN + összesítő függvények", "JOIN + GROUP BY + HAVING", "Összetett és haladó SQL-lekérdezések", "Komplex többtáblás adatbázis-tervezési feladat", "Adatbázis exportálása és dump készítése", "Adatbázis használata backend alkalmazásból", "Adatbázist használó REST API", "ORM – objektum-relációs leképezés", "Adatbázist kezelő konzolos vagy grafikus alkalmazás", "Komplex webes és adatbázis-kezelési vizsgafeladat", "Szakmai vizsga típusú adatbázis-feladatok"]}];
-const A=document.querySelector("#app");function go(x){location.hash=x}function route(){let p=location.hash.replace(/^#\/?/,"").split("/").filter(Boolean);return p[0]=="sql"&&p[1]=="lesson"?{p:"lesson",m:p[2],n:+p[3]}:{p:p[0]||"home"}}
-function shell(c,a){return `<header class="top"><div class="brand" onclick="go('/')"><b>S</b>SchoolMaterials</div></header><div class="layout"><aside><div class="cap">Tananyagok</div><div class="nav"><button class="${a=="home"?"on":""}" onclick="go('/')">Kezdőlap</button><button class="muted">Gyakorló · hamarosan</button><button class="muted">JS · hamarosan</button><button class="${a=="sql"?"on":""}" onclick="go('/sql')">SQL · 38 lecke</button><button class="muted">Matek · hamarosan</button></div></aside><main>${c}</main></div>`}
-function home(){let d=[["Bevezető","Alapozó anyagok és indulási útmutatók."],["Gyakorló","Feladatsorok és célzott gyakorlás."],["JS","JavaScript és webes programozás."],["SQL","Adatbázis-kezelés az alapoktól a szakmai vizsgáig."],["Matek","Matematikai segédanyagok."]];A.innerHTML=shell(`<div class="page"><section><div class="eye">Oktatási platform diákoknak</div><h1>SchoolMaterials</h1><p class="lead">Modern, átlátható tanulási felület. Elsőként az SQL teljes tananyagstruktúrája érhető el.</p></section><div class="grid">${d.map((x,i)=>`<article class="card ${i==3?"":"off"}" ${i==3?`onclick="go('/sql')"`:""}><span class="num">0${i+1} / 05</span><h3>${x[0]}</h3><p>${x[1]}</p><span class="tag ${i==3?"live":""}">${i==3?"Elérhető":"Hamarosan"}</span></article>`).join("")}</div></div>`,"home")}
-function mod(x,i){return `<section class="mod"><div class="modHead"><small>MODUL ${i+1}</small><h2>${x.name}</h2><p>${x.sub}</p></div><div class="list">${x.l.map((t,j)=>`<div class="row" onclick="go('/sql/lesson/${x.id}/${j+1}')"><span>${String(j+1).padStart(2,"0")}</span><strong>${t}</strong><span>›</span></div>`).join("")}</div></section>`}
-function sql(){A.innerHTML=shell(`<div class="page"><section class="sqlHero"><div class="eye">Aktív tananyag</div><h1>SQL</h1><p class="lead" style="margin-bottom:0">Két egymásra épülő modul az egytáblás alapoktól a relációs adatbázisokon át a szakmai vizsgáig.</p></section><div class="mods">${M.map(mod).join("")}</div></div>`,"sql")}
-function lesson(r){let m=M.find(x=>x.id==r.m),i=r.n-1,t=m?.l[i];if(!t)return sql();let prev=i?i:null,next=i<m.l.length-1?i+2:null;A.innerHTML=shell(`<div class="page"><div class="crumb"><button onclick="go('/sql')">SQL</button> › ${m.name}</div><section class="lessonHead"><div class="pills"><span class="pill a">${m.name}</span><span class="pill">${String(i+1).padStart(2,"0")} / ${m.l.length}</span><span class="pill">Tananyagváz</span></div><h1>${t}</h1><p class="lead" style="font-size:15px;margin-bottom:0">Ez a végleges tananyag-megjelenítő keret: a lecke itt kap majd magyarázatot, példákat és gyakorlófeladatokat.</p><div class="steps"><div class="step"><b>01 · Értsd meg</b><small>Rövid, világos elmélet.</small></div><div class="step"><b>02 · Nézd meg</b><small>Lépésről lépésre SQL-példa.</small></div><div class="step"><b>03 · Próbáld ki</b><small>Önálló gyakorlófeladat.</small></div></div></section><div class="stage"><section class="box"><h3>Tananyag</h3><p>Itt jelenik majd meg a részletes lecke.</p><div class="lines"><i></i><i></i><i></i></div></section><section class="box"><h3>SQL példa</h3><p>Egységes, jól olvasható kódblokk.</p><pre>-- ${t}\n<b>SELECT</b> *\n<b>FROM</b> pelda_tabla\n<b>WHERE</b> feltetel = '...';</pre></section></div><div class="foot">${prev?`<button class="btn" onclick="go('/sql/lesson/${m.id}/${prev}')">← Előző</button>`:`<button class="btn" onclick="go('/sql')">← Áttekintés</button>`}${next?`<button class="btn next" onclick="go('/sql/lesson/${m.id}/${next}')">Következő →</button>`:`<button class="btn next" onclick="go('/sql')">Modul kész →</button>`}</div></div>`,"sql")}
-function render(){let r=route();r.p=="sql"?sql():r.p=="lesson"?lesson(r):home()}addEventListener("hashchange",render);render();
-</script></body></html>
+<!doctype html>
+<html lang="hu">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#ffffff" />
+  <title>SchoolMaterials – Oktatási platform</title>
+  <style>
+    :root {
+      --bg: #f5f7fa;
+      --surface: #ffffff;
+      --surface-soft: #f9fafb;
+      --text: #16202a;
+      --muted: #66727f;
+      --line: #e5e9ee;
+      --line-strong: #d7dde4;
+      --navy: #183153;
+      --teal: #0f8f83;
+      --teal-soft: #e9f7f4;
+      --teal-mid: #c8ece6;
+      --orange: #b76a16;
+      --orange-soft: #fff5e9;
+      --violet: #6750a4;
+      --violet-soft: #f3efff;
+      --shadow: 0 10px 30px rgba(27, 42, 58, .07);
+      --shadow-sm: 0 4px 14px rgba(27, 42, 58, .06);
+      --radius: 16px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 15px/1.55 Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    button, input { font: inherit; }
+    button { color: inherit; }
+    a { color: inherit; text-decoration: none; }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      height: 72px;
+      display: grid;
+      grid-template-columns: 252px minmax(260px, 620px) 1fr;
+      align-items: center;
+      gap: 24px;
+      padding: 0 24px;
+      background: rgba(255,255,255,.96);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(10px);
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      border: 0;
+      background: transparent;
+      padding: 0;
+      cursor: pointer;
+      font-weight: 800;
+      font-size: 18px;
+      letter-spacing: -.25px;
+      color: var(--navy);
+      justify-self: start;
+    }
+    .brand-mark {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border-radius: 10px;
+      background: var(--navy);
+      color: white;
+      font-size: 12px;
+      letter-spacing: -.5px;
+    }
+    .search-wrap { position: relative; }
+    .search {
+      width: 100%;
+      height: 42px;
+      border: 1px solid var(--line);
+      border-radius: 11px;
+      background: var(--surface-soft);
+      padding: 0 42px 0 42px;
+      outline: none;
+      color: var(--text);
+      transition: border-color .15s, box-shadow .15s, background .15s;
+    }
+    .search:focus {
+      background: white;
+      border-color: #a9c8c4;
+      box-shadow: 0 0 0 3px rgba(15,143,131,.10);
+    }
+    .search-icon {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #7b8793;
+      font-size: 16px;
+      pointer-events: none;
+    }
+    .kbd {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      border: 1px solid var(--line);
+      background: white;
+      color: #8a949e;
+      border-radius: 6px;
+      padding: 1px 6px;
+      font-size: 11px;
+    }
+    .search-results {
+      display: none;
+      position: absolute;
+      top: 49px;
+      left: 0;
+      right: 0;
+      max-height: 390px;
+      overflow: auto;
+      padding: 8px;
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      box-shadow: var(--shadow);
+      z-index: 80;
+    }
+    .search-results.open { display: block; }
+    .search-result {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 34px 1fr auto;
+      gap: 11px;
+      align-items: center;
+      border: 0;
+      background: transparent;
+      padding: 10px;
+      border-radius: 9px;
+      text-align: left;
+      cursor: pointer;
+    }
+    .search-result:hover { background: var(--surface-soft); }
+    .search-result .mini-no {
+      width: 30px;
+      height: 30px;
+      display: grid;
+      place-items: center;
+      border-radius: 8px;
+      background: var(--teal-soft);
+      color: var(--teal);
+      font-size: 11px;
+      font-weight: 800;
+    }
+    .search-result strong { display: block; font-size: 13px; }
+    .search-result small { color: var(--muted); font-size: 11px; }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+    .icon-btn, .mobile-menu {
+      width: 40px;
+      height: 40px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: white;
+      cursor: pointer;
+      color: #64717d;
+    }
+    .profile {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding-left: 6px;
+    }
+    .avatar {
+      width: 36px;
+      height: 36px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--navy);
+      color: white;
+      font-size: 12px;
+      font-weight: 800;
+    }
+    .profile-text { line-height: 1.2; }
+    .profile-text strong { display: block; font-size: 12px; }
+    .profile-text small { color: var(--muted); font-size: 11px; }
+    .mobile-menu { display: none; }
+
+    .shell {
+      display: grid;
+      grid-template-columns: 252px 1fr;
+      min-height: calc(100vh - 72px);
+    }
+    .sidebar {
+      position: sticky;
+      top: 72px;
+      height: calc(100vh - 72px);
+      padding: 22px 14px 18px;
+      background: var(--surface);
+      border-right: 1px solid var(--line);
+      overflow: auto;
+      z-index: 40;
+    }
+    .sidebar-label {
+      margin: 4px 12px 9px;
+      color: #9aa4ae;
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.35px;
+    }
+    .nav-list { display: grid; gap: 4px; }
+    .nav-item {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 34px 1fr auto;
+      gap: 9px;
+      align-items: center;
+      border: 0;
+      border-radius: 10px;
+      background: transparent;
+      padding: 9px 10px;
+      color: #495866;
+      text-align: left;
+      cursor: pointer;
+      transition: background .15s, color .15s;
+    }
+    .nav-item:hover { background: #f4f7f8; color: var(--navy); }
+    .nav-item.active { background: var(--teal-soft); color: #08756c; font-weight: 700; }
+    .nav-item.disabled { color: #9ea8b2; }
+    .nav-item.disabled:hover { background: transparent; color: #9ea8b2; cursor: default; }
+    .nav-icon {
+      width: 30px;
+      height: 30px;
+      display: grid;
+      place-items: center;
+      border-radius: 8px;
+      background: #f0f3f6;
+      color: #697683;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: -.3px;
+    }
+    .nav-item.active .nav-icon { background: white; color: var(--teal); box-shadow: 0 1px 4px rgba(10,70,66,.08); }
+    .coming {
+      padding: 3px 7px;
+      border-radius: 999px;
+      background: #f0f2f4;
+      color: #8d98a3;
+      font-size: 9px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .4px;
+    }
+    .sidebar-bottom {
+      margin-top: 26px;
+      padding: 14px 12px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 11px;
+    }
+    .sidebar-bottom b { display: block; color: #53606c; margin-bottom: 4px; }
+
+    .main {
+      min-width: 0;
+      padding: 38px clamp(24px, 4vw, 64px) 70px;
+    }
+    .content { max-width: 1180px; margin: 0 auto; }
+    .eyebrow {
+      margin-bottom: 8px;
+      color: var(--teal);
+      font-size: 11px;
+      font-weight: 850;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+    }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 { margin-bottom: 12px; font-size: clamp(32px, 4vw, 46px); line-height: 1.1; letter-spacing: -1.5px; color: #15263a; }
+    h2 { color: #1b2d42; letter-spacing: -.6px; }
+    .muted { color: var(--muted); }
+
+    .welcome {
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 22px;
+      align-items: stretch;
+      margin-bottom: 30px;
+    }
+    .welcome-copy {
+      padding: 4px 0;
+    }
+    .welcome-copy p { max-width: 650px; font-size: 16px; color: var(--muted); }
+    .continue-card {
+      position: relative;
+      overflow: hidden;
+      padding: 22px;
+      border: 1px solid #d7e5e2;
+      border-radius: var(--radius);
+      background: white;
+      box-shadow: var(--shadow-sm);
+    }
+    .continue-card::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: var(--teal);
+    }
+    .continue-top { display: flex; align-items: center; justify-content: space-between; gap: 14px; margin-bottom: 16px; }
+    .continue-top span { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .8px; font-weight: 800; }
+    .progress-chip { color: var(--teal); font-size: 11px; font-weight: 800; }
+    .continue-card h3 { margin-bottom: 5px; font-size: 18px; line-height: 1.3; }
+    .continue-card p { margin-bottom: 18px; color: var(--muted); font-size: 12px; }
+    .bar { height: 7px; overflow: hidden; border-radius: 999px; background: #e9edef; }
+    .bar > i { display: block; height: 100%; border-radius: inherit; background: var(--teal); transition: width .25s; }
+    .continue-actions { display: flex; justify-content: flex-end; margin-top: 16px; }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 18px;
+      margin: 34px 0 14px;
+    }
+    .section-head h2 { margin: 0; font-size: 21px; }
+    .section-head p { margin: 3px 0 0; color: var(--muted); font-size: 12px; }
+    .text-link { border: 0; background: transparent; color: var(--teal); cursor: pointer; font-size: 12px; font-weight: 800; padding: 5px 0; }
+
+    .course-grid { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 14px; }
+    .course-card {
+      min-height: 220px;
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: white;
+      box-shadow: var(--shadow-sm);
+      transition: transform .16s, border-color .16s, box-shadow .16s;
+      cursor: pointer;
+    }
+    .course-card:hover { transform: translateY(-2px); border-color: #c7d4d4; box-shadow: var(--shadow); }
+    .course-card.disabled { cursor: default; box-shadow: none; background: #fafbfc; }
+    .course-card.disabled:hover { transform: none; border-color: var(--line); }
+    .course-badge {
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      font-weight: 900;
+      font-size: 11px;
+      background: var(--teal-soft);
+      color: var(--teal);
+    }
+    .course-card.practice .course-badge { background: var(--orange-soft); color: var(--orange); }
+    .course-card.js .course-badge { background: #fff8d9; color: #8b6b00; }
+    .course-card.math .course-badge { background: var(--violet-soft); color: var(--violet); }
+    .course-card h3 { margin: 36px 0 6px; font-size: 19px; }
+    .course-card p { color: var(--muted); font-size: 12px; line-height: 1.55; }
+    .course-meta { margin-top: auto; display: flex; align-items: center; justify-content: space-between; color: #7a8691; font-size: 11px; }
+    .status-live { color: var(--teal); font-weight: 800; }
+
+    .stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-top: 26px; }
+    .stat { padding: 16px 18px; border: 1px solid var(--line); border-radius: 12px; background: white; }
+    .stat small { display: block; color: var(--muted); font-size: 10px; text-transform: uppercase; letter-spacing: .8px; font-weight: 800; }
+    .stat strong { display: block; margin-top: 4px; color: var(--navy); font-size: 22px; letter-spacing: -.5px; }
+
+    .sql-hero {
+      display: grid;
+      grid-template-columns: 1fr 290px;
+      gap: 28px;
+      padding: 32px;
+      margin-bottom: 26px;
+      border-radius: 18px;
+      background: #17314f;
+      color: white;
+      box-shadow: var(--shadow);
+    }
+    .sql-hero .eyebrow { color: #79d9cf; }
+    .sql-hero h1 { color: white; margin-bottom: 10px; }
+    .sql-hero p { max-width: 720px; margin-bottom: 22px; color: #c6d2df; }
+    .sql-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .sql-tag { padding: 6px 9px; border: 1px solid rgba(255,255,255,.18); border-radius: 999px; color: #d9e4ed; font-size: 10px; }
+    .course-progress-card {
+      padding: 20px;
+      border-radius: 13px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.12);
+      align-self: center;
+    }
+    .course-progress-card small { color: #adbdcb; }
+    .course-progress-card strong { display: block; margin: 4px 0 12px; font-size: 30px; }
+    .course-progress-card .bar { background: rgba(255,255,255,.13); }
+    .course-progress-card .bar > i { background: #62d0c5; }
+
+    .module-stack { display: grid; gap: 16px; }
+    .module {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      background: white;
+      box-shadow: var(--shadow-sm);
+    }
+    .module summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 20px 22px;
+      display: grid;
+      grid-template-columns: 46px 1fr auto;
+      gap: 14px;
+      align-items: center;
+    }
+    .module summary::-webkit-details-marker { display: none; }
+    .module-no {
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      border-radius: 11px;
+      background: var(--teal-soft);
+      color: var(--teal);
+      font-weight: 900;
+      font-size: 12px;
+    }
+    .module summary h2 { margin: 0 0 3px; font-size: 18px; }
+    .module summary p { margin: 0; color: var(--muted); font-size: 11px; }
+    .module-count { color: #7d8993; font-size: 11px; }
+    .lesson-list { border-top: 1px solid var(--line); }
+    .lesson-row {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 42px minmax(0,1fr) 70px 24px;
+      gap: 12px;
+      align-items: center;
+      border: 0;
+      border-bottom: 1px solid #eef1f3;
+      background: white;
+      padding: 13px 20px;
+      text-align: left;
+      cursor: pointer;
+      transition: background .12s;
+    }
+    .lesson-row:last-child { border-bottom: 0; }
+    .lesson-row:hover { background: #fbfcfd; }
+    .lesson-index {
+      width: 30px;
+      height: 30px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      color: #87929c;
+      font-size: 10px;
+      font-weight: 800;
+    }
+    .lesson-row.done .lesson-index { background: var(--teal); border-color: var(--teal); color: white; }
+    .lesson-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 650; font-size: 13px; color: #2a3947; }
+    .lesson-time { color: #8a959f; font-size: 10px; text-align: right; }
+    .arrow { color: #9aa4ad; font-size: 17px; }
+
+    .crumbs { display: flex; gap: 7px; align-items: center; flex-wrap: wrap; margin-bottom: 16px; color: #7b8792; font-size: 11px; }
+    .crumbs button { border: 0; background: none; padding: 0; color: var(--teal); cursor: pointer; }
+
+    .lesson-layout {
+      display: grid;
+      grid-template-columns: 270px minmax(0, 1fr);
+      gap: 22px;
+      align-items: start;
+    }
+    .course-rail {
+      position: sticky;
+      top: 92px;
+      max-height: calc(100vh - 112px);
+      overflow: auto;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: white;
+      box-shadow: var(--shadow-sm);
+    }
+    .rail-head { padding: 17px; border-bottom: 1px solid var(--line); }
+    .rail-head small { color: var(--teal); font-size: 10px; font-weight: 850; text-transform: uppercase; letter-spacing: .8px; }
+    .rail-head h3 { margin: 5px 0 0; font-size: 15px; }
+    .rail-module-title { padding: 12px 14px 6px; color: #87919b; font-size: 9px; font-weight: 850; text-transform: uppercase; letter-spacing: .9px; }
+    .rail-lesson {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 25px 1fr;
+      gap: 8px;
+      align-items: start;
+      border: 0;
+      background: transparent;
+      padding: 8px 12px;
+      text-align: left;
+      cursor: pointer;
+      color: #596672;
+      font-size: 11px;
+      line-height: 1.35;
+    }
+    .rail-lesson:hover { background: #f7f9fa; }
+    .rail-lesson.current { background: var(--teal-soft); color: #096f67; font-weight: 750; }
+    .rail-dot {
+      width: 20px;
+      height: 20px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      background: white;
+      font-size: 8px;
+      color: #8b96a0;
+    }
+    .rail-lesson.done .rail-dot { background: var(--teal); color: white; border-color: var(--teal); }
+
+    .lesson-article { min-width: 0; }
+    .lesson-header {
+      padding: 30px 32px 26px;
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      background: white;
+      box-shadow: var(--shadow-sm);
+    }
+    .lesson-header h1 { max-width: 860px; margin-bottom: 12px; font-size: clamp(30px, 4vw, 44px); }
+    .lesson-sub { max-width: 760px; margin-bottom: 18px; color: var(--muted); font-size: 14px; }
+    .lesson-meta { display: flex; flex-wrap: wrap; gap: 8px; }
+    .pill { padding: 5px 9px; border: 1px solid var(--line); border-radius: 999px; color: #697581; font-size: 10px; background: #fbfcfd; }
+    .pill.teal { border-color: var(--teal-mid); background: var(--teal-soft); color: #08766d; font-weight: 700; }
+
+    .learning-path {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 10px;
+      margin: 14px 0;
+    }
+    .path-card {
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: white;
+    }
+    .path-card b { display: block; margin-bottom: 4px; color: #273849; font-size: 12px; }
+    .path-card span { color: var(--muted); font-size: 10px; }
+    .path-step { width: 24px; height: 24px; display: grid; place-items: center; margin-bottom: 14px; border-radius: 7px; background: #eef5f4; color: var(--teal); font-size: 9px; font-weight: 900; }
+
+    .material {
+      margin-top: 14px;
+      padding: 30px 32px;
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      background: white;
+      box-shadow: var(--shadow-sm);
+    }
+    .material h2 { margin: 26px 0 10px; font-size: 20px; }
+    .material h2:first-child { margin-top: 0; }
+    .material p { color: #53616e; }
+    .material ul { padding-left: 20px; color: #53616e; }
+    .material li { margin: 7px 0; }
+    .notice {
+      display: grid;
+      grid-template-columns: 4px 1fr;
+      overflow: hidden;
+      margin: 20px 0;
+      border: 1px solid #dfebe9;
+      border-radius: 11px;
+      background: #f7fbfa;
+    }
+    .notice::before { content: ""; background: var(--teal); }
+    .notice > div { padding: 15px 17px; }
+    .notice b { display: block; margin-bottom: 2px; color: #17675f; font-size: 12px; }
+    .notice span { color: #63716e; font-size: 11px; }
+    .code-label {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 9px 13px;
+      border: 1px solid #253241;
+      border-bottom: 0;
+      border-radius: 11px 11px 0 0;
+      background: #111a24;
+      color: #9fb0bf;
+      font-size: 10px;
+    }
+    pre {
+      margin: 0;
+      padding: 20px;
+      overflow: auto;
+      border: 1px solid #253241;
+      border-radius: 0 0 11px 11px;
+      background: #0d141c;
+      color: #d7e1e9;
+      font: 13px/1.7 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    }
+    pre .kw { color: #69d6c9; }
+    pre .cm { color: #7d8d9b; }
+    .practice-box {
+      margin-top: 18px;
+      padding: 20px;
+      border: 1px solid #dde5ee;
+      border-radius: 12px;
+      background: #f8fafc;
+    }
+    .practice-box small { color: var(--teal); font-weight: 850; text-transform: uppercase; letter-spacing: .8px; }
+    .practice-box h3 { margin: 6px 0 8px; font-size: 16px; }
+    .practice-box p { margin: 0; font-size: 12px; }
+
+    .lesson-footer {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 12px;
+      margin-top: 16px;
+    }
+    .lesson-footer .right { justify-self: end; }
+    .btn {
+      min-height: 40px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      border: 1px solid var(--line-strong);
+      border-radius: 10px;
+      background: white;
+      padding: 0 14px;
+      cursor: pointer;
+      font-size: 11px;
+      font-weight: 750;
+      transition: background .12s, border-color .12s;
+    }
+    .btn:hover { background: #f7f9fa; border-color: #c4ccd4; }
+    .btn.primary { background: var(--teal); border-color: var(--teal); color: white; }
+    .btn.primary:hover { background: #0b7f75; }
+    .btn.done { background: var(--teal-soft); border-color: var(--teal-mid); color: #08766d; }
+
+    .empty-state {
+      padding: 64px 28px;
+      text-align: center;
+      border: 1px dashed var(--line-strong);
+      border-radius: 15px;
+      background: white;
+    }
+    .empty-icon {
+      width: 56px;
+      height: 56px;
+      display: grid;
+      place-items: center;
+      margin: 0 auto 17px;
+      border-radius: 14px;
+      background: #f0f3f6;
+      color: #7a8793;
+      font-weight: 900;
+    }
+    .empty-state h2 { margin-bottom: 8px; }
+    .empty-state p { max-width: 520px; margin: 0 auto; color: var(--muted); }
+
+    .footer-note { margin-top: 42px; padding-top: 18px; border-top: 1px solid var(--line); color: #98a2ab; font-size: 10px; }
+    .scrim { display: none; }
+
+    @media (max-width: 1100px) {
+      .topbar { grid-template-columns: 210px minmax(240px, 1fr) auto; }
+      .shell { grid-template-columns: 220px 1fr; }
+      .course-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+      .sql-hero { grid-template-columns: 1fr 240px; }
+      .lesson-layout { grid-template-columns: 230px minmax(0,1fr); }
+    }
+
+    @media (max-width: 860px) {
+      .topbar { grid-template-columns: auto 1fr auto; padding: 0 14px; gap: 12px; }
+      .brand span:last-child, .profile-text, .kbd { display: none; }
+      .mobile-menu { display: grid; }
+      .shell { display: block; }
+      .sidebar {
+        position: fixed;
+        left: 0;
+        top: 72px;
+        width: 260px;
+        transform: translateX(-105%);
+        transition: transform .2s ease;
+        box-shadow: 14px 0 40px rgba(25,38,52,.16);
+      }
+      .sidebar.open { transform: translateX(0); }
+      .scrim {
+        position: fixed;
+        inset: 72px 0 0 0;
+        z-index: 35;
+        background: rgba(19,32,45,.35);
+      }
+      .scrim.open { display: block; }
+      .main { padding: 28px 18px 60px; }
+      .welcome { grid-template-columns: 1fr; }
+      .sql-hero { grid-template-columns: 1fr; padding: 25px; }
+      .course-progress-card { width: 100%; }
+      .lesson-layout { grid-template-columns: 1fr; }
+      .course-rail { position: static; max-height: 300px; }
+    }
+
+    @media (max-width: 620px) {
+      .topbar { height: 64px; }
+      .search-wrap { min-width: 0; }
+      .search { height: 38px; padding-left: 36px; font-size: 12px; }
+      .top-actions .icon-btn { display: none; }
+      .sidebar { top: 64px; height: calc(100vh - 64px); }
+      .scrim { inset: 64px 0 0 0; }
+      .course-grid, .stats, .learning-path { grid-template-columns: 1fr; }
+      .course-card { min-height: 190px; }
+      .lesson-row { grid-template-columns: 36px minmax(0,1fr) 20px; padding: 12px 13px; }
+      .lesson-time { display: none; }
+      .lesson-header, .material { padding: 22px 18px; }
+      .lesson-footer { grid-template-columns: 1fr 1fr; }
+      .lesson-footer .complete { grid-column: 1 / -1; grid-row: 1; }
+      .lesson-footer .right { justify-self: stretch; }
+      .lesson-footer .btn { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <div id="app"></div>
+
+  <script>
+    const module1 = [
+      'Adatbázis, tábla, rekord, mező és az SQL alapjai',
+      'SELECT, FROM és oszlopok lekérdezése',
+      'WHERE és összehasonlító feltételek',
+      'DISTINCT, ORDER BY, ASC és DESC',
+      'Több feltétel – AND, OR, NOT',
+      'NULL, IS NULL és IS NOT NULL',
+      'Adatmódosítás – INSERT, UPDATE, DELETE',
+      'Összesítés – COUNT, SUM, AVG, MIN, MAX',
+      'Csoportosítás – GROUP BY és HAVING',
+      'Rendezés, szűrés, csoportosítás és összesítés egy lekérdezésben',
+      'Adatbázis és tábla létrehozása',
+      'SQL adattípusok',
+      'Alapvető megszorítások – PRIMARY KEY, NOT NULL, UNIQUE',
+      'Egytáblás komplex gyakorlás',
+      'Egytáblás SQL számonkérés'
+    ];
+
+    const module2 = [
+      'Relációs adatbázisok felépítése',
+      'Elsődleges és idegen kulcsok',
+      'Táblák közötti kapcsolatok – 1:1, 1:N, N:M',
+      'Többtáblás adatbázis létrehozása',
+      'Adatbázis-tervezés',
+      'Redundanciamentes adatbázis-tervezés',
+      'Adatbázismodell-diagram készítése',
+      'Többtáblás lekérdezések alapjai',
+      'INNER JOIN',
+      'Külső JOIN-ok, elsősorban LEFT JOIN',
+      'Több tábla összekapcsolása egy lekérdezésben',
+      'JOIN + WHERE + ORDER BY',
+      'JOIN + összesítő függvények',
+      'JOIN + GROUP BY + HAVING',
+      'Összetett és haladó SQL-lekérdezések',
+      'Komplex többtáblás adatbázis-tervezési feladat',
+      'Adatbázis exportálása és dump készítése',
+      'Adatbázis használata backend alkalmazásból',
+      'Adatbázist használó REST API',
+      'ORM – objektum-relációs leképezés',
+      'Adatbázist kezelő konzolos vagy grafikus alkalmazás',
+      'Komplex webes és adatbázis-kezelési vizsgafeladat',
+      'Szakmai vizsga típusú adatbázis-feladatok'
+    ];
+
+    const modules = [
+      { id: 1, name: 'Adatbázis-kezelés 1', subtitle: 'SQL alapok és egytáblás adatkezelés', lessons: module1 },
+      { id: 2, name: 'Adatbázis-kezelés 2', subtitle: 'Relációs adatbázisok és komplex SQL', lessons: module2 }
+    ];
+
+    const lessons = modules.flatMap(m => m.lessons.map((title, index) => ({
+      key: `m${m.id}-${index}`,
+      module: m.id,
+      index,
+      number: String(index + 1).padStart(2, '0'),
+      title,
+      minutes: 12 + ((index * 3 + m.id) % 4) * 3
+    })));
+
+    const app = document.getElementById('app');
+    const completed = new Set(JSON.parse(localStorage.getItem('schoolmaterials-progress') || '[]'));
+
+    function saveProgress() {
+      localStorage.setItem('schoolmaterials-progress', JSON.stringify([...completed]));
+    }
+
+    function pct() {
+      return Math.round((completed.size / lessons.length) * 100);
+    }
+
+    function nextIncomplete() {
+      return lessons.find(l => !completed.has(l.key)) || lessons[lessons.length - 1];
+    }
+
+    function go(path) {
+      location.hash = path;
+      closeMobile();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function route() {
+      return (location.hash || '#/').slice(1);
+    }
+
+    function activeArea(path) {
+      if (path.startsWith('/sql')) return 'sql';
+      if (path.startsWith('/practice')) return 'practice';
+      if (path.startsWith('/js')) return 'js';
+      if (path.startsWith('/math')) return 'math';
+      return 'home';
+    }
+
+    function navButton(id, label, icon, path, disabled = false) {
+      const active = activeArea(route()) === id;
+      return `<button class="nav-item ${active ? 'active' : ''} ${disabled ? 'disabled' : ''}" ${disabled ? '' : `onclick="go('${path}')"`}>
+        <span class="nav-icon">${icon}</span>
+        <span>${label}</span>
+        ${disabled ? '<span class="coming">hamarosan</span>' : ''}
+      </button>`;
+    }
+
+    function shell(content) {
+      return `
+        <header class="topbar">
+          <div style="display:flex;align-items:center;gap:8px">
+            <button class="mobile-menu" onclick="toggleMobile()" aria-label="Menü">☰</button>
+            <button class="brand" onclick="go('/')">
+              <span class="brand-mark">SM</span>
+              <span>SchoolMaterials</span>
+            </button>
+          </div>
+          <div class="search-wrap">
+            <span class="search-icon">⌕</span>
+            <input id="searchBox" class="search" placeholder="Keresés a tananyagok között..." autocomplete="off" oninput="searchLessons(this.value)" onfocus="searchLessons(this.value)" />
+            <span class="kbd">/</span>
+            <div id="searchResults" class="search-results"></div>
+          </div>
+          <div class="top-actions">
+            <button class="icon-btn" title="Értesítések">•</button>
+            <div class="profile">
+              <div class="avatar">D</div>
+              <div class="profile-text"><strong>Diák</strong><small>Tanulói felület</small></div>
+            </div>
+          </div>
+        </header>
+        <div id="scrim" class="scrim" onclick="closeMobile()"></div>
+        <div class="shell">
+          <aside id="sidebar" class="sidebar">
+            <div class="sidebar-label">Tanulás</div>
+            <div class="nav-list">
+              ${navButton('home','Kezdőlap','H','/')}
+              ${navButton('practice','Gyakorló','GY','/practice',true)}
+              ${navButton('js','JavaScript','JS','/js',true)}
+              ${navButton('sql','SQL','SQL','/sql')}
+              ${navButton('math','Matek','M','/math',true)}
+            </div>
+            <div class="sidebar-bottom">
+              <b>SchoolMaterials</b>
+              Oktatási platform középiskolai tananyagokhoz.
+            </div>
+          </aside>
+          <main class="main">${content}</main>
+        </div>`;
+    }
+
+    function homePage() {
+      const current = nextIncomplete();
+      const p = pct();
+      return shell(`<div class="content">
+        <div class="welcome">
+          <div class="welcome-copy">
+            <div class="eyebrow">Kezdőlap</div>
+            <h1>Tanulj a saját tempódban.</h1>
+            <p>A SchoolMaterials egy helyen rendezi a tanórai anyagokat, példákat és gyakorlófeladatokat. Válassz témát, haladj leckéről leckére, és mindig ott folytasd, ahol abbahagytad.</p>
+          </div>
+          <section class="continue-card">
+            <div class="continue-top"><span>Folytasd a tanulást</span><b class="progress-chip">${p}% kész</b></div>
+            <h3>${current.title}</h3>
+            <p>SQL · ${current.module === 1 ? 'Adatbázis-kezelés 1' : 'Adatbázis-kezelés 2'} · ${current.minutes} perc</p>
+            <div class="bar"><i style="width:${p}%"></i></div>
+            <div class="continue-actions"><button class="btn primary" onclick="go('/sql/${current.module}/${current.index}')">Folytatás →</button></div>
+          </section>
+        </div>
+
+        <div class="section-head">
+          <div><h2>Tantárgyaid</h2><p>A platform témakörök szerint rendezi az összes tananyagot.</p></div>
+        </div>
+        <div class="course-grid">
+          <article class="course-card practice disabled">
+            <div class="course-badge">GY</div><h3>Gyakorló</h3><p>Összetett gyakorlófeladatok és felkészülés dolgozatokra.</p>
+            <div class="course-meta"><span>Feltöltés alatt</span><span>Hamarosan</span></div>
+          </article>
+          <article class="course-card js disabled">
+            <div class="course-badge">JS</div><h3>JavaScript</h3><p>Programozási alapok, DOM, aszinkron működés és webes kliensoldal.</p>
+            <div class="course-meta"><span>Feltöltés alatt</span><span>Hamarosan</span></div>
+          </article>
+          <article class="course-card" onclick="go('/sql')">
+            <div class="course-badge">SQL</div><h3>SQL</h3><p>Adatbázis-kezelés az alapoktól a relációs tervezésen át a backend használatig.</p>
+            <div class="course-meta"><span>38 lecke · 2 modul</span><span class="status-live">Elérhető</span></div>
+          </article>
+          <article class="course-card math disabled">
+            <div class="course-badge">M</div><h3>Matek</h3><p>Matematikai összefoglalók, feladatok és lépésről lépésre megoldások.</p>
+            <div class="course-meta"><span>Feltöltés alatt</span><span>Hamarosan</span></div>
+          </article>
+        </div>
+
+        <div class="stats">
+          <div class="stat"><small>Elérhető SQL modul</small><strong>2</strong></div>
+          <div class="stat"><small>SQL leckék száma</small><strong>38</strong></div>
+          <div class="stat"><small>Saját haladás</small><strong>${p}%</strong></div>
+        </div>
+        <div class="footer-note">SchoolMaterials · Tanulói oktatási felület</div>
+      </div>`);
+    }
+
+    function moduleBlock(m) {
+      return `<details class="module" ${m.id === 1 ? 'open' : ''}>
+        <summary>
+          <div class="module-no">0${m.id}</div>
+          <div><h2>${m.name}</h2><p>${m.subtitle}</p></div>
+          <div class="module-count">${m.lessons.length} lecke</div>
+        </summary>
+        <div class="lesson-list">
+          ${m.lessons.map((title, i) => {
+            const key = `m${m.id}-${i}`;
+            const lesson = lessons.find(l => l.key === key);
+            const done = completed.has(key);
+            return `<button class="lesson-row ${done ? 'done' : ''}" onclick="go('/sql/${m.id}/${i}')">
+              <span class="lesson-index">${done ? '✓' : String(i+1).padStart(2,'0')}</span>
+              <span class="lesson-name">${title}</span>
+              <span class="lesson-time">${lesson.minutes} perc</span>
+              <span class="arrow">›</span>
+            </button>`;
+          }).join('')}
+        </div>
+      </details>`;
+    }
+
+    function sqlPage() {
+      const p = pct();
+      return shell(`<div class="content">
+        <div class="crumbs"><button onclick="go('/')">Kezdőlap</button><span>/</span><span>SQL</span></div>
+        <section class="sql-hero">
+          <div>
+            <div class="eyebrow">Adatbázis-kezelés</div>
+            <h1>SQL</h1>
+            <p>Tanulási útvonal az egytáblás lekérdezésektől a relációs adatbázisokon és összetett lekérdezéseken át az alkalmazások adatbázis-kezeléséig.</p>
+            <div class="sql-tags"><span class="sql-tag">2 modul</span><span class="sql-tag">38 lecke</span><span class="sql-tag">Elmélet + példák + gyakorlás</span></div>
+          </div>
+          <div class="course-progress-card">
+            <small>Kurzus előrehaladás</small><strong>${p}%</strong>
+            <div class="bar"><i style="width:${p}%"></i></div>
+            <small style="display:block;margin-top:9px">${completed.size} / ${lessons.length} lecke teljesítve</small>
+          </div>
+        </section>
+
+        <div class="section-head">
+          <div><h2>Tanulási útvonal</h2><p>Nyisd le a modulokat, és haladj végig a leckéken sorrendben.</p></div>
+          <button class="text-link" onclick="go('/sql/${nextIncomplete().module}/${nextIncomplete().index}')">Folytatás →</button>
+        </div>
+        <div class="module-stack">${modules.map(moduleBlock).join('')}</div>
+        <div class="footer-note">A részletes SQL tananyagok feltöltése folyamatban van; a teljes kurzusszerkezet már használható.</div>
+      </div>`);
+    }
+
+    function rail(modId, currentIndex) {
+      const m = modules.find(x => x.id === modId);
+      return `<aside class="course-rail">
+        <div class="rail-head"><small>SQL kurzus</small><h3>${m.name}</h3></div>
+        <div class="rail-module-title">${m.subtitle}</div>
+        ${m.lessons.map((title, i) => {
+          const key = `m${m.id}-${i}`;
+          return `<button class="rail-lesson ${i === currentIndex ? 'current' : ''} ${completed.has(key) ? 'done' : ''}" onclick="go('/sql/${m.id}/${i}')">
+            <span class="rail-dot">${completed.has(key) ? '✓' : i+1}</span><span>${title}</span>
+          </button>`;
+        }).join('')}
+      </aside>`;
+    }
+
+    function exampleFor(title) {
+      const t = title.toUpperCase();
+      if (t.includes('JOIN')) return `<span class="kw">SELECT</span> t.nev, o.osztalynev\n<span class="kw">FROM</span> tanulok t\n<span class="kw">INNER JOIN</span> osztalyok o <span class="kw">ON</span> t.osztaly_id = o.id;`;
+      if (t.includes('GROUP BY') || t.includes('ÖSSZESÍT')) return `<span class="kw">SELECT</span> osztaly, <span class="kw">AVG</span>(atlag) AS osztaly_atlag\n<span class="kw">FROM</span> tanulok\n<span class="kw">GROUP BY</span> osztaly;`;
+      if (t.includes('WHERE') || t.includes('FELTÉTEL')) return `<span class="kw">SELECT</span> nev, atlag\n<span class="kw">FROM</span> tanulok\n<span class="kw">WHERE</span> atlag >= 4.0\n<span class="kw">ORDER BY</span> atlag <span class="kw">DESC</span>;`;
+      if (t.includes('CREATE') || t.includes('LÉTREHOZ') || t.includes('KULCS') || t.includes('MEGSZORÍT')) return `<span class="kw">CREATE TABLE</span> tanulok (\n  id INT <span class="kw">PRIMARY KEY</span>,\n  nev VARCHAR(100) <span class="kw">NOT NULL</span>\n);`;
+      if (t.includes('INSERT') || t.includes('UPDATE') || t.includes('DELETE') || t.includes('ADATMÓDOSÍTÁS')) return `<span class="kw">UPDATE</span> tanulok\n<span class="kw">SET</span> atlag = 4.6\n<span class="kw">WHERE</span> id = 12;`;
+      return `<span class="cm">-- A lecke mintapéldája</span>\n<span class="kw">SELECT</span> *\n<span class="kw">FROM</span> tanulok\n<span class="kw">ORDER BY</span> nev;`;
+    }
+
+    function lessonPage(modId, index) {
+      const m = modules.find(x => x.id === modId);
+      if (!m || index < 0 || index >= m.lessons.length) return notFound();
+      const lesson = lessons.find(l => l.module === modId && l.index === index);
+      const globalIndex = lessons.findIndex(l => l.key === lesson.key);
+      const prev = lessons[globalIndex - 1];
+      const next = lessons[globalIndex + 1];
+      const done = completed.has(lesson.key);
+
+      return shell(`<div class="content" style="max-width:1320px">
+        <div class="crumbs"><button onclick="go('/')">Kezdőlap</button><span>/</span><button onclick="go('/sql')">SQL</button><span>/</span><span>${m.name}</span></div>
+        <div class="lesson-layout">
+          ${rail(modId, index)}
+          <article class="lesson-article">
+            <header class="lesson-header">
+              <div class="eyebrow">${m.name} · ${lesson.number}. lecke</div>
+              <h1>${lesson.title}</h1>
+              <p class="lesson-sub">A lecke felülete már készen áll a részletes oktatási anyaghoz. Az anyag elméleti magyarázattal, kódpéldával és önálló gyakorlással épül fel.</p>
+              <div class="lesson-meta"><span class="pill teal">SQL</span><span class="pill">${lesson.minutes} perc</span><span class="pill">Tananyag + példa + gyakorlás</span></div>
+            </header>
+
+            <div class="learning-path">
+              <div class="path-card"><span class="path-step">01</span><b>Értsd meg</b><span>Rövid, lényegre törő elméleti magyarázat.</span></div>
+              <div class="path-card"><span class="path-step">02</span><b>Nézd meg</b><span>Átlátható SQL példa és várható működés.</span></div>
+              <div class="path-card"><span class="path-step">03</span><b>Próbáld ki</b><span>Önálló feladat a frissen tanultak gyakorlására.</span></div>
+            </div>
+
+            <section class="material">
+              <h2>Miről lesz szó?</h2>
+              <p>Ebben a leckében a <strong>${lesson.title}</strong> témakör kerül feldolgozásra. A végleges tananyag lépésről lépésre vezeti majd végig a tanulót a fogalomtól a gyakorlati alkalmazásig.</p>
+
+              <div class="notice"><div><b>Tananyag szerkesztés alatt</b><span>A kurzus szerkezete és a tanulói felület elkészült. A részletes magyarázatok és feladatok fokozatosan kerülnek feltöltésre.</span></div></div>
+
+              <h2>Mintapélda</h2>
+              <p>A végleges leckékben minden új fogalom közvetlenül kipróbálható SQL példával jelenik meg.</p>
+              <div class="code-label"><span>SQL példa</span><span>school_db</span></div>
+              <pre><code>${exampleFor(lesson.title)}</code></pre>
+
+              <h2>Mit fogsz tudni a lecke végére?</h2>
+              <ul>
+                <li>felismerni a témakör szerepét egy adatbázis-kezelési feladatban;</li>
+                <li>értelmezni a kapcsolódó SQL-szintaxist és annak részeit;</li>
+                <li>önálló lekérdezésben vagy adatbázis-feladatban alkalmazni a tanultakat.</li>
+              </ul>
+
+              <div class="practice-box"><small>Gyakorlás</small><h3>Önálló feladat helye</h3><p>Itt jelennek majd meg az egymásra épülő gyakorlófeladatok, ellenőrizhető elvárt kimenettel.</p></div>
+            </section>
+
+            <div class="lesson-footer">
+              <div>${prev ? `<button class="btn" onclick="go('/sql/${prev.module}/${prev.index}')">← Előző</button>` : ''}</div>
+              <button class="btn ${done ? 'done' : 'primary'} complete" onclick="toggleComplete('${lesson.key}')">${done ? '✓ Teljesítve' : 'Lecke teljesítése'}</button>
+              <div class="right">${next ? `<button class="btn primary" onclick="go('/sql/${next.module}/${next.index}')">Következő →</button>` : `<button class="btn primary" onclick="go('/sql')">Kurzus áttekintése</button>`}</div>
+            </div>
+          </article>
+        </div>
+      </div>`);
+    }
+
+    function comingSoon(title, icon) {
+      return shell(`<div class="content">
+        <div class="crumbs"><button onclick="go('/')">Kezdőlap</button><span>/</span><span>${title}</span></div>
+        <div class="empty-state"><div class="empty-icon">${icon}</div><h2>${title}</h2><p>Ennek a témakörnek a tananyagai még feltöltés alatt vannak. Az SQL kurzus már teljes menüstruktúrával elérhető.</p><div style="margin-top:20px"><button class="btn primary" onclick="go('/sql')">SQL megnyitása</button></div></div>
+      </div>`);
+    }
+
+    function notFound() {
+      return shell(`<div class="content"><div class="empty-state"><div class="empty-icon">404</div><h2>Az oldal nem található</h2><p>A keresett tananyag nem létezik.</p><div style="margin-top:20px"><button class="btn primary" onclick="go('/')">Vissza a kezdőlapra</button></div></div></div>`);
+    }
+
+    function toggleComplete(key) {
+      if (completed.has(key)) completed.delete(key); else completed.add(key);
+      saveProgress();
+      render();
+    }
+
+    function toggleMobile() {
+      document.getElementById('sidebar')?.classList.toggle('open');
+      document.getElementById('scrim')?.classList.toggle('open');
+    }
+    function closeMobile() {
+      document.getElementById('sidebar')?.classList.remove('open');
+      document.getElementById('scrim')?.classList.remove('open');
+    }
+
+    function searchLessons(value) {
+      const box = document.getElementById('searchResults');
+      if (!box) return;
+      const q = value.trim().toLowerCase();
+      if (!q) { box.classList.remove('open'); box.innerHTML = ''; return; }
+      const results = lessons.filter(l => l.title.toLowerCase().includes(q)).slice(0, 8);
+      box.innerHTML = results.length ? results.map(l => `<button class="search-result" onclick="go('/sql/${l.module}/${l.index}')">
+        <span class="mini-no">${l.number}</span><span><strong>${l.title}</strong><small>${l.module === 1 ? 'Adatbázis-kezelés 1' : 'Adatbázis-kezelés 2'}</small></span><span>›</span>
+      </button>`).join('') : `<div style="padding:15px;color:#7d8993;font-size:12px">Nincs találat erre a kifejezésre.</div>`;
+      box.classList.add('open');
+    }
+
+    function render() {
+      const path = route();
+      const match = path.match(/^\/sql\/(1|2)\/(\d+)$/);
+      if (match) app.innerHTML = lessonPage(Number(match[1]), Number(match[2]));
+      else if (path === '/sql') app.innerHTML = sqlPage();
+      else if (path === '/practice') app.innerHTML = comingSoon('Gyakorló', 'GY');
+      else if (path === '/js') app.innerHTML = comingSoon('JavaScript', 'JS');
+      else if (path === '/math') app.innerHTML = comingSoon('Matek', 'M');
+      else if (path === '/' || path === '') app.innerHTML = homePage();
+      else app.innerHTML = notFound();
+    }
+
+    window.addEventListener('hashchange', render);
+    window.addEventListener('keydown', e => {
+      if (e.key === '/' && document.activeElement?.tagName !== 'INPUT') {
+        e.preventDefault();
+        document.getElementById('searchBox')?.focus();
+      }
+      if (e.key === 'Escape') {
+        document.getElementById('searchResults')?.classList.remove('open');
+        closeMobile();
+      }
+    });
+    document.addEventListener('click', e => {
+      if (!e.target.closest('.search-wrap')) document.getElementById('searchResults')?.classList.remove('open');
+    });
+
+    render();
+  </script>
+</body>
+</html>
