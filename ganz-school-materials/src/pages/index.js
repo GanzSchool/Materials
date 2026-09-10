@@ -1,6 +1,6 @@
 import React from 'react';
 import Layout from '@theme/Layout';
-import clsx from 'clsx';
+import Link from '@docusaurus/Link';
 import styles from './index.module.css';
 
 export default function Home() {
@@ -20,15 +20,15 @@ export default function Home() {
 
       <main className={styles.mainContent}>
         <div className={styles.cardGrid}>
-          <a href="/Materials/docs/Webprogramozás/HTML" className={styles.card}>
+          <Link to="/docs/Webprogramozás/HTML" className={styles.card}>
             <h3>HTML</h3>
-          </a>
-          <a href="/Materials/docs/Webprogramozás/CSS" className={styles.card}>
+          </Link>
+          <Link to="/docs/Webprogramozás/CSS" className={styles.card}>
             <h3>CSS</h3>
-          </a>
-          <a href="/Materials/docs/Webprogramozás/JavaScript" className={styles.card}>
+          </Link>
+          <Link to="/docs/Webprogramozás/JavaScript" className={styles.card}>
             <h3>JavaScript</h3>
-          </a>
+          </Link>
         </div>
       </main>
     </Layout>
