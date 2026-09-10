@@ -1,0 +1,6 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "installCommand": "npm ci --prefix ganz-school-materials",
+  "buildCommand": "npm run build --prefix ganz-school-materials",
+  "outputDirectory": "ganz-school-materials/build"
+}
