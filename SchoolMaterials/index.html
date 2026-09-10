@@ -6,33 +6,137 @@
   <meta name="theme-color" content="#f7f7f8" />
   <title>SchoolMaterials</title>
   <style>
-    :root{color-scheme:light;--bg:#f7f7f8;--surface:#ffffff;--surface-2:#f1f3f4;--text:#17191d;--muted:#68707c;--line:#e1e4e8;--accent:#087a67;--accent-soft:#e6f5f1;--accent-text:#066353;--code:#101821;--code-text:#dbe7ee;--shadow:0 12px 30px rgba(20,28,36,.06)}
-    [data-theme="dark"]{color-scheme:dark;--bg:#0f1114;--surface:#15181c;--surface-2:#1d2126;--text:#f2f3f5;--muted:#9ba3ae;--line:#2a2f36;--accent:#52ccb3;--accent-soft:#17372f;--accent-text:#7ee0cb;--code:#090d12;--code-text:#dbe7ee;--shadow:0 16px 36px rgba(0,0,0,.22)}
-    *{box-sizing:border-box}html,body{margin:0;min-width:320px;min-height:100%;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}button{font:inherit;color:inherit}.app-header{height:62px;position:sticky;top:0;z-index:100;background:color-mix(in srgb,var(--surface) 94%,transparent);border-bottom:1px solid var(--line);backdrop-filter:blur(14px)}.header-inner{height:100%;padding:0 18px;display:flex;align-items:center;justify-content:space-between;gap:14px}.brand{display:flex;align-items:center;gap:10px;border:0;background:none;padding:0;cursor:pointer;font-weight:760;font-size:17px;letter-spacing:-.35px}.brand-mark{width:32px;height:32px;border-radius:9px;display:grid;place-items:center;background:var(--text);color:var(--surface);font-size:10px;font-weight:850}.header-actions{display:flex;gap:8px;align-items:center}.icon-btn{width:38px;height:38px;border:1px solid var(--line);border-radius:10px;background:var(--surface);display:grid;place-items:center;cursor:pointer}.icon-btn:hover{background:var(--surface-2)}.icon-btn svg{width:17px;height:17px}.menu-btn{display:none}
-    .home{width:min(1040px,calc(100% - 36px));margin:0 auto;padding:56px 0 72px}.home-label{margin:0 0 8px;color:var(--accent);font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.11em}.home h1{margin:0;font-size:clamp(34px,5vw,52px);line-height:1.05;letter-spacing:-1.8px}.home-copy{margin:12px 0 26px;color:var(--muted);font-size:15px;line-height:1.65}.sql-card{width:100%;min-height:220px;border:1px solid var(--line);border-radius:20px;background:var(--surface);box-shadow:var(--shadow);padding:30px;display:flex;align-items:flex-end;justify-content:space-between;gap:24px;text-align:left;cursor:pointer}.sql-card:hover{border-color:color-mix(in srgb,var(--accent) 45%,var(--line))}.sql-card h2{margin:0 0 8px;font-size:clamp(36px,5vw,54px);letter-spacing:-1.7px;line-height:1}.sql-card p{margin:0;max-width:650px;color:var(--muted);line-height:1.6}.open-btn{width:46px;height:46px;border-radius:13px;background:var(--accent);color:white;display:grid;place-items:center;flex:none}[data-theme="dark"] .open-btn{color:#08251f}.open-btn svg{width:19px;height:19px}
-    .learning-shell{display:grid;grid-template-columns:286px minmax(0,1fr);min-height:calc(100vh - 62px)}.course-sidebar{position:sticky;top:62px;height:calc(100vh - 62px);overflow-y:auto;background:var(--surface);border-right:1px solid var(--line);padding:20px 12px 28px}.sidebar-head{padding:0 8px 16px;border-bottom:1px solid var(--line);margin-bottom:12px}.sidebar-home{border:0;background:none;padding:3px 0 14px;color:var(--muted);font-size:12px;cursor:pointer}.sidebar-home:hover{color:var(--text)}.sidebar-head h2{margin:0;font-size:22px;letter-spacing:-.6px}.sidebar-head p{margin:4px 0 0;color:var(--muted);font-size:12px}.accordion{display:grid;gap:7px}.module-toggle{width:100%;display:grid;grid-template-columns:minmax(0,1fr) 18px;align-items:center;gap:8px;border:0;border-radius:10px;background:transparent;padding:11px 10px;text-align:left;cursor:pointer}.module-toggle:hover{background:var(--surface-2)}.module-toggle.active,.module-toggle.expanded{background:var(--accent-soft)}.module-toggle small{display:block;margin-bottom:3px;color:var(--muted);font-size:9px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}.module-toggle strong{display:block;font-size:13px;line-height:1.3}.module-toggle.active strong,.module-toggle.expanded strong{color:var(--accent-text)}.chev{display:grid;place-items:center;color:var(--muted);transition:transform .16s ease}.module-toggle.expanded .chev{transform:rotate(90deg)}.chev svg{width:15px;height:15px}.module-lessons{display:none;padding:3px 0 5px 8px}.module-lessons.expanded{display:grid;gap:2px}.sidebar-lesson{width:100%;border:0;background:transparent;border-radius:8px;padding:8px 10px;color:var(--muted);text-align:left;font-size:12px;line-height:1.35;cursor:pointer}.sidebar-lesson:hover{background:var(--surface-2);color:var(--text)}.sidebar-lesson.active{background:var(--accent-soft);color:var(--accent-text);font-weight:700}
-    .main-pane{min-width:0;padding:40px clamp(24px,5vw,64px) 64px}.lesson{width:min(820px,100%);margin:0 auto}.crumb{display:flex;align-items:center;gap:7px;color:var(--muted);font-size:12px;margin-bottom:24px}.crumb button{border:0;background:none;padding:0;color:var(--muted);cursor:pointer}.crumb button:hover{color:var(--text)}.lesson-kicker{margin:0 0 10px;color:var(--accent);font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.09em}.lesson h1{margin:0 0 28px;font-size:clamp(32px,4.7vw,50px);line-height:1.08;letter-spacing:-1.7px;overflow-wrap:anywhere}.material{border:1px solid var(--line);border-radius:16px;background:var(--surface);padding:clamp(20px,4vw,30px)}.material h2{margin:0 0 8px;font-size:18px}.material p{margin:0;color:var(--muted);line-height:1.7}.sample{margin-top:22px}.sample-label{margin-bottom:8px;color:var(--muted);font-size:11px;font-weight:700}pre{margin:0;border-radius:12px;background:var(--code);color:var(--code-text);padding:17px;overflow-x:auto;font:13px/1.6 "SFMono-Regular",Consolas,"Liberation Mono",monospace}.pager{display:flex;justify-content:space-between;gap:12px;margin-top:18px}.pager-btn{max-width:48%;border:1px solid var(--line);border-radius:11px;background:var(--surface);padding:11px 13px;font-size:12px;font-weight:650;cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.pager-btn:hover{background:var(--surface-2)}.pager-btn:disabled{opacity:.35;cursor:default}.backdrop{display:none}
-    @media(max-width:860px){.learning-shell{grid-template-columns:250px minmax(0,1fr)}.main-pane{padding-left:24px;padding-right:24px}}
+    :root{
+      color-scheme:light;
+      --bg:#f7f7f8;
+      --surface:#ffffff;
+      --surface-2:#f1f3f4;
+      --text:#17191d;
+      --muted:#68707c;
+      --line:#e1e4e8;
+      --accent:#087a67;
+      --accent-soft:#e6f5f1;
+      --accent-text:#066353;
+      --code:#101821;
+      --code-text:#dbe7ee;
+      --shadow:0 12px 30px rgba(20,28,36,.06)
+    }
+    [data-theme="dark"]{
+      color-scheme:dark;
+      --bg:#0f1114;
+      --surface:#15181c;
+      --surface-2:#1d2126;
+      --text:#f2f3f5;
+      --muted:#9ba3ae;
+      --line:#2a2f36;
+      --accent:#52ccb3;
+      --accent-soft:#17372f;
+      --accent-text:#7ee0cb;
+      --code:#090d12;
+      --code-text:#dbe7ee;
+      --shadow:0 16px 36px rgba(0,0,0,.22)
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;min-width:320px;min-height:100%;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+    button{font:inherit;color:inherit}
+    .app-header{height:62px;position:sticky;top:0;z-index:100;background:color-mix(in srgb,var(--surface) 94%,transparent);border-bottom:1px solid var(--line);backdrop-filter:blur(14px)}
+    .header-inner{height:100%;padding:0 18px;display:flex;align-items:center;justify-content:space-between;gap:14px}
+    .brand{display:flex;align-items:center;gap:10px;border:0;background:none;padding:0;cursor:pointer;font-weight:760;font-size:17px;letter-spacing:-.35px}
+    .brand-mark{width:32px;height:32px;border-radius:9px;display:grid;place-items:center;background:var(--text);color:var(--surface);font-size:10px;font-weight:850}
+    .header-actions{display:flex;gap:8px;align-items:center}
+    .icon-btn{width:38px;height:38px;border:1px solid var(--line);border-radius:10px;background:var(--surface);display:grid;place-items:center;cursor:pointer}
+    .icon-btn:hover{background:var(--surface-2)}
+    .icon-btn svg{width:17px;height:17px}
+    .menu-btn{display:none}
+    .home{width:min(1040px,calc(100% - 36px));margin:0 auto;padding:56px 0 72px}
+    .home-label{margin:0 0 8px;color:var(--accent);font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.11em}
+    .home h1{margin:0;font-size:clamp(34px,5vw,52px);line-height:1.05;letter-spacing:-1.8px}
+    .home-copy{margin:12px 0 26px;color:var(--muted);font-size:15px;line-height:1.65}
+    .sql-card{width:100%;min-height:220px;border:1px solid var(--line);border-radius:20px;background:var(--surface);box-shadow:var(--shadow);padding:30px;display:flex;align-items:flex-end;justify-content:space-between;gap:24px;text-align:left;cursor:pointer}
+    .sql-card:hover{border-color:color-mix(in srgb,var(--accent) 45%,var(--line))}
+    .sql-card h2{margin:0 0 8px;font-size:clamp(36px,5vw,54px);letter-spacing:-1.7px;line-height:1}
+    .sql-card p{margin:0;max-width:650px;color:var(--muted);line-height:1.6}
+    .open-btn{width:46px;height:46px;border-radius:13px;background:var(--accent);color:white;display:grid;place-items:center;flex:none}
+    [data-theme="dark"] .open-btn{color:#08251f}
+    .open-btn svg{width:19px;height:19px}
+    .learning-shell{display:grid;grid-template-columns:286px minmax(0,1fr);min-height:calc(100vh - 62px)}
+    .course-sidebar{position:sticky;top:62px;width:286px;height:calc(100vh - 62px);overflow-y:scroll;scrollbar-gutter:stable;background:var(--surface);border-right:1px solid var(--line);padding:20px 12px 28px}
+    .sidebar-head{padding:0 8px 16px;border-bottom:1px solid var(--line);margin-bottom:12px}
+    .sidebar-home{border:0;background:none;padding:3px 0 14px;color:var(--muted);font-size:12px;cursor:pointer}
+    .sidebar-home:hover{color:var(--text)}
+    .sidebar-head h2{margin:0;font-size:22px;letter-spacing:-.6px}
+    .sidebar-head p{margin:4px 0 0;color:var(--muted);font-size:12px}
+    .accordion{display:grid;gap:7px}
+    .module-toggle{width:100%;display:grid;grid-template-columns:minmax(0,1fr) 18px;align-items:center;gap:8px;border:0;border-radius:10px;background:transparent;padding:11px 10px;text-align:left;cursor:pointer}
+    .module-toggle:hover{background:var(--surface-2)}
+    .module-toggle.active,.module-toggle.expanded{background:var(--accent-soft)}
+    .module-toggle small{display:block;margin-bottom:3px;color:var(--muted);font-size:9px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+    .module-toggle strong{display:block;font-size:13px;line-height:1.3}
+    .module-toggle.active strong,.module-toggle.expanded strong{color:var(--accent-text)}
+    .chev{display:grid;place-items:center;color:var(--muted);transition:transform .16s ease}
+    .module-toggle.expanded .chev{transform:rotate(90deg)}
+    .chev svg{width:15px;height:15px}
+    .module-lessons{display:none;padding:3px 0 5px 8px}
+    .module-lessons.expanded{display:grid;gap:2px}
+    .sidebar-lesson{width:100%;min-height:38px;border:0;background:transparent;border-radius:8px;padding:8px 10px;color:var(--muted);text-align:left;font-size:12px;font-weight:500;line-height:1.35;cursor:pointer}
+    .sidebar-lesson:hover{background:var(--surface-2);color:var(--text)}
+    .sidebar-lesson.active{background:var(--accent-soft);color:var(--accent-text);font-weight:500}
+    .main-pane{min-width:0;padding:40px clamp(24px,5vw,64px) 64px}
+    .lesson{width:min(820px,100%);margin:0 auto}
+    .crumb{display:flex;align-items:center;gap:7px;color:var(--muted);font-size:12px;margin-bottom:24px}
+    .crumb button{border:0;background:none;padding:0;color:var(--muted);cursor:pointer}
+    .crumb button:hover{color:var(--text)}
+    .lesson-kicker{margin:0 0 10px;color:var(--accent);font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.09em}
+    .lesson h1{margin:0 0 28px;font-size:clamp(32px,4.7vw,50px);line-height:1.08;letter-spacing:-1.7px;overflow-wrap:anywhere}
+    .material{border:1px solid var(--line);border-radius:16px;background:var(--surface);padding:clamp(20px,4vw,30px)}
+    .material h2{margin:0 0 8px;font-size:18px}
+    .material p{margin:0;color:var(--muted);line-height:1.7}
+    .sample{margin-top:22px}
+    .sample-label{margin-bottom:8px;color:var(--muted);font-size:11px;font-weight:700}
+    pre{margin:0;border-radius:12px;background:var(--code);color:var(--code-text);padding:17px;overflow-x:auto;font:13px/1.6 "SFMono-Regular",Consolas,"Liberation Mono",monospace}
+    .pager{display:flex;justify-content:space-between;gap:12px;margin-top:18px}
+    .pager-btn{max-width:48%;border:1px solid var(--line);border-radius:11px;background:var(--surface);padding:11px 13px;font-size:12px;font-weight:650;cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .pager-btn:hover{background:var(--surface-2)}
+    .pager-btn:disabled{opacity:.35;cursor:default}
+    .backdrop{display:none}
+    @media(max-width:860px){.learning-shell{grid-template-columns:250px minmax(0,1fr)}.course-sidebar{width:250px}.main-pane{padding-left:24px;padding-right:24px}}
     @media(max-width:700px){.app-header{height:58px}.header-inner{padding:0 12px}.brand{font-size:15px}.brand-mark{width:30px;height:30px}.menu-btn{display:grid}.learning-shell{display:block;min-height:calc(100vh - 58px)}.course-sidebar{position:fixed;z-index:90;top:58px;left:0;bottom:0;width:min(86vw,310px);height:auto;transform:translateX(-103%);transition:transform .18s ease;box-shadow:18px 0 42px rgba(0,0,0,.18)}.course-sidebar.open{transform:translateX(0)}.backdrop{position:fixed;z-index:80;inset:58px 0 0;background:rgba(0,0,0,.38);display:none}.backdrop.open{display:block}.main-pane{padding:26px 15px 44px}.pager{flex-direction:column}.pager-btn{max-width:none;width:100%}.home{width:min(100% - 28px,1040px);padding:36px 0 48px}.sql-card{min-height:190px;padding:24px;align-items:flex-end}}
   </style>
 </head>
 <body>
-<header class="app-header"><div class="header-inner"><button class="brand" id="brandBtn" aria-label="Kezdőlap"><span class="brand-mark">SM</span><span>SchoolMaterials</span></button><div class="header-actions"><button class="icon-btn menu-btn" id="menuBtn" aria-label="Tananyag menü" title="Tananyag menü"></button><button class="icon-btn" id="themeBtn" aria-label="Téma váltása" title="Téma váltása"></button></div></div></header>
-<div id="app"></div>
-<script>
-const modules=[{title:'Adatbázis-kezelés 1',lessons:['Adatbázis, tábla, rekord, mező és az SQL alapjai','SELECT, FROM és oszlopok lekérdezése','WHERE és összehasonlító feltételek','DISTINCT, ORDER BY, ASC és DESC','Több feltétel – AND, OR, NOT','NULL, IS NULL és IS NOT NULL','Adatmódosítás – INSERT, UPDATE, DELETE','Összesítés – COUNT, SUM, AVG, MIN, MAX','Csoportosítás – GROUP BY és HAVING','Rendezés, szűrés, csoportosítás és összesítés egy lekérdezésben','Adatbázis és tábla létrehozása','SQL adattípusok','Alapvető megszorítások – PRIMARY KEY, NOT NULL, UNIQUE','Egytáblás komplex gyakorlás','Egytáblás SQL számonkérés']},{title:'Adatbázis-kezelés 2',lessons:['Relációs adatbázisok felépítése','Elsődleges és idegen kulcsok','Táblák közötti kapcsolatok','Többtáblás adatbázis létrehozása','Adatbázis-tervezés','Redundanciamentes adatbázis-tervezés','Adatbázismodell-diagram készítése','Többtáblás lekérdezések alapjai','INNER JOIN','Külső JOIN-ok, elsősorban LEFT JOIN','Több tábla összekapcsolása egy lekérdezésben','JOIN + WHERE + ORDER BY','JOIN + összesítő függvények','JOIN + GROUP BY + HAVING','Összetett / haladó SQL-lekérdezések','Komplex többtáblás adatbázis-tervezési feladat','Adatbázis exportálása / dump készítése','Adatbázis használata backend alkalmazásból','Adatbázist használó REST API','ORM – objektum-relációs leképezés','Adatbázist kezelő konzolos / grafikus alkalmazás','Komplex webes + adatbázis-kezelési vizsgafeladat','Szakmai vizsga típusú adatbázis-feladatok']}];
-const app=document.getElementById('app'),themeBtn=document.getElementById('themeBtn'),menuBtn=document.getElementById('menuBtn'),brandBtn=document.getElementById('brandBtn');
-const moon='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.3 15.5A8.5 8.5 0 0 1 8.5 3.7 8.5 8.5 0 1 0 20.3 15.5Z"/></svg>',sun='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3.6"/><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42"/></svg>',menuIcon='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16M4 12h16M4 17h16"/></svg>',arrow='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m9 18 6-6-6-6"/></svg>';
-menuBtn.innerHTML=menuIcon;
-function setTheme(t){document.documentElement.dataset.theme=t;document.querySelector('meta[name="theme-color"]').content=t==='dark'?'#0f1114':'#f7f7f8';themeBtn.innerHTML=t==='dark'?sun:moon;localStorage.setItem('schoolmaterials-theme',t)}
-const saved=localStorage.getItem('schoolmaterials-theme');setTheme(saved||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'));themeBtn.onclick=()=>setTheme(document.documentElement.dataset.theme==='dark'?'light':'dark');brandBtn.onclick=showHome;menuBtn.onclick=toggleSidebar;
-function flatLessons(){return modules.flatMap((m,mi)=>m.lessons.map((title,li)=>({mi,li,title,module:m.title})))}function flatIndex(mi,li){return modules.slice(0,mi).reduce((n,m)=>n+m.lessons.length,0)+li}
-function sidebarHtml(openModule,activeModule,activeLesson){return `<aside class="course-sidebar" id="sidebar"><div class="sidebar-head"><button class="sidebar-home" data-home>← Kezdőlap</button><h2>SQL</h2><p>Tananyagok</p></div><div class="accordion">${modules.map((m,mi)=>`<div><button class="module-toggle ${mi===openModule?'expanded':''} ${mi===activeModule?'active':''}" data-module="${mi}"><span><small>Rész ${mi+1}</small><strong>${m.title}</strong></span><span class="chev">${arrow}</span></button><div class="module-lessons ${mi===openModule?'expanded':''}" data-lessons="${mi}">${m.lessons.map((l,li)=>`<button class="sidebar-lesson ${mi===activeModule&&li===activeLesson?'active':''}" data-mi="${mi}" data-li="${li}">${l}</button>`).join('')}</div></div>`).join('')}</div></aside><div class="backdrop" id="backdrop"></div>`}
-function bindSidebar(openModule){document.querySelector('[data-home]')?.addEventListener('click',showHome);document.querySelectorAll('[data-module]').forEach(btn=>{btn.addEventListener('click',()=>{const mi=Number(btn.dataset.module),already=btn.classList.contains('expanded');document.querySelectorAll('[data-module]').forEach(x=>x.classList.remove('expanded'));document.querySelectorAll('[data-lessons]').forEach(x=>x.classList.remove('expanded'));if(!already){btn.classList.add('expanded');document.querySelector(`[data-lessons="${mi}"]`).classList.add('expanded')}})});document.querySelectorAll('[data-mi]').forEach(btn=>btn.addEventListener('click',()=>{closeSidebar();showLesson(Number(btn.dataset.mi),Number(btn.dataset.li))}));document.getElementById('backdrop')?.addEventListener('click',closeSidebar)}
-function toggleSidebar(){document.getElementById('sidebar')?.classList.toggle('open');document.getElementById('backdrop')?.classList.toggle('open')}function closeSidebar(){document.getElementById('sidebar')?.classList.remove('open');document.getElementById('backdrop')?.classList.remove('open')}
-function showHome(){closeSidebar();menuBtn.style.display='none';window.scrollTo(0,0);app.innerHTML=`<main class="home"><p class="home-label">Tananyagok</p><h1>SchoolMaterials</h1><p class="home-copy">Belső oktatási felület.</p><button class="sql-card" id="sqlCard"><div><h2>SQL</h2><p>Adatbázis-kezelés, lekérdezések, relációs adatbázisok és a szakmai vizsgához szükséges témák.</p></div><span class="open-btn">${arrow}</span></button></main>`;document.getElementById('sqlCard').onclick=()=>showLesson(0,0)}
-function showLesson(mi,li){menuBtn.style.display='';window.scrollTo(0,0);const flat=flatLessons(),idx=flatIndex(mi,li),prev=flat[idx-1],next=flat[idx+1],title=modules[mi].lessons[li];app.innerHTML=`<div class="learning-shell">${sidebarHtml(mi,mi,li)}<main class="main-pane"><article class="lesson"><div class="crumb"><button id="homeCrumb">Kezdőlap</button><span>/</span><span>SQL</span><span>/</span><span>${modules[mi].title}</span></div><p class="lesson-kicker">${modules[mi].title}</p><h1>${title}</h1><section class="material"><h2>Tananyag</h2><p>A részletes oktatási tartalom ide kerül.</p><div class="sample"><div class="sample-label">SQL példa</div><pre><code>SELECT *\nFROM tabla;</code></pre></div></section><nav class="pager"><button class="pager-btn" id="prev" ${prev?'':'disabled'}>${prev?'← '+prev.title:'← Előző'}</button><button class="pager-btn" id="next" ${next?'':'disabled'}>${next?next.title+' →':'Következő →'}</button></nav></article></main></div>`;document.getElementById('homeCrumb').onclick=showHome;bindSidebar(mi);if(prev)document.getElementById('prev').onclick=()=>showLesson(prev.mi,prev.li);if(next)document.getElementById('next').onclick=()=>showLesson(next.mi,next.li)}
-showHome();
-</script>
+  <header class="app-header">
+    <div class="header-inner">
+      <button class="brand" id="brandBtn" aria-label="Kezdőlap"><span class="brand-mark">SM</span><span>SchoolMaterials</span></button>
+      <div class="header-actions">
+        <button class="icon-btn menu-btn" id="menuBtn" aria-label="Tananyag menü" title="Tananyag menü"></button>
+        <button class="icon-btn" id="themeBtn" aria-label="Téma váltása" title="Téma váltása"></button>
+      </div>
+    </div>
+  </header>
+  <div id="app"></div>
+  <script>
+    const modules=[
+      {title:'Adatbázis-kezelés 1',lessons:['Adatbázis, tábla, rekord, mező és az SQL alapjai','SELECT, FROM és oszlopok lekérdezése','WHERE és összehasonlító feltételek','DISTINCT, ORDER BY, ASC és DESC','Több feltétel – AND, OR, NOT','NULL, IS NULL és IS NOT NULL','Adatmódosítás – INSERT, UPDATE, DELETE','Összesítés – COUNT, SUM, AVG, MIN, MAX','Csoportosítás – GROUP BY és HAVING','Rendezés, szűrés, csoportosítás és összesítés egy lekérdezésben','Adatbázis és tábla létrehozása','SQL adattípusok','Alapvető megszorítások – PRIMARY KEY, NOT NULL, UNIQUE','Egytáblás komplex gyakorlás','Egytáblás SQL számonkérés']},
+      {title:'Adatbázis-kezelés 2',lessons:['Relációs adatbázisok felépítése','Elsődleges és idegen kulcsok','Táblák közötti kapcsolatok','Többtáblás adatbázis létrehozása','Adatbázis-tervezés','Redundanciamentes adatbázis-tervezés','Adatbázismodell-diagram készítése','Többtáblás lekérdezések alapjai','INNER JOIN','Külső JOIN-ok, elsősorban LEFT JOIN','Több tábla összekapcsolása egy lekérdezésben','JOIN + WHERE + ORDER BY','JOIN + összesítő függvények','JOIN + GROUP BY + HAVING','Összetett / haladó SQL-lekérdezések','Komplex többtáblás adatbázis-tervezési feladat','Adatbázis exportálása / dump készítése','Adatbázis használata backend alkalmazásból','Adatbázist használó REST API','ORM – objektum-relációs leképezés','Adatbázist kezelő konzolos / grafikus alkalmazás','Komplex webes + adatbázis-kezelési vizsgafeladat','Szakmai vizsga típusú adatbázis-feladatok']}
+    ];
+    const app=document.getElementById('app'),themeBtn=document.getElementById('themeBtn'),menuBtn=document.getElementById('menuBtn'),brandBtn=document.getElementById('brandBtn');
+    const moon='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.3 15.5A8.5 8.5 0 0 1 8.5 3.7 8.5 8.5 0 1 0 20.3 15.5Z"/></svg>',sun='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3.6"/><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42"/></svg>',menuIcon='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16M4 12h16M4 17h16"/></svg>',arrow='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m9 18 6-6-6-6"/></svg>';
+    menuBtn.innerHTML=menuIcon;
+    let learningMounted=false;
+    function setTheme(t){document.documentElement.dataset.theme=t;document.querySelector('meta[name="theme-color"]').content=t==='dark'?'#0f1114':'#f7f7f8';themeBtn.innerHTML=t==='dark'?sun:moon;localStorage.setItem('schoolmaterials-theme',t)}
+    setTheme(localStorage.getItem('schoolmaterials-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'));
+    themeBtn.onclick=()=>setTheme(document.documentElement.dataset.theme==='dark'?'light':'dark');brandBtn.onclick=showHome;menuBtn.onclick=toggleSidebar;
+    function flatLessons(){return modules.flatMap((m,mi)=>m.lessons.map((title,li)=>({mi,li,title,module:m.title})))}function flatIndex(mi,li){return modules.slice(0,mi).reduce((n,m)=>n+m.lessons.length,0)+li}
+    function sidebarHtml(){return `<aside class="course-sidebar" id="sidebar"><div class="sidebar-head"><button class="sidebar-home" data-home>← Kezdőlap</button><h2>SQL</h2><p>Tananyagok</p></div><div class="accordion">${modules.map((m,mi)=>`<div><button class="module-toggle" data-module="${mi}"><span><small>Rész ${mi+1}</small><strong>${m.title}</strong></span><span class="chev">${arrow}</span></button><div class="module-lessons" data-lessons="${mi}">${m.lessons.map((l,li)=>`<button class="sidebar-lesson" data-mi="${mi}" data-li="${li}">${l}</button>`).join('')}</div></div>`).join('')}</div></aside><div class="backdrop" id="backdrop"></div>`}
+    function mountLearningShell(){if(learningMounted)return;app.innerHTML=`<div class="learning-shell">${sidebarHtml()}<main class="main-pane" id="mainPane"></main></div>`;learningMounted=true;bindSidebar()}
+    function bindSidebar(){document.querySelector('[data-home]')?.addEventListener('click',showHome);document.querySelectorAll('[data-module]').forEach(btn=>btn.addEventListener('click',()=>{const mi=Number(btn.dataset.module),already=btn.classList.contains('expanded');setOpenModule(already?-1:mi)}));document.querySelectorAll('[data-mi]').forEach(btn=>btn.addEventListener('click',()=>{closeSidebar();showLesson(Number(btn.dataset.mi),Number(btn.dataset.li))}));document.getElementById('backdrop')?.addEventListener('click',closeSidebar)}
+    function setOpenModule(openModule){document.querySelectorAll('[data-module]').forEach(btn=>btn.classList.toggle('expanded',Number(btn.dataset.module)===openModule));document.querySelectorAll('[data-lessons]').forEach(panel=>panel.classList.toggle('expanded',Number(panel.dataset.lessons)===openModule))}
+    function updateSidebarState(mi,li){setOpenModule(mi);document.querySelectorAll('[data-module]').forEach(btn=>btn.classList.toggle('active',Number(btn.dataset.module)===mi));document.querySelectorAll('[data-mi]').forEach(btn=>{const active=Number(btn.dataset.mi)===mi&&Number(btn.dataset.li)===li;btn.classList.toggle('active',active);if(active)btn.setAttribute('aria-current','page');else btn.removeAttribute('aria-current')})}
+    function toggleSidebar(){document.getElementById('sidebar')?.classList.toggle('open');document.getElementById('backdrop')?.classList.toggle('open')}function closeSidebar(){document.getElementById('sidebar')?.classList.remove('open');document.getElementById('backdrop')?.classList.remove('open')}
+    function showHome(){closeSidebar();menuBtn.style.display='none';learningMounted=false;window.scrollTo(0,0);app.innerHTML=`<main class="home"><p class="home-label">Tananyagok</p><h1>SchoolMaterials</h1><p class="home-copy">Belső oktatási felület.</p><button class="sql-card" id="sqlCard"><div><h2>SQL</h2><p>Adatbázis-kezelés, lekérdezések, relációs adatbázisok és a szakmai vizsgához szükséges témák.</p></div><span class="open-btn">${arrow}</span></button></main>`;document.getElementById('sqlCard').onclick=()=>showLesson(0,0)}
+    function renderLessonContent(mi,li){const flat=flatLessons(),idx=flatIndex(mi,li),prev=flat[idx-1],next=flat[idx+1],title=modules[mi].lessons[li],pane=document.getElementById('mainPane');pane.innerHTML=`<article class="lesson"><div class="crumb"><button id="homeCrumb">Kezdőlap</button><span>/</span><span>SQL</span><span>/</span><span>${modules[mi].title}</span></div><p class="lesson-kicker">${modules[mi].title}</p><h1>${title}</h1><section class="material"><h2>Tananyag</h2><p>A részletes oktatási tartalom ide kerül.</p><div class="sample"><div class="sample-label">SQL példa</div><pre><code>SELECT *\nFROM tabla;</code></pre></div></section><nav class="pager"><button class="pager-btn" id="prev" ${prev?'':'disabled'}>${prev?'← '+prev.title:'← Előző'}</button><button class="pager-btn" id="next" ${next?'':'disabled'}>${next?next.title+' →':'Következő →'}</button></nav></article>`;document.getElementById('homeCrumb').onclick=showHome;if(prev)document.getElementById('prev').onclick=()=>showLesson(prev.mi,prev.li);if(next)document.getElementById('next').onclick=()=>showLesson(next.mi,next.li)}
+    function showLesson(mi,li){menuBtn.style.display='';mountLearningShell();updateSidebarState(mi,li);renderLessonContent(mi,li);window.scrollTo({top:0,left:0,behavior:'auto'})}
+    showHome();
+  </script>
 </body>
 </html>
