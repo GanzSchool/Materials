@@ -64,7 +64,7 @@
 
     /* Belső SQL nézet */
     .learning-shell{display:grid;grid-template-columns:286px minmax(0,1fr);min-height:calc(100vh - 62px)}
-    .course-sidebar{position:sticky;top:62px;height:calc(100vh - 62px);overflow-y:auto;background:var(--surface);border-right:1px solid var(--line);padding:20px 12px 28px}
+    .course-sidebar{position:sticky;top:62px;width:286px;height:calc(100vh - 62px);overflow-y:scroll;scrollbar-gutter:stable;background:var(--surface);border-right:1px solid var(--line);padding:20px 12px 28px}
     .sidebar-head{padding:0 8px 16px;border-bottom:1px solid var(--line);margin-bottom:12px}
     .sidebar-home{border:0;background:none;padding:3px 0 14px;color:var(--muted);font-size:12px;cursor:pointer}
     .sidebar-home:hover{color:var(--text)}
@@ -82,9 +82,9 @@
     .chev svg{width:15px;height:15px}
     .module-lessons{display:none;padding:3px 0 5px 8px}
     .module-lessons.expanded{display:grid;gap:2px}
-    .sidebar-lesson{width:100%;border:0;background:transparent;border-radius:8px;padding:8px 10px;color:var(--muted);text-align:left;font-size:12px;line-height:1.35;cursor:pointer}
+    .sidebar-lesson{width:100%;min-height:38px;border:0;background:transparent;border-radius:8px;padding:8px 10px;color:var(--muted);text-align:left;font-size:12px;font-weight:500;line-height:1.35;cursor:pointer}
     .sidebar-lesson:hover{background:var(--surface-2);color:var(--text)}
-    .sidebar-lesson.active{background:var(--accent-soft);color:var(--accent-text);font-weight:700}
+    .sidebar-lesson.active{background:var(--accent-soft);color:var(--accent-text);font-weight:500}
 
     .main-pane{min-width:0;padding:40px clamp(24px,5vw,64px) 64px}
     .lesson{width:min(820px,100%);margin:0 auto}
@@ -107,6 +107,7 @@
 
     @media(max-width:860px){
       .learning-shell{grid-template-columns:250px minmax(0,1fr)}
+      .course-sidebar{width:250px}
       .main-pane{padding-left:24px;padding-right:24px}
     }
     @media(max-width:700px){
@@ -158,6 +159,10 @@
     const arrow='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m9 18 6-6-6-6"/></svg>';
     menuBtn.innerHTML=menuIcon;
 
+    let currentModule=0;
+    let currentLesson=0;
+    let learningMounted=false;
+
     function setTheme(t){
       document.documentElement.dataset.theme=t;
       document.querySelector('meta[name="theme-color"]').content=t==='dark'?'#0f1114':'#f7f7f8';
@@ -173,7 +178,7 @@
     function flatLessons(){return modules.flatMap((m,mi)=>m.lessons.map((title,li)=>({mi,li,title,module:m.title})))}
     function flatIndex(mi,li){return modules.slice(0,mi).reduce((n,m)=>n+m.lessons.length,0)+li}
 
-    function sidebarHtml(openModule,activeModule,activeLesson){
+    function sidebarHtml(){
       return `<aside class="course-sidebar" id="sidebar">
         <div class="sidebar-head">
           <button class="sidebar-home" data-home>← Kezdőlap</button>
@@ -181,29 +186,34 @@
         </div>
         <div class="accordion">
           ${modules.map((m,mi)=>`<div>
-            <button class="module-toggle ${mi===openModule?'expanded':''} ${mi===activeModule?'active':''}" data-module="${mi}">
+            <button class="module-toggle" data-module="${mi}">
               <span><small>Rész ${mi+1}</small><strong>${m.title}</strong></span><span class="chev">${arrow}</span>
             </button>
-            <div class="module-lessons ${mi===openModule?'expanded':''}" data-lessons="${mi}">
-              ${m.lessons.map((l,li)=>`<button class="sidebar-lesson ${mi===activeModule&&li===activeLesson?'active':''}" data-mi="${mi}" data-li="${li}">${l}</button>`).join('')}
+            <div class="module-lessons" data-lessons="${mi}">
+              ${m.lessons.map((l,li)=>`<button class="sidebar-lesson" data-mi="${mi}" data-li="${li}">${l}</button>`).join('')}
             </div>
           </div>`).join('')}
         </div>
       </aside><div class="backdrop" id="backdrop"></div>`;
     }
 
-    function bindSidebar(openModule){
+    function mountLearningShell(){
+      if(learningMounted) return;
+      app.innerHTML=`<div class="learning-shell">
+        ${sidebarHtml()}
+        <main class="main-pane" id="mainPane"></main>
+      </div>`;
+      learningMounted=true;
+      bindSidebar();
+    }
+
+    function bindSidebar(){
       document.querySelector('[data-home]')?.addEventListener('click',showHome);
       document.querySelectorAll('[data-module]').forEach(btn=>{
         btn.addEventListener('click',()=>{
           const mi=Number(btn.dataset.module);
           const already=btn.classList.contains('expanded');
-          document.querySelectorAll('[data-module]').forEach(x=>x.classList.remove('expanded'));
-          document.querySelectorAll('[data-lessons]').forEach(x=>x.classList.remove('expanded'));
-          if(!already){
-            btn.classList.add('expanded');
-            document.querySelector(`[data-lessons="${mi}"]`).classList.add('expanded');
-          }
+          setOpenModule(already?-1:mi);
         });
       });
       document.querySelectorAll('[data-mi]').forEach(btn=>btn.addEventListener('click',()=>{
@@ -211,6 +221,30 @@
         showLesson(Number(btn.dataset.mi),Number(btn.dataset.li));
       }));
       document.getElementById('backdrop')?.addEventListener('click',closeSidebar);
+    }
+
+    function setOpenModule(openModule){
+      document.querySelectorAll('[data-module]').forEach(btn=>{
+        const mi=Number(btn.dataset.module);
+        btn.classList.toggle('expanded',mi===openModule);
+      });
+      document.querySelectorAll('[data-lessons]').forEach(panel=>{
+        const mi=Number(panel.dataset.lessons);
+        panel.classList.toggle('expanded',mi===openModule);
+      });
+    }
+
+    function updateSidebarState(mi,li){
+      setOpenModule(mi);
+      document.querySelectorAll('[data-module]').forEach(btn=>{
+        btn.classList.toggle('active',Number(btn.dataset.module)===mi);
+      });
+      document.querySelectorAll('[data-mi]').forEach(btn=>{
+        const active=Number(btn.dataset.mi)===mi&&Number(btn.dataset.li)===li;
+        btn.classList.toggle('active',active);
+        if(active) btn.setAttribute('aria-current','page');
+        else btn.removeAttribute('aria-current');
+      });
     }
 
     function toggleSidebar(){
@@ -225,6 +259,7 @@
     function showHome(){
       closeSidebar();
       menuBtn.style.display='none';
+      learningMounted=false;
       window.scrollTo(0,0);
       app.innerHTML=`<main class="home">
         <p class="home-label">Tananyagok</p>
@@ -238,37 +273,40 @@
       document.getElementById('sqlCard').onclick=()=>showLesson(0,0);
     }
 
-    function showLesson(mi,li){
-      menuBtn.style.display='';
-      window.scrollTo(0,0);
+    function renderLessonContent(mi,li){
       const flat=flatLessons();
       const idx=flatIndex(mi,li);
       const prev=flat[idx-1];
       const next=flat[idx+1];
       const title=modules[mi].lessons[li];
-      app.innerHTML=`<div class="learning-shell">
-        ${sidebarHtml(mi,mi,li)}
-        <main class="main-pane">
-          <article class="lesson">
-            <div class="crumb"><button id="homeCrumb">Kezdőlap</button><span>/</span><span>SQL</span><span>/</span><span>${modules[mi].title}</span></div>
-            <p class="lesson-kicker">${modules[mi].title}</p>
-            <h1>${title}</h1>
-            <section class="material">
-              <h2>Tananyag</h2>
-              <p>A részletes oktatási tartalom ide kerül.</p>
-              <div class="sample"><div class="sample-label">SQL példa</div><pre><code>SELECT *\nFROM tabla;</code></pre></div>
-            </section>
-            <nav class="pager">
-              <button class="pager-btn" id="prev" ${prev?'':'disabled'}>${prev?'← '+prev.title:'← Előző'}</button>
-              <button class="pager-btn" id="next" ${next?'':'disabled'}>${next?next.title+' →':'Következő →'}</button>
-            </nav>
-          </article>
-        </main>
-      </div>`;
+      const pane=document.getElementById('mainPane');
+      pane.innerHTML=`<article class="lesson">
+        <div class="crumb"><button id="homeCrumb">Kezdőlap</button><span>/</span><span>SQL</span><span>/</span><span>${modules[mi].title}</span></div>
+        <p class="lesson-kicker">${modules[mi].title}</p>
+        <h1>${title}</h1>
+        <section class="material">
+          <h2>Tananyag</h2>
+          <p>A részletes oktatási tartalom ide kerül.</p>
+          <div class="sample"><div class="sample-label">SQL példa</div><pre><code>SELECT *\nFROM tabla;</code></pre></div>
+        </section>
+        <nav class="pager">
+          <button class="pager-btn" id="prev" ${prev?'':'disabled'}>${prev?'← '+prev.title:'← Előző'}</button>
+          <button class="pager-btn" id="next" ${next?'':'disabled'}>${next?next.title+' →':'Következő →'}</button>
+        </nav>
+      </article>`;
       document.getElementById('homeCrumb').onclick=showHome;
-      bindSidebar(mi);
-      if(prev)document.getElementById('prev').onclick=()=>showLesson(prev.mi,prev.li);
-      if(next)document.getElementById('next').onclick=()=>showLesson(next.mi,next.li);
+      if(prev) document.getElementById('prev').onclick=()=>showLesson(prev.mi,prev.li);
+      if(next) document.getElementById('next').onclick=()=>showLesson(next.mi,next.li);
+    }
+
+    function showLesson(mi,li){
+      currentModule=mi;
+      currentLesson=li;
+      menuBtn.style.display='';
+      mountLearningShell();
+      updateSidebarState(mi,li);
+      renderLessonContent(mi,li);
+      window.scrollTo({top:0,left:0,behavior:'auto'});
     }
 
     showHome();
