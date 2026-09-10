@@ -20,14 +20,14 @@ export default function Home() {
 
       <main className={styles.mainContent}>
         <div className={styles.cardGrid}>
-          <Link to="/docs/Webprogramozás/HTML" className={styles.card}>
-            <h3>HTML</h3>
+          <Link to="/docs/Webprogramozás/Bevezető/" className={styles.card}>
+            <h3>Bevezető</h3>
           </Link>
-          <Link to="/docs/Webprogramozás/CSS" className={styles.card}>
-            <h3>CSS</h3>
-          </Link>
-          <Link to="/docs/Webprogramozás/JavaScript" className={styles.card}>
+          <Link to="/docs/Webprogramozás/JavaScript/" className={styles.card}>
             <h3>JavaScript</h3>
+          </Link>
+          <Link to="/docs/Webprogramozás/Gyakorlás/" className={styles.card}>
+            <h3>Gyakorlás</h3>
           </Link>
         </div>
       </main>
