@@ -1,19 +1,22 @@
 // @ts-check
 import { themes as prismThemes } from 'prism-react-renderer';
 
+const isVercel = process.env.VERCEL === '1';
+const vercelHost = process.env.VERCEL_PROJECT_PRODUCTION_URL || process.env.VERCEL_URL;
+
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'GanzSchool Materials',
   tagline: 'Everything you need',
   favicon: 'img/favicon.ico',
 
-  // Set the production url of your site here
-  url: 'https://ganzschool.github.io',
-  baseUrl: '/Materials/',
+  // GitHub Pagesen marad a /Materials/ base path, Vercelen pedig a domain gyökeréről fut.
+  url: isVercel && vercelHost ? `https://${vercelHost}` : 'https://ganzschool.github.io',
+  baseUrl: isVercel ? '/' : '/Materials/',
 
   // GitHub pages deployment config.
-  organizationName: 'GanzSchool', // Usually your GitHub org/user name.
-  projectName: 'Materials', // Usually your repo name.
+  organizationName: 'GanzSchool',
+  projectName: 'Materials',
   deploymentBranch: 'gh-pages',
 
   onBrokenLinks: 'throw',
@@ -65,7 +68,6 @@ const config = {
         title: 'GanzSchool',
 
         items: [
-          // Itt cseréltük a 'tutorialSidebar'-t 'mySidebar'-ra
           {
             type: 'docSidebar',
             sidebarId: 'mySidebar',
@@ -87,7 +89,6 @@ const config = {
             title: 'Docs',
             items: [
               {
-                // Frissített hivatkozás a helyes útvonalra
                 label: 'Bevezető',
                 to: '/docs/Webprogramozás/Bevezető',
               },
