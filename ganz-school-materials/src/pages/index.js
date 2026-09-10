@@ -26,11 +26,8 @@ export default function Home() {
           <Link to="/docs/Webprogramozás/JavaScript/" className={styles.card}>
             <h3>JavaScript</h3>
           </Link>
-          <Link to="/docs/adatbazis-kezeles-1/" className={styles.card}>
-            <h3>Adatbázis-kezelés 1</h3>
-          </Link>
-          <Link to="/docs/adatbazis-kezeles-2/" className={styles.card}>
-            <h3>Adatbázis-kezelés 2</h3>
+          <Link to="/docs/sql/" className={styles.card}>
+            <h3>SQL</h3>
           </Link>
           <Link to="/docs/Webprogramozás/Gyakorlás/" className={styles.card}>
             <h3>Gyakorlás</h3>
