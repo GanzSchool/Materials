@@ -1,4 +1,156 @@
 ---
-title: SELECT, FROM és oszlopok lekérdezése
+title: SELECT és FROM
 sidebar_position: 2
+description: A SELECT és FROM utasítások használata MariaDB-ben
 ---
+
+:::info MariaDB
+A példák és az indító scriptek MariaDB-kompatibilis SQL-t használnak. A mintaadatbázisok `utf8mb4` karakterkészlettel jönnek létre, így a magyar ékezetes adatok is biztonságosan tárolhatók.
+:::
+
+# `SELECT` és `FROM` – az első lekérdezések
+
+Ebben a részben a forrásanyag `SELECT` és `FROM` fejezeteit gyakoroljuk külön, ugyanazzal a `tanulok` mintatáblával.
+
+## A SELECT utasítás
+
+Az SQL egyik legalapvetőbb utasítása a `SELECT`. Ezt akkor használjuk, amikor adatokat szeretnénk lekérdezni egy táblából.
+
+A `SELECT` utasítással megadjuk, hogy mely adatokat szeretnénk látni, a `FROM` kulcsszóval pedig azt, hogy melyik táblából kérjük le azokat.
+
+Az alábbi példa megmutatja egy egyszerű lekérdezés szerkezetét:
+
+```sql
+SELECT * FROM tanulok;
+```
+
+A lekérdezés jelentése:
+
+* `SELECT` – adatok lekérdezése,
+* `*` – az összes oszlop lekérdezése,
+* `FROM tanulok` – a `tanulok` nevű táblából.
+
+Ez a lekérdezés tehát a `tanulok` tábla minden adatát megjeleníti.
+
+## Egyszerű lekérdezések
+
+Ha a tábla minden oszlopát szeretnéd megjeleníteni, akkor használhatod a következő lekérdezést:
+
+```sql
+SELECT * FROM tanulok;
+```
+
+Ha csak a tanulók nevét szeretnéd látni, akkor elegendő az adott oszlop nevét megadni:
+
+```sql
+SELECT nev FROM tanulok;
+```
+
+Ha egyszerre több oszlopot szeretnél lekérdezni, akkor az oszlopneveket vesszővel kell elválasztani:
+
+```sql
+SELECT nev, osztaly FROM tanulok;
+```
+
+Az alábbi példa a tanulók nevét és átlagát jeleníti meg:
+
+```sql
+SELECT nev, atlag FROM tanulok;
+```
+
+## A FROM szerepe
+
+A `FROM` kulcsszó minden lekérdezésben azt jelöli, hogy melyik táblából szeretnénk adatot kérni.
+
+Például:
+
+```sql
+SELECT nev FROM tanulok;
+```
+
+Ebben a lekérdezésben a `nev` oszlop adatait a `tanulok` nevű táblából kérjük le.
+
+Ha a tábla nevét hibásan írjuk le, akkor a lekérdezés nem fog működni, mert az adatbázis nem talál ilyen nevű táblát.
+
+## Miért nem célszerű mindig a `*` használata?
+
+A tanulás elején a `SELECT *` hasznos, mert egyszerű és gyors megoldás. Később azonban célszerű csak azokat az oszlopokat lekérdezni, amelyekre valóban szükség van.
+
+Például az alábbi lekérdezés:
+
+```sql
+SELECT nev, atlag FROM tanulok;
+```
+
+átláthatóbb, mint ez:
+
+```sql
+SELECT * FROM tanulok;
+```
+
+Ez különösen akkor fontos, ha a tábla sok oszlopot tartalmaz.
+
+## Minta a lekérdezések értelmezéséhez
+
+Tegyük fel, hogy a `tanulok` tábla a következő adatokat tartalmazza:
+
+| id | nev        | eletkor | osztaly | atlag |
+| -- | ---------- | ------- | ------- | ----- |
+| 1  | Kiss Anna  | 16      | 10.A    | 4.7   |
+| 2  | Nagy Péter | 17      | 10.B    | 3.9   |
+| 3  | Tóth Réka  | 16      | 10.A    | 4.4   |
+
+A következő lekérdezés a teljes táblát jeleníti meg:
+
+```sql
+SELECT * FROM tanulok;
+```
+
+A következő csak a neveket listázza:
+
+```sql
+SELECT nev FROM tanulok;
+```
+
+A következő a neveket és az osztályokat írja ki:
+
+```sql
+SELECT nev, osztaly FROM tanulok;
+```
+
+A következő pedig a neveket és az átlagokat jeleníti meg:
+
+```sql
+SELECT nev, atlag FROM tanulok;
+```
+
+---
+
+## SQL SCRIPT FELADTOKHOZ
+
+```sql
+CREATE DATABASE IF NOT EXISTS iskola CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE iskola;
+
+DROP TABLE IF EXISTS tanulok;
+
+CREATE TABLE tanulok (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nev VARCHAR(100) NOT NULL,
+    eletkor INT NOT NULL,
+    osztaly VARCHAR(10) NOT NULL,
+    atlag DECIMAL(3,1) NOT NULL
+);
+
+INSERT INTO tanulok (nev, eletkor, osztaly, atlag) VALUES
+('Kiss Anna', 16, '10.A', 4.7),
+('Nagy Péter', 17, '10.B', 3.9),
+('Tóth Réka', 16, '10.A', 4.4),
+('Szabó Márk', 15, '9.C', 3.6),
+('Varga Dóra', 17, '11.B', 4.9),
+('Kovács Levente', 16, '10.C', 4.1),
+('Molnár Eszter', 15, '9.A', 4.3),
+('Balogh Máté', 17, '11.A', 3.8),
+('Horváth Lilla', 16, '10.B', 4.6),
+('Juhász Bence', 15, '9.B', 3.5);
+```
