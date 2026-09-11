@@ -3,29 +3,27 @@ title: Adatbázis-kezelés 1
 sidebar_label: Adatbázis-kezelés 1
 ---
 
-:::warning Fejlesztés alatt
-
-Ez az oldal még fejlesztés alatt áll. A részletes tananyagok hamarosan kerülnek fel.
-
-:::
-
 # Adatbázis-kezelés 1
 
-## Tervezett témák
+Ebben a fejezetben a MariaDB használatán keresztül vesszük át az SQL alapjait, az egytáblás lekérdezéseket és az alapvető adatkezelési műveleteket.
+
+## Elérhető tananyagok
 
 - Az adatbázis és az SQL alapjai
-- `SELECT`, `FROM`, `WHERE`
-- `DISTINCT`, `ORDER BY`
+- `SELECT` és `FROM`
+- `WHERE`
+- `DISTINCT` és `ORDER BY`
 - `AND`, `OR`, `NOT`
-- `LIKE`, `BETWEEN`, `IN`
-- `INSERT`, `UPDATE`, `DELETE`
 - `NULL` kezelése
+- `INSERT`, `UPDATE`, `DELETE`
 - `COUNT`, `SUM`, `AVG`, `MIN`, `MAX`
-- `LIMIT`
 - `GROUP BY`, `HAVING`
-- Aliasok és számított mezők
-- Adatbázisok és táblák létrehozása
-- Adattípusok és megszorítások
-- `PRIMARY KEY`, `UNIQUE`, `DEFAULT`, `NOT NULL`
-- `ALTER TABLE`, `DROP TABLE`
-- Összefoglaló gyakorlófeladatok
+- Komplex egytáblás lekérdezések, többek között `LIKE`, `BETWEEN`, `IN`, `LIMIT`, aliasok és számított mezők
+- Egytáblás komplex gyakorlás
+- Egytáblás SQL számonkérés
+
+A tananyagokhoz tartozó példák és indító scriptek MariaDB-kompatibilis SQL-t használnak.
+
+:::note Következő témák
+Az **Adatbázis és tábla létrehozása**, **SQL adattípusok** és **Alapvető megszorítások** menüpontok jelenleg még vázlatként szerepelnek. Ezeket csak akkor töltjük fel részletes tartalommal, amikor megfelelő forrásanyag áll rendelkezésre.
+:::
